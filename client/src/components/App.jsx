@@ -5,12 +5,12 @@ import { AuthProvider } from '../contexts/AuthContext';
 
 const App = () => {
   return (
-    <AuthProvider>
-      <div id="app-container">
+    <div id="app-container">
+      <AuthProvider>
         Hello world
         <SignUp />
-      </div>
-    </AuthProvider>
+      </AuthProvider>
+   </div>
   );
 }
 
