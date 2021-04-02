@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   watch: true,
-  mode: 'production',
+  mode: 'development',
   entry: path.resolve(__dirname, './client/src'),
   output: {
     path: path.resolve(__dirname, './client/dist'),
