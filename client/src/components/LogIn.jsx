@@ -18,10 +18,10 @@ const LogIn = () => {
   }
 
   // Sends login request to firebase
-  handleClick = (e) => {
-    e.preventDefault();
+  // handleClick = (e) => {
+  //   e.preventDefault();
 
-  }
+  // }
 
   return (
     <>
