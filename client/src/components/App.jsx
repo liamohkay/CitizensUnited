@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import HomePage from './Home/HomePage.jsx';
 
 const App = () => {
   return (
     <div id="app-container">
-      Hello world
+      <div>
+        <HomePage />
+      </div>
     </div>
   );
 }
