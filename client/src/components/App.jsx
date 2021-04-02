@@ -7,7 +7,6 @@ const App = () => {
   return (
     <div id="app-container">
       <AuthProvider>
-        Hello world
         <SignUp />
       </AuthProvider>
    </div>

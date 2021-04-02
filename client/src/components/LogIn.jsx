@@ -2,22 +2,22 @@ import React, { useState, useEffect } from 'react'
 import { Form, Button, Card } from 'react-bootstrap'
 
 const LogIn = () => {
-  const [email, updateEmail] = useState('')
-  const [password, updatePassword] = useState('')
+  // const [email, updateEmail] = useState('')
+  // const [password, updatePassword] = useState('')
 
-  const emailInput = (e) => {
-    updateEmail(e.target.value)
-    console.log(email)
-  }
+  // const emailInput = (e) => {
+  //   updateEmail(e.target.value)
+  //   console.log(email)
+  // }
 
-  const passwordInput = (e) => {
-    updatePassword(e.target.value)
-    console.log(password)
-  }
+  // const passwordInput = (e) => {
+  //   updatePassword(e.target.value)
+  //   console.log(password)
+  // }
 
   return (
     <>
-      <Card>
+      {/* <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Log In</h2>
           <Form>
@@ -33,7 +33,7 @@ const LogIn = () => {
           </Form>
         </Card.Body>
       </Card>
-      <div className="w-100 text-center mt-2"></div>
+      <div className="w-100 text-center mt-2"></div> */}
     </>
   )
 }

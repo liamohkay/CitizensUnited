@@ -25,7 +25,7 @@ const SignUp = () => {
   // Submits sign up to firebase & creates new user
   const submitForm = (e) => {
     e.preventDefault();
-    signup(email, password)
+    signup(fields.email, fields.password)
       .then(() => console.log('success'))
       .catch(err => console.log(err))
   }

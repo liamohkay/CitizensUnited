@@ -56,5 +56,6 @@ table {
   justify-content: center;
 }
 
-
-
+#signup-container {
+  width: 80vw;
+}
