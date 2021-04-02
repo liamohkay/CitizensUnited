@@ -1,51 +1,34 @@
+// Libraries + dependencies
 import React, { useState, useEffect, useRef } from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
+import { useAuth } from '../contexts/AuthContext.js';
 
 const SignUp = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [address, setAddress] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  // const firstNameRef = useRef(() => console.log(firstNameRef));
+  const { signup } = useAuth();
+  const [fields, setFields] = useState({
+    firstName: '',
+    lastName: '',
+    phone: '',
+    address: '',
+    email: '',
+    password: ''
+  });
 
-  const changeFirstName = (e) => {
-    setFirstName(e.target.value);
-    console.log(firstName);
+  // Tracks user input on form fields
+  const handleChange = (e) => {
+    setFields({
+      ...fields,
+      [e.target.name]: e.target.value
+    });
   }
 
-  const changeLastName = (e) => {
-    setLastName(e.target.value);
-    console.log(lastName);
-  }
-
-  const changePhone = (e) => {
-    setPhone(e.target.value);
-    console.log(phone);
-  }
-
-  const changeAddress = (e) => {
-    setAddress(e.target.value);
-    console.log(address);
-  }
-
-  const changeEmail = (e) => {
-    setEmail(e.target.value);
-    console.log(email);
-  }
-
-  const changePassword = (e) => {
-    setPassword(e.target.value);
-    console.log(password);
-  }
-
+  // Submits sign up to firebase & creates new user
   const submitForm = (e) => {
     e.preventDefault();
-    // INSERT POST REQUEST
+    signup(fields.email, fields.password)
+      .then(() => alert(`Account for ${fields.email} created!`))
+      .catch(err => console.log(err))
   }
-
-
 
   return (
     <div id="signUp-container">
@@ -56,61 +39,67 @@ const SignUp = () => {
             <Form.Group id="signUpFirstName">
               <Form.Label> First Name </Form.Label>
               <Form.Control
+                name="firstName"
                 type="firstName"
-                value={firstName}
-                onChange={changeFirstName}
+                value={fields.firstName}
+                onChange={handleChange}
                 required
               />
             </Form.Group>
             <Form.Group id="signUpLastName">
               <Form.Label> Last Name </Form.Label>
               <Form.Control
+                name="lastName"
                 type="lastName"
-                value={lastName}
-                onChange={changeLastName}
+                value={fields.lastName}
+                onChange={handleChange}
                 required
               />
             </Form.Group>
             <Form.Group id="signUpPhone">
               <Form.Label> Phone Number </Form.Label>
               <Form.Control
+                name="phone"
                 type="phone"
-                value={phone}
-                onChange={changePhone}
+                value={fields.phone}
+                onChange={handleChange}
                 required
               />
             </Form.Group>
             <Form.Group id="signUpAddress">
               <Form.Label> Address </Form.Label>
               <Form.Control
+                name="address"
                 type="address"
-                value={address}
-                onChange={changeAddress}
+                value={fields.address}
+                onChange={handleChange}
                 required
               />
             </Form.Group>
             <Form.Group id="signUpEmail">
               <Form.Label> Email </Form.Label>
               <Form.Control
+                name="email"
                 type="email"
-                value={email}
-                onChange={changeEmail}
+                value={fields.email}
+                onChange={handleChange}
                 required
               />
             </Form.Group>
             <Form.Group id="signUpPassword">
               <Form.Label> Password </Form.Label>
               <Form.Control
+                name="password"
                 type="password"
-                value={password}
-                onChange={changePassword}
+                value={fields.password}
+                onChange={handleChange}
                 required
               />
             </Form.Group>
             <Button
               className="w-100"
               type="submit"
-              onSubmit={submitForm}
+              onClick={submitForm}
             > Sign Up
             </Button>
           </Form>
