@@ -3,13 +3,12 @@ import React, { useState } from 'React';
 const = sampleData = {
   request: "I need some help going to the grocery store",
   Neighborhood: 'Brentwood',
-  startTime: '';
-  Duration: '',
-
+  startTime: '',
+  Duration: ''
 }
 
 const Tile = () => {
   return (
-    <div className="tile"></div>
+    <div className="request-tile"></div>
   );
 }
