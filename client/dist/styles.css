@@ -56,5 +56,61 @@ table {
   justify-content: center;
 }
 
+#volunteer-button, #requester-button {
+  background-color: #8DA5ED;
+  margin: 5px;
+  margin-top: 25px;
+}
 
+#login-button {
+  background-color: #8DA5ED;
+  margin-top: 5px;
+}
 
+#banner {
+  background-color: cornsilk;
+}
+
+#Help, #About-Us, #Log-In-Button {
+  margin: 20px;
+  color: black;
+}
+
+#Help, #About-Us {
+  margin-top: 23px;
+  font-size: x-large;
+  color: #8DA5ED
+}
+
+#end-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+#logo-container {
+  margin: 5px;
+  margin-top: 15px;
+  margin-bottom: 0px;
+  color: #8DA5ED;
+  font-size: xx-large;
+  font-weight: 500;
+  align-content: space-evenly;
+}
+
+#dot {
+  margin-right: 5px;
+  height: 25px;
+  width: 25px;
+  background-color: #FFAF7A;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+#Home-Page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#mission-statement {
+  font-size: xx-large;
+}
