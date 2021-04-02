@@ -4,10 +4,12 @@ import LogIn from './LogIn.jsx';
 import SignUp from './SignUp.jsx';
 
 const App = () => {
+  const [userID, setUserID] = useState('');
+
   return (
     <div id="app-container">
       <AuthProvider>
-        <LogIn />
+        <LogIn setUserID={setUserID} />
         <SignUp />
       </AuthProvider>
    </div>
