@@ -32,7 +32,6 @@ const SignUp = () => {
 
   return (
     <div id="signUp-container">
-      { JSON.stringify(fields) }
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4"> Sign Up</h2>

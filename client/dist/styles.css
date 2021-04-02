@@ -53,9 +53,5 @@ table {
 #app-container {
   display: flex;
   align-items: center;
-  justify-content: center;
-}
-
-#signup-container {
-  width: 80vw;
+  justify-content: space-between;
 }
