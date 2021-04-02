@@ -1,10 +1,10 @@
 // Libraries + dependencies
-const express = require('express');
-const morgan = require('morgan');
-const bodyparser = require('body-parser');
-const cors = require('cors');
 const path = require('path');
+const cors = require('cors');
+const morgan = require('morgan');
+const express = require('express');
 const router = require('./router.js');
+const bodyparser = require('body-parser');
 const port = 3000;
 
 // Apply Middleware

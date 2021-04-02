@@ -2,3 +2,5 @@
 /node_modules
 /package-lock.json
 /coverage
+.env.local
+client/src/firebaseConfig.js
