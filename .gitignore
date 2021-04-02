@@ -4,3 +4,4 @@
 /coverage
 .env.local
 client/src/firebaseConfig.js
+/database/dbConfig.js

@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import SignUp from './SignUp.jsx';
 import { AuthProvider } from '../contexts/AuthContext';
-
+import LogIn from './LogIn.jsx';
+import SignUp from './SignUp.jsx';
 
 const App = () => {
+  const [userID, setUserID] = useState('');
+
   return (
     <div id="app-container">
       <AuthProvider>
-        Hello world
+        <LogIn setUserID={setUserID} />
         <SignUp />
       </AuthProvider>
    </div>

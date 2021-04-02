@@ -1,18 +1,31 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Button, Card } from 'react-bootstrap'
+import { useAuth } from '../contexts/AuthContext.js';
 
-const LogIn = () => {
-  const [email, updateEmail] = useState('')
-  const [password, updatePassword] = useState('')
+const LogIn = ({ setUserID }) => {
+  const { login } = useAuth();
+  const [fields, setFields] = useState({
+    email: '',
+    password: ''
+  });
 
-  const emailInput = (e) => {
-    updateEmail(e.target.value)
-    console.log(email)
+  // Tracks user input on form fields
+  const handleChange = (e) => {
+    setFields({
+      ...fields,
+      [e.target.name]: e.target.value
+    });
   }
 
-  const passwordInput = (e) => {
-    updatePassword(e.target.value)
-    console.log(password)
+  // Sends login request to firebase
+  const handleClick = (e) => {
+    e.preventDefault();
+    login(fields.email, fields.password)
+      .catch(err => console.log(err))
+      .then(resp => {
+        setUserID(resp.user.uid);
+        console.log(`${fields.email} signed in`)
+      })
   }
 
   return (
@@ -23,13 +36,13 @@ const LogIn = () => {
           <Form>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
-              <Form.Control type ="email" value={email} onChange={emailInput} required />
+              <Form.Control  name="email" type="email" value={fields.email} onChange={handleChange} required />
             </Form.Group>
             <Form.Group id="password">
               <Form.Label>Password</Form.Label>
-              <Form.Control type ="password" value={password} onChange={passwordInput} required />
+              <Form.Control name="password" type="password" value={fields.password} onChange={handleChange} required />
             </Form.Group>
-            <Button className="w-100" type="submit">Log In</Button>
+            <Button className="w-100" onClick={handleClick}>Log In</Button>
           </Form>
         </Card.Body>
       </Card>
@@ -38,4 +51,4 @@ const LogIn = () => {
   )
 }
 
-export default LogI
+export default LogIn;

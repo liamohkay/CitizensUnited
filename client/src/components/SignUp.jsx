@@ -25,14 +25,13 @@ const SignUp = () => {
   // Submits sign up to firebase & creates new user
   const submitForm = (e) => {
     e.preventDefault();
-    signup(email, password)
-      .then(() => console.log('success'))
+    signup(fields.email, fields.password)
+      .then(() => alert(`Account for ${fields.email} created!`))
       .catch(err => console.log(err))
   }
 
   return (
     <div id="signUp-container">
-      { JSON.stringify(fields) }
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4"> Sign Up</h2>

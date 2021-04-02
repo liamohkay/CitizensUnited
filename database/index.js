@@ -1,13 +1,7 @@
+const dbConfig = require('./dbConfig.js');
 const { Client } = require('pg');
 
-const client = new Client({
-  user: 'jordanbeaird',
-  host: 'localhost',
-  database: 'citizens',
-  port: 5432,
-  password: 'password'
-})
-
+const client = new Client(dbConfig);
 client.connect();
 
 client.query('SELECT 1+1 AS solution', (err, results) => {
