@@ -1,18 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
-
-
-  render() {
-    return(
-      <div>
-        Test
-      </div>
-    )
-  }
+const App = () => {
+  return (
+    <div id="app-container">
+      Hello world
+    </div>
+  );
 }
+
+export default App;

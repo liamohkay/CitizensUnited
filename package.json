@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./server/index.js",
-    "react-dev": "webpack -d --watch"
+    "build": "webpack -d --watch",
+    "start": "nodemon ./server/index.js"
   },
   "repository": {
     "type": "git",
