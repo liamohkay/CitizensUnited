@@ -1,6 +1,9 @@
+// Libraries + dependencies
 import React, { useState, useEffect } from 'react'
 import { Form, Button, Card } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext.js';
+import firebase from 'firebase';
+import { auth } from '../firebase.jsx';
 
 const LogIn = ({ setUserID }) => {
   const { login } = useAuth();
@@ -42,7 +45,7 @@ const LogIn = ({ setUserID }) => {
               <Form.Label>Password</Form.Label>
               <Form.Control name="password" type="password" value={fields.password} onChange={handleChange} required />
             </Form.Group>
-            <Button className="w-100" onClick={handleClick}>Log In</Button>
+            <Button id="sign-in-btn" className="w-100" onClick={handleClick}>Log In</Button>
           </Form>
         </Card.Body>
       </Card>
