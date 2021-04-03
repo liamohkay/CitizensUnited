@@ -1,5 +1,6 @@
 import config from './firebaseConfig.js';
 import firebase from 'firebase/app';
+import "firebase/storage";
 import 'firebase/auth';
 
 const fb = firebase.initializeApp({
@@ -11,5 +12,6 @@ const fb = firebase.initializeApp({
   appId: config.appId
 });
 
+export const storage = fb.storage();
 export const auth = fb.auth();
 export default fb;
