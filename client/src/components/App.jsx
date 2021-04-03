@@ -4,6 +4,7 @@ import LogIn from './LogIn';
 import SignUp from './SignUp';
 import HomePage from './Home/HomePage';
 import { BrowserRouter as Router, Link, NavLink, Switch, Route, useHistory} from 'react-router-dom';
+import TileList from './TileList.jsx';
 
 const App = () => {
   const [userID, setUserID] = useState('');

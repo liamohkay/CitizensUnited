@@ -6,7 +6,7 @@ import Login from './LogIn';
 import { BrowserRouter as Router, Link, NavLink, Switch, Route, useHistory} from 'react-router-dom';
 
 const SignUp = () => {
-  const { signup } = useAuth();
+  const { signup, currentUser } = useAuth();
   const [fields, setFields] = useState({
     firstName: '',
     lastName: '',
@@ -14,7 +14,8 @@ const SignUp = () => {
     address: '',
     email: '',
     password: '',
-    type: ''
+    type: '',
+    photoURL: '',
   });
   const [currentPage, setCurrentPage] = useState('signup')
 
@@ -30,6 +31,12 @@ const SignUp = () => {
   const submitForm = (e) => {
     e.preventDefault();
     signup(fields.email, fields.password)
+      .then((res) => {
+        res.user.updateProfile({
+          displayName: `${fields.firstName} ${fields.lastName}` ,
+          photoURL: fields.photoURL,
+        })
+      })
       .then(() => alert(`Account for ${fields.email} created!`))
       .catch(err => console.log(err))
   }

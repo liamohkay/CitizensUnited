@@ -7,7 +7,6 @@ import { Button, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function HomePage () {
-
   return (
     <div>
       <div id="Home-Page">
