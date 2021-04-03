@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext';
 
-const VolunteerTile = ({ ticket }) => {
+const RequestTile = ({ ticket }) => {
   const { currentUser } = useAuth();
   const {
     task_date,
@@ -12,17 +12,26 @@ const VolunteerTile = ({ ticket }) => {
     start_time,
     end_time,
   } = ticket;
+  const styles = {
+    profile: {
+      width: '50px',
+      height: '50px',
+      borderRadius: '50%',
+      backgroundPosition: 'center center',
+      backgroundSize: 'cover',
+    }
+  }
 
   return (
-    <div className="volunteer-ticket">
-      <div className="volunteer-ticket__profile-img">
+    <div className="requestor-ticket">
+      <div className="requestor-ticket__profile-img">
         {
           currentUser && currentUser.photoURL
-            ? <img src={currentUser.photoURL} />
-            : <img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTOkHm3_mPQ5PPRvGtU6Si7FJg8DVDtZ47rw&usqp=CAU'} />
+            ? <img src={currentUser.photoURL} style={styles.profile} />
+            : <img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTOkHm3_mPQ5PPRvGtU6Si7FJg8DVDtZ47rw&usqp=CAU'} style={styles.profile} />
         }
       </div>
-      <div className="volunteer-ticket__body">
+      <div className="requestor-ticket__body">
         <span style={{ display: 'block' }}>
           Requestor: {requestor_name}
         </span>
@@ -39,12 +48,11 @@ const VolunteerTile = ({ ticket }) => {
           Request Date/Time: {task_date}
         </span>
       </div>
-      <div className="volunteer-ticket__buttons">
-        <button value="Accept"></button>
-        <button value="Not Now"></button>
+      <div className="requestor-ticket__buttons">
+        <span id="volunteer-button" className="btn btn-sm" style={{ cursor: "default" }}>{task_status}</span>
       </div>
     </div>
-  )
+  );
 }
 
-export default VolunteerTile;
+export default RequestTile;
