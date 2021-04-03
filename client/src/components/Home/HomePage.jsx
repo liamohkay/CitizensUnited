@@ -13,12 +13,6 @@ export default function HomePage () {
       <div id="Home-Page">
           <Logo />
         <div id="end-links" className="d-flex justify-content-end">
-          <div id="About-Us">
-          <a id="About-Us" href="#" className="link" name="about-us">About Us</a>
-          </div>
-          <div id="Help">
-          <a id="Help" href="#" className="link" name="help">Help</a>
-          </div>
           <div id="Log-In-Button" name="login" >
             <Link to="/login">
             <button type="submit" id="login-button" name="login" className="btn btn-sm" >Log In</button>
