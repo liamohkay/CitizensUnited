@@ -22,18 +22,30 @@ export default function HomePage () {
       <div id="mission-statement">
         Mission Statement Here
       </div>
-        <Card className="banner" id="banner" >
-          <Card.Img src='story.png' />
-        </Card>
-        <div>
-          <Link to="/signup">
-            <div className="d-flex justify-content-around">
-                <button type="submit" id="volunteer-button" className="btn btn-lg" name="volunteer" >
-                Sign up to be a volunteer</button>
-                <button type="submit" id="requester-button" className="btn btn-lg" name="requester"> Sign up to make requests</button>
-            </div>
-          </Link>
+      <Card className="banner" id="banner" >
+        <Card.Img src='story.png' />
+      </Card>
+      <div>
+        <Link to="/signup">
+          <div className="d-flex justify-content-around">
+              <button type="submit" id="volunteer-button" className="btn btn-lg" name="volunteer" >
+                Sign up to be a volunteer
+              </button>
+              <button type="submit" id="requester-button" className="btn btn-lg" name="requester">
+                Sign up to make requests
+              </button>
           </div>
+        </Link>
+      </div>
+      <div>
+        <Link to="/dashboard">
+          <div className="d-flex justify-content-around">
+              <button type="submit" id="volunteer-button" className="btn btn-lg" name="volunteer" >
+                Link to Dashboard
+              </button>
+          </div>
+        </Link>
+      </div>
     </div>
   )
 }
