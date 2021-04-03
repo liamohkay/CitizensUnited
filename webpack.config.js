@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   watch: true,
@@ -7,6 +8,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './client/dist'),
     filename: 'bundle.js',
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -26,5 +28,21 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
-  }
+  },
+  // devServer: {
+  //   host: 'localhost',
+  //   port: 3000,
+  //   open: true,
+  //   historyApiFallback: true,
+  //   contentBase: path.resolve(__dirname, './client/dist'),
+  //   index: '/',
+  //   hot: true
+  // },
+  // plugins: [
+  //     new HtmlWebPackPlugin({
+  //     template: path.resolve(__dirname, './client/dist/index.html'),
+  //     filename: 'index.html'
+  //   })
+  // ]
 };
+
