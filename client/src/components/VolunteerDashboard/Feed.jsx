@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import sampleFeed from './sampleFeed';
 import { useAuth } from '../../contexts/AuthContext';
+import sampleFeed from './sampleFeed';
+import Ticket from './Ticket';
 
 const Feed = () => {
   const { currentUser } = useAuth();
-  const [posts, setPosts] = useState(sampleFeed);
+  const [tickets, setTickets] = useState(sampleFeed);
 
-  return(
+  return (
     <div className="volunteer-feed">
-      <div className="volunteer-feed-header">
+      <div className="volunteer-feed_header">
         Welcome {currentUser.displayName}
+      </div>
+      <div className="volunteer-feed_list">
+        {
+          tickets.map((ticket) => (
+            <
+          ))
+        }
       </div>
     </div>
   )
