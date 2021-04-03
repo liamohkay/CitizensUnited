@@ -5,6 +5,7 @@ import { Form, Button, Card } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext';
 import { storage } from '../firebase';
 import Login from './LogIn';
+import { BrowserRouter as Router, Link, NavLink, Switch, Route, useHistory} from 'react-router-dom';
 
 const SignUp = () => {
   const { signup, currentUser } = useAuth();
