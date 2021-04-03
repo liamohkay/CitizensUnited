@@ -1,4 +1,5 @@
 // Libraries + dependencies
+import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext.js';
@@ -35,14 +36,32 @@ const SignUp = () => {
   const submitForm = (e) => {
     e.preventDefault();
     signup(fields.email, fields.password)
+      .catch(err => console.log(err))
       .then((res) => {
         res.user.updateProfile({
           displayName: `${fields.firstName} ${fields.lastName}` ,
           photoURL: fields.photoURL,
         })
       })
-      .then(() => alert(`Account for ${fields.email} created!`))
-      .catch(err => console.log(err))
+      .then(() => {
+        // After firebase user creates, create new user in mongo as well
+        let params = {
+          firebase_id: currentUser.uid,
+          first_name: fields.firstName,
+          last_name: fields.lastName,
+          address: fields.address,
+          phone_number: fields.phone,
+          email: fields.email,
+          isVolunteer: true,
+          thumbsUp: 0,
+          thumbsDown: 0,
+          photo: 'www.photo.com',
+          tasks: [],
+        }
+        axios.post(`/api/users`, params)
+          .catch(err => alert(`Failed to create Mongo Account for ${fields.email}`))
+          .then(() => alert(`Account for ${fields.email} created!`))
+      })
   }
 
   if(currentPage === 'signup') {

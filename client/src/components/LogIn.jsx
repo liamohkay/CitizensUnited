@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Form, Button, Card } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext.js';
 
-const LogIn = ({ setUserID }) => {
-  const { login } = useAuth();
+const LogIn = () => {
+  const { login, currentUser } = useAuth();
   const [fields, setFields] = useState({
     email: '',
     password: ''
