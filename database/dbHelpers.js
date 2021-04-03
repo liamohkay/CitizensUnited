@@ -2,10 +2,20 @@ const {Users, Tasks, Messages} = require('./index.js');
 
 const dbHelpers = {
   getUserInfo: (req, callback) => {
-    Users
-      .find({firebase_id: req.query.firebase_id}, (err, data) => {
+    Tasks
+      .find({task_neighborhood: req.query.neighborhood}, (err, data) => {
         if (err) callback(err)
-        callback(null, data)
+        Users
+          .update({firebase_id: req.query.firebase_id}, {
+            $set: {tasks: data}
+          }, (err) => {
+            if (err) callback(err)
+            Users
+              .find({firebase_id: req.query.firebase_id}, (err, updatedData) => {
+                if (err) callback(err)
+                callback(null, updatedData);
+              })
+          })
       })
   },
 
@@ -63,6 +73,7 @@ const dbHelpers = {
       })
   },
 
+  // after this status of task changed in task collection but doesn't update the status in users collection automatically, you will need to do a getUserInfo request again
   acceptTask: (req, callback) => {
     Tasks
       .update({_id: req.body.task_id}, {
@@ -75,16 +86,35 @@ const dbHelpers = {
 
   hideTask: (req, callback) => {
     Users
-      .update({firebase_id: req.body.firebase_id}, {
-        $pull: {tasks: req.body.task_id}
-      }, (err, data) => {
+      .find({firebase_id: req.body.firebase_id}, (err, data) => {
         if (err) callback(err)
-        callback(null, data)
+        let oldArr =data[0].tasks;
+        let newArr = oldArr.filter((obj) => {
+          return obj._id.toString() !== req.body.task_id;
+        });
+        Users
+          .update({firebase_id: req.body.firebase_id}, {
+            $set: {tasks: newArr}
+          }, (err) => {
+            if (err) callback(err)
+            Users
+              .find({firebase_id: req.body.firebase_id}, (err, updatedData) => {
+                if (err) callback(err)
+                callback(null, updatedData);
+              })
+          })
       })
   },
 
+  // after this status of task changed in task collection but doesn't update the status in users collection automatically, you will need to do a getUserInfo request again
   completeTask: (req, callback) => {
-
+    Tasks
+    .update({_id: req.body.task_id}, {
+      $set: {task_status: 'Completed'}
+    }, (err, data) => {
+      if (err) callback(err)
+      callback(null, data)
+    })
   },
 }
 
