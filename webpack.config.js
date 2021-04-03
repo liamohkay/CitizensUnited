@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   watch: true,
-  mode: 'production',
+  mode: 'development',
   entry: path.resolve(__dirname, './client/src'),
   output: {
     path: path.resolve(__dirname, './client/dist'),
@@ -18,6 +18,10 @@ module.exports = {
           presets: ['@babel/preset-env', '@babel/preset-react'],
         },
       },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      }
     ],
   },
   resolve: {

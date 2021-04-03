@@ -1,14 +1,11 @@
-import React, { useState } from 'React';
+import React from 'React';
 
-const = sampleData = {
-  request: "I need some help going to the grocery store",
-  Neighborhood: 'Brentwood',
-  startTime: '',
-  Duration: ''
-}
-
-const Tile = () => {
+const RequestTile = ({ ticket }) => {
   return (
-    <div className="request-tile"></div>
+    <div className="request-tile">
+      {/* { JSON.stringify(ticket) } */}
+    </div>
   );
 }
+
+export default RequestTile;
