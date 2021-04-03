@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext.js';
 import Login from './LogIn';
+import { BrowserRouter as Router, Link, NavLink, Switch, Route, useHistory} from 'react-router-dom';
 
 const SignUp = () => {
   const { signup } = useAuth();
@@ -16,11 +17,6 @@ const SignUp = () => {
     type: ''
   });
   const [currentPage, setCurrentPage] = useState('signup')
-  // const [type, setType] = useState('default')
-
-  const changePage = (e) => {
-    setCurrentPage(e.target.name)
-  }
 
   // Tracks user input on form fields
   const handleChange = (e) => {
@@ -38,7 +34,6 @@ const SignUp = () => {
       .catch(err => console.log(err))
   }
 
-  if(currentPage === 'signup') {
     return (
       <div id="signUp-container" name="signup">
         <Card>
@@ -138,15 +133,13 @@ const SignUp = () => {
           </Card.Body>
         </Card>
         <div className="w-100 text-center mt-2" >
-          Already have an account? <a href="#" class="link" name="login" onClick={changePage}>Log In</a>
+          Already have an account?
+          <Link to="/login">
+            <a href="#" id="login" class="link" name="login" >Log In</a>
+          </Link>
         </div>
       </div>
     )
-  } else if (currentPage === 'login') {
-    return (
-      <Login />
-    )
-  }
 }
 
 export default SignUp;
