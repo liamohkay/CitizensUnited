@@ -3,9 +3,25 @@ const controller = require('./controller.js');
 
 router
   .route('/users')
-    .get(controller.getUsers)
-    .post(controller.postUsers)
+    .get(controller.getUserInfo)
+    .post(controller.postSignUp)
 
+router
+  .route('/tasks')
+    .get(controller.getAllTasks)
+    .post(controller.postNewTask)
+
+router
+  .route('/tasks/accepted')
+    .put(controller.acceptTask)
+
+router
+  .route('/tasks/hidden')
+    .put(controller.hideTask)
+
+router
+  .route('/tasks/completed')
+    .put(controller.completeTask)
 
 
 module.exports = router;

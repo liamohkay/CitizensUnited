@@ -14,7 +14,7 @@ const usersSchema = new Schema({
   firebase_id: {type: String, required: true, index: true},
   first_name: String,
   last_name: String,
-  address: String,
+  neighborhood: String,
   phone_number: String,
   email: String,
   isVolunteer: Boolean,
@@ -32,7 +32,7 @@ const tasksSchema = new Schema({
   task_date: String,
   task_status: String, // Pending, Accepted, Hidden, Completed
   task_body: String,
-  task_location: String,
+  task_neighborhood: String,
   start_time: String,
   end_time: String,
 })
