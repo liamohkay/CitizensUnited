@@ -6,12 +6,13 @@ import HomePage from './Home/HomePage';
 import TileList from './TileList.jsx';
 
 const App = () => {
+  const [user, setUser] = useState('');
 
   return (
     <div id="app-container">
       <AuthProvider>
         <HomePage />
-        <LogIn />
+        <LogIn setUser={setUser} />
         <SignUp />
         <TileList />
       </AuthProvider>

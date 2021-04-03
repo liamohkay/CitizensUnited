@@ -11,7 +11,7 @@ const SignUp = () => {
     firstName: '',
     lastName: '',
     phone: '',
-    address: '',
+    neighborhood: '',
     email: '',
     password: '',
     type: '',
@@ -42,14 +42,11 @@ const SignUp = () => {
           displayName: `${fields.firstName} ${fields.lastName}` ,
           photoURL: fields.photoURL,
         })
-      })
-      .then(() => {
-        // After firebase user creates, create new user in mongo as well
         let params = {
-          firebase_id: currentUser.uid,
+          firebase_id: res.user.uid,
           first_name: fields.firstName,
           last_name: fields.lastName,
-          address: fields.address,
+          neighborhood: fields.neighborhood,
           phone_number: fields.phone,
           email: fields.email,
           isVolunteer: true,
@@ -101,12 +98,12 @@ const SignUp = () => {
                   required
                 />
               </Form.Group>
-              <Form.Group id="signUpAddress">
-                <Form.Label> Address </Form.Label>
+              <Form.Group id="signUpNeighborhood">
+                <Form.Label> Neighborhood </Form.Label>
                 <Form.Control
-                  name="address"
-                  type="address"
-                  value={fields.address}
+                  name="neighborhood"
+                  type="neighborhood"
+                  value={fields.neighborhood}
                   onChange={handleChange}
                   required
                 />

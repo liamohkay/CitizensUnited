@@ -1,8 +1,10 @@
+// Libraries + dependencies
+import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import { Form, Button, Card } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext.js';
 
-const LogIn = () => {
+const LogIn = ({ setUser }) => {
   const { login, currentUser } = useAuth();
   const [fields, setFields] = useState({
     email: '',
@@ -23,8 +25,9 @@ const LogIn = () => {
     login(fields.email, fields.password)
       .catch(err => console.log(err))
       .then(resp => {
-        setUserID(resp.user.uid);
-        console.log(`${fields.email} signed in`)
+        axios.get('/api/users', { params: { firebase_id: currentUser.uid }})
+          .catch(err => consoole.log(err))
+          .then(resp => setUser(resp.data[0]))
       })
   }
 
