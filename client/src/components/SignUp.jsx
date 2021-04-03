@@ -38,8 +38,6 @@ const SignUp = () => {
       .catch(err => console.log(err))
   }
 
-  console.log(fields.type)
-
   if(currentPage === 'signup') {
     return (
       <div id="signUp-container" name="signup">
@@ -130,6 +128,7 @@ const SignUp = () => {
               </Form.Group>
               </div>
               <Button
+                id="signup-button"
                 className="w-100"
                 type="submit"
                 onClick={submitForm}
@@ -139,7 +138,7 @@ const SignUp = () => {
           </Card.Body>
         </Card>
         <div className="w-100 text-center mt-2" >
-          Already have an account? <a href="#" class="link-primary" name="login" onClick={changePage}>Log In</a>
+          Already have an account? <a href="#" class="link" name="login" onClick={changePage}>Log In</a>
         </div>
       </div>
     )

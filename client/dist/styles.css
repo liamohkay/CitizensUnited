@@ -48,15 +48,20 @@ table {
   border-spacing: 0;
 }
 
-
 /* App Styles */
+#app {
+  margin: auto;
+  width: 100%;
+}
+
 #app-container {
+  margin: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-#volunteer-button, #requester-button {
+#volunteer-button, #requester-button, #signup-button, #login-button {
   background-color: #8DA5ED;
   margin: 5px;
   margin-top: 25px;
@@ -127,4 +132,14 @@ input[type=radio] {
 #radio-buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+
+#signUp-container {
+  margin: auto;
+  width: 40%;
+}
+
+#login-container {
+  margin: 50px;
+  margin: auto;
 }

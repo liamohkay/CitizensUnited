@@ -19,10 +19,10 @@ export default function HomePage () {
             <Logo />
           <div id="end-links" class="d-flex justify-content-end">
             <div id="About-Us">
-              About Us
+            <a id="About-Us" href="#" class="link" name="about-us" onClick={changePage}>About Us</a>
             </div>
             <div id="Help">
-              Help
+            <a id="Help" href="#" class="link" name="help" onClick={changePage}>Help</a>
             </div>
             <div id="Log-In-Button" name="login" >
               <button type="submit" id="login-button" name="login" onClick={changePage} class="btn btn-sm" >Log In</button>
