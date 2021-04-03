@@ -5,3 +5,4 @@
 .env.local
 client/src/firebaseConfig.js
 /database/dbConfig.js
+package-lock.json
