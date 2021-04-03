@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useAuth } from '../../contexts/AuthContext';
 import RequestTile from './RequestTile';
+import VolunteerTile from './VolunteerTile';
 
 const sampleFeed = [
   {
@@ -61,6 +63,10 @@ const sampleFeed = [
 
 const TileList = () => {
   const [ticketFeed, setTicketFeed] = useState(sampleFeed);
+
+  // Gets current signed-in user for displayName and photoURL props
+  const { currentUser } = useAuth();
+
   let user = { isVolunteer: true }; // This is just sample so we can bool check for tiles
 
   // Grab ticket feed on load & re-render
@@ -70,9 +76,13 @@ const TileList = () => {
 
   return (
     <div id="list-container">
-      { ticketFeed.map(ticket => (
-        !user.isVolunteer ? null /*volunteer tile */ : <RequestTile ticket={ticket}/>
-      )) }
+      {
+        ticketFeed.map(ticket => (
+          !user.isVolunteer
+            ? <VolunteerTile key={ticket.task_id} ticket={ticket} />
+            : <RequestTile key={ticket.task_id} ticket={ticket}/>
+        ))
+      }
     </div>
   );
 }

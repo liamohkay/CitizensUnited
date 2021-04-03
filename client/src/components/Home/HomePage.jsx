@@ -34,7 +34,16 @@ export default function HomePage ({ setIsVolunteer }) {
                 <button type="submit" id="requester-button" className="btn btn-lg" name="requester" onClick={() => setIsVolunteer(false)}> Sign up to make requests</button>
             </div>
           </Link>
+        </div>
+      <div>
+        <Link to="/dashboard">
+          <div className="d-flex justify-content-around">
+              <button type="submit" id="volunteer-button" className="btn btn-lg" name="volunteer" >
+                Link to Dashboard
+              </button>
           </div>
+        </Link>
+      </div>
     </div>
   )
 }
