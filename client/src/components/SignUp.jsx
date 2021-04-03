@@ -26,8 +26,11 @@ const SignUp = () => {
   const submitForm = (e) => {
     e.preventDefault();
     signup(fields.email, fields.password)
-      .then(() => alert(`Account for ${fields.email} created!`))
       .catch(err => console.log(err))
+
+      .then(resp => {
+        alert(`Account for ${fields.email} created!`);
+      })
   }
 
   return (
