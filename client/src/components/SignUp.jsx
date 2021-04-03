@@ -33,8 +33,9 @@ const SignUp = ({ isVolunteer }) => {
     e.preventDefault();
     const task = storage
       .ref(`/photos/${e.target.files[0].name}`)
-      .put(e.target.files)
+      .put(e.target.files[0])
 
+    console.log
     task.on(
       'state_changed',
       snapshot => { },
