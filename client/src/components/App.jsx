@@ -3,6 +3,7 @@ import { AuthProvider } from '../contexts/AuthContext';
 import LogIn from './LogIn';
 import SignUp from './SignUp';
 import HomePage from './Home/HomePage';
+import VolunteerFeed from './VolunteerDashboard/Feed';
 
 const App = () => {
   const [userID, setUserID] = useState('');
@@ -11,6 +12,7 @@ const App = () => {
     <div id="app-container">
       <AuthProvider>
         <HomePage />
+        <VolunteerFeed />
       </AuthProvider>
    </div>
   );

@@ -5,7 +5,7 @@ import { useAuth } from '../contexts/AuthContext.js';
 import Login from './LogIn';
 
 const SignUp = () => {
-  const { signup } = useAuth();
+  const { signup, currentUser } = useAuth();
   const [fields, setFields] = useState({
     firstName: '',
     lastName: '',
@@ -13,7 +13,8 @@ const SignUp = () => {
     address: '',
     email: '',
     password: '',
-    type: ''
+    type: '',
+    photoURL: '',
   });
   const [currentPage, setCurrentPage] = useState('signup')
   // const [type, setType] = useState('default')
@@ -34,6 +35,12 @@ const SignUp = () => {
   const submitForm = (e) => {
     e.preventDefault();
     signup(fields.email, fields.password)
+      .then((res) => {
+        res.user.updateProfile({
+          displayName: `${fields.firstName} ${fields.lastName}` ,
+          photoURL: fields.photoURL,
+        })
+      })
       .then(() => alert(`Account for ${fields.email} created!`))
       .catch(err => console.log(err))
   }
