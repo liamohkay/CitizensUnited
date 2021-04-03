@@ -15,7 +15,7 @@ const Feed = () => {
       <div className="volunteer-feed_list">
         {
           tickets.map((ticket) => (
-            <
+            <Ticket />
           ))
         }
       </div>

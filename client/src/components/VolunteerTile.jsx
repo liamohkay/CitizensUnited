@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 
-const RequestTile = ({ ticket }) => {
+const VolunteerTile = ({ ticket }) => {
   const { currentUser } = useAuth();
   const {
     task_date,
@@ -12,26 +12,17 @@ const RequestTile = ({ ticket }) => {
     start_time,
     end_time,
   } = ticket;
-  const styles = {
-    profile: {
-      width: '50px',
-      height: '50px',
-      borderRadius: '50%',
-      backgroundPosition: 'center center',
-      backgroundSize: 'cover',
-    }
-  }
 
   return (
-    <div className="requestor-ticket">
-      <div className="requestor-ticket__profile-img">
+    <div className="volunteer-ticket">
+      <div className="volunteer-ticket__profile-img">
         {
           currentUser && currentUser.photoURL
-            ? <img src={currentUser.photoURL} style={styles.profile} />
-            : <img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTOkHm3_mPQ5PPRvGtU6Si7FJg8DVDtZ47rw&usqp=CAU'} style={styles.profile} />
+            ? <img src={currentUser.photoURL} />
+            : <img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTOkHm3_mPQ5PPRvGtU6Si7FJg8DVDtZ47rw&usqp=CAU'} />
         }
       </div>
-      <div className="requestor-ticket__body">
+      <div className="volunteer-ticket__body">
         <span style={{ display: 'block' }}>
           Requestor: {requestor_name}
         </span>
@@ -48,11 +39,12 @@ const RequestTile = ({ ticket }) => {
           Request Date/Time: {task_date}
         </span>
       </div>
-      <div className="requestor-ticket__buttons">
-        <span id="volunteer-button" className="btn btn-sm" style={{ cursor: "default" }}>{task_status}</span>
+      <div className="volunteer-ticket__buttons">
+        <button value="Accept"></button>
+        <button value="Not Now"></button>
       </div>
     </div>
-  );
+  )
 }
 
-export default RequestTile;
+export default VolunteerTile;

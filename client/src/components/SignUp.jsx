@@ -145,7 +145,7 @@ const SignUp = () => {
           </Card.Body>
         </Card>
         <div className="w-100 text-center mt-2" >
-          Already have an account? <a href="#" class="link" name="login" onClick={changePage}>Log In</a>
+          Already have an account? <a href="#" className="link" name="login" onClick={changePage}>Log In</a>
         </div>
       </div>
     )
