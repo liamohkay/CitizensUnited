@@ -29,7 +29,7 @@ const LogIn = ({ setUserID }) => {
   }
 
   return (
-    <>
+    <div id="login-container">
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Log In</h2>
@@ -42,12 +42,12 @@ const LogIn = ({ setUserID }) => {
               <Form.Label>Password</Form.Label>
               <Form.Control name="password" type="password" value={fields.password} onChange={handleChange} required />
             </Form.Group>
-            <Button className="w-100" onClick={handleClick}>Log In</Button>
+            <Button id="login-button" className="w-100" onClick={handleClick}>Log In</Button>
           </Form>
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2"></div>
-    </>
+    </div>
   )
 }
 
