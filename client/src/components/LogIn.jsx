@@ -26,7 +26,7 @@ const LogIn = ({ setUser }) => {
       .catch(err => console.log(err))
       .then(resp => {
         axios.get('/api/users', { params: { firebase_id: currentUser.uid }})
-          .catch(err => consoole.log(err))
+          .catch(err => console.log(err))
           .then(resp => setUser(resp.data[0]))
       })
   }
