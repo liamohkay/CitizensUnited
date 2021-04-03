@@ -20,6 +20,46 @@ const controller = {
       }
     })
   },
+
+  getTasks: (req, res) => {
+    dbHelpers.getAllTasks(req, (err, data) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    })
+  },
+
+  postTasks: (req, res) => {
+    dbHelpers.postNewTask(req, (err, data) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    })
+  },
+
+  acceptTask: (req, res) => {
+    dbHelpers.acceptTask(req, (err, data) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    })
+  },
+
+  hideTask: (req, res) => {
+    dbHelpers.hideTask(req, (err, data) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    })
+  },
 }
 
 module.exports = controller;
