@@ -11,8 +11,6 @@ const App = () => {
     <div id="app-container">
       <AuthProvider>
         <HomePage />
-        <LogIn setUserID={setUserID} />
-        <SignUp />
       </AuthProvider>
    </div>
   );

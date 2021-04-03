@@ -114,3 +114,17 @@ table {
 #mission-statement {
   font-size: xx-large;
 }
+
+#volunteer-radio, #requester-radio {
+  display: block;
+  text-align: center;
+}
+
+input[type=radio] {
+  transform: scale(0.5);
+}
+
+#radio-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
