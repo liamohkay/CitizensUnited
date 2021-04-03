@@ -35,7 +35,6 @@ const SignUp = ({ isVolunteer }) => {
       .ref(`/photos/${e.target.files[0].name}`)
       .put(e.target.files[0])
 
-    console.log
     task.on(
       'state_changed',
       snapshot => { },
