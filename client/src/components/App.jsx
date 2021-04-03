@@ -8,14 +8,15 @@ import TileList from './TileList.jsx';
 
 const App = () => {
   const [user, setUser] = useState('');
+  const [isVolunteer, setIsVolunteer] = useState();
 
   return (
   <div id="app-container">
     <AuthProvider>
       <Router>
         <Switch>
-          <Route exact path="/" component={HomePage}/>
-          <Route exact path="/signup" component={SignUp}/>
+          <Route exact path="/" render={() => <HomePage setIsVolunteer={setIsVolunteer} />} />
+          <Route exact path="/signup" render={() => <SignUp isVolunteer={isVolunteer} />}/>
           <Route exact path="/login" component={LogIn}/>
         </Switch>
       </Router>

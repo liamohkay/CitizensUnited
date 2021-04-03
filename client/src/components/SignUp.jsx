@@ -7,7 +7,7 @@ import { storage } from '../firebase';
 import Login from './LogIn';
 import { BrowserRouter as Router, Link, NavLink, Switch, Route, useHistory} from 'react-router-dom';
 
-const SignUp = () => {
+const SignUp = ({ isVolunteer }) => {
   const { signup, currentUser } = useAuth();
   const [photoURL, setPhotoURL] = useState()
   const [fields, setFields] = useState({
@@ -58,7 +58,7 @@ const SignUp = () => {
       .then((res) => {
         res.user.updateProfile({
           displayName: `${fields.firstName} ${fields.lastName}` ,
-          photoURL: fields.photoURL,
+          photoURL: photoURL,
         })
         let params = {
           firebase_id: res.user.uid,
@@ -67,7 +67,7 @@ const SignUp = () => {
           neighborhood: fields.neighborhood,
           phone_number: fields.phone,
           email: fields.email,
-          isVolunteer: true,
+          isVolunteer: isVolunteer,
           thumbsUp: 0,
           thumbsDown: 0,
           photo: photoURL,
