@@ -3,9 +3,11 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import { Form, Button, Card } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext.js';
+import { useHistory } from 'react-router-dom';
 
 const LogIn = ({ setUser }) => {
   const { login, currentUser } = useAuth();
+  const history = useHistory();
   const [fields, setFields] = useState({
     email: '',
     password: ''
@@ -27,7 +29,10 @@ const LogIn = ({ setUser }) => {
       .then(resp => {
         axios.get('/api/users', { params: { firebase_id: currentUser.uid }})
           .catch(err => console.log(err))
-          .then(resp => setUser(resp.data[0]))
+          .then(resp => {
+            setUser(resp.data[0]);
+            history.push('/');
+          })
       })
   }
 

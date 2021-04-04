@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Link, NavLink, Switch, Route, useHistory} from
 
 const SignUp = ({ isVolunteer }) => {
   const { signup, currentUser } = useAuth();
+  const history = useHistory();
   const [photoURL, setPhotoURL] = useState()
   const [fields, setFields] = useState({
     firstName: '',
@@ -76,7 +77,10 @@ const SignUp = ({ isVolunteer }) => {
         console.log(params);
         axios.post(`/api/users`, params)
           .catch(err => alert(`Failed to create Mongo Account for ${fields.email}`))
-          .then(() => alert(`Account for ${fields.email} created!`))
+          .then(() => {
+            alert(`Account for ${fields.email} created!`);
+            history.push('/login');
+          })
       })
   }
 
