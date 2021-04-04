@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Logo from './Logo';
 import LogIn from '../LogIn';
 import SignUp from '../SignUp';
@@ -6,7 +6,8 @@ import { BrowserRouter as Router, Link, NavLink, Switch, Route, useHistory} from
 import { Button, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function HomePage () {
+export default function HomePage ({ setIsVolunteer }) {
+
   return (
     <div>
       <div id="Home-Page">
@@ -22,21 +23,18 @@ export default function HomePage () {
       <div id="mission-statement">
         Mission Statement Here
       </div>
-      <Card className="banner" id="banner" >
-        <Card.Img src='story.png' />
-      </Card>
-      <div>
-        <Link to="/signup">
-          <div className="d-flex justify-content-around">
-              <button type="submit" id="volunteer-button" className="btn btn-lg" name="volunteer" >
-                Sign up to be a volunteer
-              </button>
-              <button type="submit" id="requester-button" className="btn btn-lg" name="requester">
-                Sign up to make requests
-              </button>
-          </div>
-        </Link>
-      </div>
+        <Card className="banner" id="banner" >
+          <Card.Img src='story.png' />
+        </Card>
+        <div>
+          <Link to="/signup">
+            <div className="d-flex justify-content-around">
+                <button type="submit" id="volunteer-button" className="btn btn-lg" name="volunteer" onClick={() => setIsVolunteer(true)} >
+                Sign up to be a volunteer</button>
+                <button type="submit" id="requester-button" className="btn btn-lg" name="requester" onClick={() => setIsVolunteer(false)}> Sign up to make requests</button>
+            </div>
+          </Link>
+        </div>
       <div>
         <Link to="/dashboard">
           <div className="d-flex justify-content-around">

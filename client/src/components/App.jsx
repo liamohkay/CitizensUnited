@@ -7,15 +7,16 @@ import HomePage from './Home/HomePage';
 import TileList from './Dashboard/TileList';
 
 const App = () => {
-  const [userID, setUserID] = useState('');
+  const [user, setUser] = useState('');
+  const [isVolunteer, setIsVolunteer] = useState();
 
   return (
   <div id="app-container">
     <AuthProvider>
       <Router>
         <Switch>
-          <Route exact path="/" component={HomePage}/>
-          <Route exact path="/signup" component={SignUp}/>
+          <Route exact path="/" render={() => <HomePage setIsVolunteer={setIsVolunteer} />} />
+          <Route exact path="/signup" render={() => <SignUp isVolunteer={isVolunteer} />}/>
           <Route exact path="/login" component={LogIn}/>
           <Route exact path="/dashboard" component={TileList} />
         </Switch>
