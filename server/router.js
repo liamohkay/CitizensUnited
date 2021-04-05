@@ -3,8 +3,12 @@ const controller = require('./controller.js');
 
 router
   .route('/users')
-    .get(controller.getUserInfo)
+    .get(controller.getVolunteerInfo)
     .post(controller.postSignUp)
+
+router
+  .route('/users/requester')
+    .get(controller.getRequesterInfo)
 
 router
   .route('/tasks')
