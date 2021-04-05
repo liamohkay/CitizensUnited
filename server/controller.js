@@ -31,6 +31,17 @@ const controller = {
     })
   },
 
+  getOneTask: (req, res) => {
+    console.log('i made it');
+    dbHelpers.getOneTask(req, (err, data) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    });
+  },
+
   postNewTask: (req, res) => {
     dbHelpers.postNewTask(req, (err, data) => {
       if (err) {
