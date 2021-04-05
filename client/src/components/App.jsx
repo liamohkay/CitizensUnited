@@ -11,7 +11,7 @@ import PrivateRoute from './PrivateRoute'
 const App = () => {
   const [user, setUser] = useState('');
   const [isVolunteer, setIsVolunteer] = useState();
-  // const { currentUser } = useAuth();
+  // const { currentUser } = useAuth();use()
 
   return (
   <div id="app-container">

@@ -1,7 +1,7 @@
 // Libraries + dependencies
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
-import { Form, Button, Card } from 'react-bootstrap';
+import { Form, Button, Card, Dropdown, DropdownButton } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext';
 import { storage } from '../firebase';
 import Login from './LogIn';
@@ -59,8 +59,9 @@ const SignUp = ({ isVolunteer }) => {
       .then((res) => {
         res.user.updateProfile({
           displayName: `${fields.firstName} ${fields.lastName}` ,
-          photoURL: photoURL,
-        })
+          photoUrl: photoURL,
+        });
+        analytics.setUserProperties({isVolunteer: isVolunteer});
         let params = {
           firebase_id: res.user.uid,
           first_name: fields.firstName,
@@ -149,9 +150,37 @@ const SignUp = ({ isVolunteer }) => {
                 onChange={handleChange}
                 required
               />
+              <DropdownButton onSelect={handleChange}>
+                  <Dropdown.Item eventKey="Arlington Heights">Arlington Heights</Dropdown.Item>
+                  <Dropdown.Item eventKey="Beverly Grove">Beverly Grove</Dropdown.Item>
+                  <Dropdown.Item eventKey="Carthay">Carthay</Dropdown.Item>
+                  <Dropdown.Item eventKey="Chinatown">Chinatown</Dropdown.Item>
+                  <Dropdown.Item eventKey="Downtown">Downtown</Dropdown.Item>
+                  <Dropdown.Item eventKey="East Hollywood">East Hollywood</Dropdown.Item>
+                  <Dropdown.Item eventKey="Echo Park">Echo Park</Dropdown.Item>
+                  <Dropdown.Item eventKey="Elysian Park">Elysian Park</Dropdown.Item>
+                  <Dropdown.Item eventKey="Elysian Valley">Elysian Valley</Dropdown.Item>
+                  <Dropdown.Item eventKey="Fairfax">Fairfax</Dropdown.Item>
+                  <Dropdown.Item eventKey="Griffith Park">Griffith Park</Dropdown.Item>
+                  <Dropdown.Item eventKey="Hancock Park">Hancock Park</Dropdown.Item>
+                  <Dropdown.Item eventKey="Harvard Heights">Harvard Heights</Dropdown.Item>
+                  <Dropdown.Item eventKey="Hollywood">Hollywood</Dropdown.Item>
+                  <Dropdown.Item eventKey="Hollywood Hills">Hollywood Hills</Dropdown.Item>
+                  <Dropdown.Item eventKey="Hollywood Hills West">Hollywood Hills West</Dropdown.Item>
+                  <Dropdown.Item eventKey="Koreatown">Koreatown</Dropdown.Item>
+                  <Dropdown.Item eventKey="Larchmont">Larchmont</Dropdown.Item>
+                  <Dropdown.Item eventKey="Los Feliz">Los Feliz</Dropdown.Item>
+                  <Dropdown.Item eventKey="Mid-City">Mid-City</Dropdown.Item>
+                  <Dropdown.Item eventKey="Mid-Wilshire">Mid-Wilshire</Dropdown.Item>
+                  <Dropdown.Item eventKey="Pico-Union">Pico-Union</Dropdown.Item>
+                  <Dropdown.Item eventKey="Silver Lake">Silver Lake</Dropdown.Item>
+                  <Dropdown.Item eventKey="West Hollywood">West Hollywood</Dropdown.Item>
+                  <Dropdown.Item eventKey="Westlake">Westlake</Dropdown.Item>
+                  <Dropdown.Item eventKey="Windsor Square">Windsor Square</Dropdown.Item>
+              </DropdownButton>
             </Form.Group>
-            <label className="form-label" htmlFor="customFile">Upload Profile Pciture</label>
-            <input type="file" className="form-control" id="customFile" accept="image/*" onChange={handlePhoto} />
+            <label class="form-label" htmlFor="customFile">Upload Profile Pciture</label>
+            <input type="file" class="form-control" id="customFile" accept="image/*" onChange={handlePhoto} />
             <Button
               id="signup-button"
               className="w-100"
