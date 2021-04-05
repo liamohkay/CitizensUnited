@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Link, NavLink, Switch, Route, useHistory} from
 const SignUp = ({ isVolunteer }) => {
   const { signup, currentUser } = useAuth();
   const history = useHistory();
-  const [photoURL, setPhotoURL] = useState()
+  const [photoUrl, setPhotoUrl] = useState()
   const [fields, setFields] = useState({
     firstName: '',
     lastName: '',
@@ -45,7 +45,7 @@ const SignUp = ({ isVolunteer }) => {
           .ref('photos')
           .child(e.target.files[0].name)
           .getDownloadURL()
-          .then(url => setPhotoURL(url))
+          .then(url => setPhotoUrl(url))
       }
     )
   }
@@ -59,7 +59,7 @@ const SignUp = ({ isVolunteer }) => {
       .then((res) => {
         res.user.updateProfile({
           displayName: `${fields.firstName} ${fields.lastName}` ,
-          photoURL: photoURL,
+          photoUrl: photoUrl,
         })
         let params = {
           firebase_id: res.user.uid,
@@ -71,7 +71,7 @@ const SignUp = ({ isVolunteer }) => {
           isVolunteer: isVolunteer,
           thumbsUp: 0,
           thumbsDown: 0,
-          photo: photoURL,
+          photo: photoUrl,
           tasks: [],
         }
         console.log(params);

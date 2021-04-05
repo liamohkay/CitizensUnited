@@ -70,6 +70,26 @@ const controller = {
       }
     })
   },
+
+  thumbsUp: (req, res) => {
+    dbHelpers.completeTask(req, (err, data) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    })
+  },
+
+  thumbsDown: (req, res) => {
+    dbHelpers.completeTask(req, (err, data) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    })
+  },
 }
 
 module.exports = controller;
