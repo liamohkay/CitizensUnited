@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AuthProvider } from '../contexts/AuthContext';
-import { BrowserRouter as Router, Link, NavLink, Switch, Route, useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
 import LogIn from './LogIn';
 import SignUp from './SignUp';
 import HomePage from './Home/HomePage';
