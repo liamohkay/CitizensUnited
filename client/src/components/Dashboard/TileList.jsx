@@ -74,17 +74,28 @@ const TileList = () => {
   //   setTicketFeed(sampleFeed);
   // }, [])
 
-  return (
-    <div id="list-container">
-      {
-        ticketFeed.map(ticket => (
-          !user.isVolunteer
-            ? <VolunteerTile key={ticket.task_id} ticket={ticket} />
-            : <RequestTile key={ticket.task_id} ticket={ticket}/>
-        ))
-      }
-    </div>
-  );
+  if (currentUser) {
+    return (
+      <div id="list-container">
+        <div className="dash-welcome">
+          <span>Welcome {currentUser.displayName}!</span>
+        </div>
+        <div className="dash-ticketfeed">
+          {
+            ticketFeed.map(ticket => (
+              !user.isVolunteer
+                ? <VolunteerTile key={ticket.task_id} ticket={ticket} />
+                : <RequestTile key={ticket.task_id} ticket={ticket}/>
+            ))
+          }
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <span>No logged in user.</span>
+    );
+  }
 }
 
 export default TileList;
