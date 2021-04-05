@@ -13,19 +13,35 @@ const TileList = ({ user }) => {
   // Gets current signed-in user for displayName and photoURL props
   const { currentUser, logout } = useAuth();
 
-  console.log('User-TileList', user.isVolunteer)
+  console.log('User-TileList', currentUser)
   let exampleUser = { isVolunteer: true }; // This is just sample so we can bool check for tiles
 
   // Grab ticket feed on load & re-render
-  useEffect(() => {
-    getTasks();
-  }, [currentUser])
+  // useEffect(() => {
+  //   getTasks();
+  // }, [user])
 
-  const getTasks = () => {
-    axios.get('/tasks')
-    .then((results) => (setTicketFeed(results.data)))
+  const getUser = () => {
+    const params = {
+      firebase_id: '' //need firebase_id from auth
+    }
+    axios.get('/api/users', params)
+    .then((results) => (setUser(results.data)))
+    // .then((results) => (setIsVolunteer(results.data.isVolunteer)))
     .catch((err) => (console.log(err)))
   }
+
+  // const getTasks = () => {
+  //   if (isVolunteer) {
+  //     axios.get('/tasks/volunteer')
+  //     .then((results) => (setTicketFeed(results.data)))
+  //     .catch((err) => (console.log(err)))
+  //   } else {
+  //     axios.get('/tasks/requester')
+  //     .then((results) => (setTicketFeed(results.data)))
+  //     .catch((err) => (console.log(err)))
+  //   }
+  // }
 
   const logOut = () => {
     logout()
