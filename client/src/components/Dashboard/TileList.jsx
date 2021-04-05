@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import axios from 'axios';
 import RequestTile from './RequestTile';
 import VolunteerTile from './VolunteerTile';
 
@@ -65,14 +66,24 @@ const TileList = () => {
   const [ticketFeed, setTicketFeed] = useState(sampleFeed);
 
   // Gets current signed-in user for displayName and photoURL props
-  const { currentUser } = useAuth();
+  const { currentUser, logout } = useAuth();
 
   let user = { isVolunteer: true }; // This is just sample so we can bool check for tiles
 
   // Grab ticket feed on load & re-render
-  // useEffect(() => {
-  //   setTicketFeed(sampleFeed);
-  // }, [])
+  useEffect(() => {
+    getTasks();
+  }, [currentUser])
+
+  const getTasks = () => {
+    axios.get('/tasks')
+    .then((results) => (setTicketFeed(results.data)))
+    .catch((err) => (console.log(err)))
+  }
+
+  const logOut = () => {
+    logout()
+  }
 
   if (currentUser) {
     return (
@@ -89,6 +100,7 @@ const TileList = () => {
             ))
           }
         </div>
+        <button onClick={logOut}>Log Out</button>
       </div>
     );
   } else {
