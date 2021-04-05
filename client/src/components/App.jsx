@@ -11,15 +11,15 @@ import PrivateRoute from './PrivateRoute'
 const App = () => {
   const [user, setUser] = useState('');
   const [isVolunteer, setIsVolunteer] = useState();
-  const { currentUser } = useAuth();
+  // const { currentUser } = useAuth();
 
-  const getUser = () => {
-    const params = {
-      firebase_id: '',
-      neighborhood: '',
-    }
-    axios.get('/api/users')
-  }
+  // const getUser = () => {
+  //   const params = {
+  //     firebase_id: '',
+  //     neighborhood: '',
+  //   }
+  //   axios.get('/api/users')
+  // }
 
   return (
   <div id="app-container">

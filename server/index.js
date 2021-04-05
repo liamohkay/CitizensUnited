@@ -18,13 +18,6 @@ server.use(bodyparser.urlencoded({ extended: true }));
 
 // Serve up static files
 server.use(express.static(path.join(__dirname, '../client/dist/')));
-server.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist/index.html'), function(err) {
-    if (err) {
-      res.status(500).send(err)
-    }
-  })
-});
 
 // Connect to router
 server.use('/api', router);

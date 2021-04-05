@@ -150,8 +150,8 @@ const SignUp = ({ isVolunteer }) => {
                 required
               />
             </Form.Group>
-            <label class="form-label" htmlFor="customFile">Upload Profile Pciture</label>
-            <input type="file" class="form-control" id="customFile" accept="image/*" onChange={handlePhoto} />
+            <label className="form-label" htmlFor="customFile">Upload Profile Pciture</label>
+            <input type="file" className="form-control" id="customFile" accept="image/*" onChange={handlePhoto} />
             <Button
               id="signup-button"
               className="w-100"
