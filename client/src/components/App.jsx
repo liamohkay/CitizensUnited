@@ -4,6 +4,7 @@ import LogIn from './LogIn';
 import SignUp from './SignUp';
 import HomePage from './Home/HomePage';
 import { BrowserRouter as Router, Link, NavLink, Switch, Route, useHistory} from 'react-router-dom';
+import { browserHistory } from 'react-router';
 import TileList from './TileList.jsx';
 
 const App = () => {
@@ -12,11 +13,11 @@ const App = () => {
   return (
   <div id="app-container">
     <AuthProvider>
-      <Router>
+      <Router history={browserHistory}>
         <Switch>
-          <Route exact path="/" component={HomePage}/>
-          <Route exact path="/signup" component={SignUp}/>
-          <Route exact path="/login" component={LogIn}/>
+          <Route history={browserHistory} exact path="/" component={HomePage}/>
+          <Route history={browserHistory} exact path="/signup" component={SignUp}/>
+          <Route history={browserHistory} exact path="/login" component={LogIn}/>
         </Switch>
       </Router>
     </AuthProvider>

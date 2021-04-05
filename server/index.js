@@ -15,9 +15,15 @@ server.use(cors());
 server.use(bodyparser.json());
 server.use(bodyparser.urlencoded({ extended: true }));
 
-
 // Serve up static files
 server.use(express.static(path.join(__dirname, '../client/dist/')));
+server.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
 
 // Connect to router
 server.use('/api', router);

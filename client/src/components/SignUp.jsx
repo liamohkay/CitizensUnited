@@ -142,7 +142,7 @@ const SignUp = () => {
         <div className="w-100 text-center mt-2" >
           Already have an account?
           <Link to="/login">
-            <a href="#" id="login" class="link" name="login" >Log In</a>
+            <a href="#" id="login" className="link" name="login" >Log In</a>
           </Link>
         </div>
       </div>
