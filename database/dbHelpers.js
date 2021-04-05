@@ -116,6 +116,22 @@ const dbHelpers = {
       callback(null, data)
     })
   },
+
+  thumbsUp: (req, callback) => {
+    Users
+      .findOneAndUpdate(
+        { firebase_id: req.body.firebase_id},
+        { $inc: {thumbsUp: 1} }
+      )
+  },
+
+  thumbsDown: (req, callback) => {
+    Users
+      .findOneAndUpdate(
+        { firebase_id: req.body.firebase_id},
+        { $inc: {thumbsDown: 1} }
+      )
+  }
 }
 
 module.exports = dbHelpers;
