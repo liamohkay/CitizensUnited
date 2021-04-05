@@ -12,6 +12,10 @@ router
     .post(controller.postNewTask)
 
 router
+  .route('/oneTask')
+    .get(controller.getOneTask)
+
+router
   .route('/tasks/accepted')
     .put(controller.acceptTask)
 

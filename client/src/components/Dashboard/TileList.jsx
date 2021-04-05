@@ -84,8 +84,8 @@ const TileList = () => {
           {
             ticketFeed.map(ticket => (
               !user.isVolunteer
-                ? <VolunteerTile key={ticket.task_id} ticket={ticket} />
-                : <RequestTile key={ticket.task_id} ticket={ticket}/>
+                ? <RequestTile key={ticket.task_id} ticket={ticket}/>
+                : <VolunteerTile key={ticket.task_id} ticket={ticket} />
             ))
           }
         </div>

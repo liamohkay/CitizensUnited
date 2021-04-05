@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import AcceptBtn from './AcceptBtn'
 
 const VolunteerTile = ({ ticket }) => {
   const { currentUser } = useAuth();
@@ -40,7 +41,7 @@ const VolunteerTile = ({ ticket }) => {
         </span>
       </div>
       <div className="volunteer-ticket__buttons">
-        <button value="Accept"></button>
+        <AcceptBtn task_id={ticket.task_id}/>
         <button value="Not Now"></button>
       </div>
     </div>

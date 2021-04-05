@@ -74,7 +74,7 @@ const SignUp = ({ isVolunteer }) => {
           photo: photoUrl,
           tasks: [],
         }
-        console.log(params);
+
         axios.post(`/api/users`, params)
           .catch(err => alert(`Failed to create Mongo Account for ${fields.email}`))
           .then(() => {
