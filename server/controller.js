@@ -1,8 +1,18 @@
 const dbHelpers = require('../database/dbHelpers.js');
 
 const controller = {
-  getUserInfo: (req, res) => {
-    dbHelpers.getUserInfo(req, (err, data) => {
+  getVolunteerInfo: (req, res) => {
+    dbHelpers.getVolunteerInfo(req, (err, data) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    })
+  },
+
+  getRequesterInfo: (req, res) => {
+    dbHelpers.getRequesterInfo(req, (err, data) => {
       if (err) {
         res.status(400).send(err);
       } else {
