@@ -32,6 +32,10 @@ const LogIn = ({ setUser }) => {
           .then(resp => {
             setUser(resp.data[0]);
             history.push('/');
+            currentUser.updateProfile({
+              // displayName: `${fields.firstName} ${fields.lastName}` ,
+              photoUrl: res.data[0].photo,
+            })
           })
       })
   }

@@ -23,5 +23,12 @@ router
   .route('/tasks/completed')
     .put(controller.completeTask)
 
+router
+  .route('/ratings/thumbsUp')
+    .put(controller.thumbsUp)
+
+router
+  .route('/ratings/thumbsDown')
+    .put(controller.thumbsDown)
 
 module.exports = router;
