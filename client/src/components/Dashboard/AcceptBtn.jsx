@@ -6,12 +6,11 @@ import { chat } from '../../firebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 const AcceptBtn = ({ task_id }) => {
-  const [roomID, setRoomID] = useState();
   const { currentUser } = useAuth();
+  const chatRoomRef = chat.collection('chatRooms');
 
   // Creates a new chatroom in firebase & returns the roomID
   const createChatRoom = () => {
-    const chatRoomRef = chat.collection('chatRooms');
     chatRoomRef.add({ users: [], message: [] })
       .catch(err => console.log(err))
       .then(resp => setRoomID(resp._delegate._key.path.segments[1]))
@@ -21,24 +20,28 @@ const AcceptBtn = ({ task_id }) => {
   const putVolunteer = () => {
     axios.put('/api/tasks/accepted', { task_id: '606b9271e40fcbf29959c181', firebase_id: currentUser.uid })
       .catch(err => console.log(err))
-      .then(resp => console.log(resp))
+      .then(() => null)
   }
 
   // Get's task by task id that volunteer was just added to
-  const getOneTask = () => {
+  const putChatUsers = () => {
     axios.get('/api/oneTask', { params: { task_id: '606b9271e40fcbf29959c181' }})
       .catch(err => console.log(err))
-      .then(resp => console.log(resp))
+      .then(resp => {
+        const { requestor_id, volunteer_id } = resp.data[0];
+        // Insert both ids into chatroom by id
+        chatRoomRef.add({
+          users: [requestor_id, volunteer_id],
+          messages: []
+        })
+      })
   }
 
   const handleClick = (e) => {
     e.preventDefault();
     // createChatRoom();
-    // putVolunteer();
-    getOneTask();
-    // get that specific task
-    // parse out volunteer + requestor id
-    // insert volunteer + requestor id to chatroom document
+    putVolunteer();
+    putChatUsers();
   }
 
   return (
