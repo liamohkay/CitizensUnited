@@ -21,6 +21,9 @@ const TileList = ({ user }) => {
     getUser()
   }, [])
 
+  //  Log user out
+  const logOut = () => logout();
+
   const getUser = () => {
     const options = {
       params: {
@@ -50,10 +53,6 @@ const TileList = ({ user }) => {
         })
         .catch((err) => (console.log(err)))
     )
-  }
-
-  const logOut = () => {
-    logout()
   }
 
   if (currentUser) {
