@@ -11,7 +11,7 @@ const dbHelpers = {
 
   getVolunteerInfo: (req, callback) => {
     Tasks
-      .find({task_neighborhood: req.query.neighborhood}, (err, data) => {
+      .find({task_neighborhood: req.query.task_neighborhood}, (err, data) => {
         if (err) callback(err)
         Users
           .update({firebase_id: req.query.firebase_id}, {
@@ -100,6 +100,7 @@ const dbHelpers = {
         volunteer_id: req.body.volunteer_id,
         requestor_id: req.body.requestor_id,
         requestor_name: req.body.requestor_name,
+        requestor_photo: req.body.requestor_photo,
         task_date: req.body.task_date,
         task_status: req.body.task_status,
         task_body: req.body.task_body,
@@ -133,7 +134,7 @@ const dbHelpers = {
     Users
       .find({firebase_id: req.body.firebase_id}, (err, data) => {
         if (err) callback(err)
-        let oldArr =data[0].tasks;
+        let oldArr = data[0].tasks;
         let newArr = oldArr.filter((obj) => {
           return obj._id.toString() !== req.body.task_id;
         });
