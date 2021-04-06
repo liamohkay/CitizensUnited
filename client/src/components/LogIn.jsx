@@ -26,8 +26,8 @@ const LogIn = ({ setUser }) => {
     e.preventDefault();
     login(fields.email, fields.password)
       .catch(err => console.log(err))
-      .then(resp => {
-        axios.get('/api/users', { params: { firebase_id: currentUser.uid }})
+      .then(res => {
+        axios.get('/api/users', { params: { firebase_id: res.user.uid }})
           .catch(err => console.log(err))
           .then(resp => {
             setUser(resp.data[0]);

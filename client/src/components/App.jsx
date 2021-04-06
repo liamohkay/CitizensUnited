@@ -13,6 +13,7 @@ import Chat from './Chat/Chat.jsx'
 const App = () => {
   const [user, setUser] = useState('');
   const [isVolunteer, setIsVolunteer] = useState();
+  // const { currentUser } = useAuth();use()
 
   return (
     <div id="app-container">

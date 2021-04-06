@@ -16,6 +16,14 @@ router
     .get(controller.getOneTask)
 
 router
+  .route('/tasks/volunteer')
+    .get(controller.getVolunteerInfo)
+
+router
+  .route('/tasks/requester')
+    .get(controller.getRequesterInfo)
+
+router
   .route('/tasks/accepted')
     .put(controller.acceptTask)
 
