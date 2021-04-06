@@ -9,26 +9,26 @@ import HomePage from './Home/HomePage';
 import TileList from './Dashboard/TileList';
 import PrivateRoute from './PrivateRoute';
 import Chat from './Chat/Chat.jsx'
+import Map from './Map/Map';
 
 const App = () => {
   const [user, setUser] = useState('');
   const [isVolunteer, setIsVolunteer] = useState();
 
   return (
-    <div id="app-container">
-      <AuthProvider>
-        <Router>
-          <Switch>
-            <PrivateRoute exact path="/" component={TileList} />
-            <Route exact path="/home" render={() => <HomePage setIsVolunteer={setIsVolunteer} />} />
-            <Route exact path="/signup" render={() => <SignUp isVolunteer={isVolunteer} />} />
-            <Route exact path="/login" render={() => <LogIn setUser={setUser} />} />
-          </Switch>
-        </Router>
-        <Chat user={user}/>
-      </AuthProvider>
-    </div>
-  );
+  <div id="app-container">
+    <AuthProvider>
+      <Router >
+        <Switch>
+          <PrivateRoute exact path="/" component={TileList} user={user} />
+          <Route exact path="/home" render={() => <HomePage setIsVolunteer={setIsVolunteer} />} />
+          <Route exact path="/signup" render={() => <SignUp isVolunteer={isVolunteer} />} />
+          <Route exact path="/login" render={() => <LogIn setUser={setUser} />} />
+        </Switch>
+      </Router>
+    </AuthProvider>
+  </div>
+  )
 }
 
 export default App;
