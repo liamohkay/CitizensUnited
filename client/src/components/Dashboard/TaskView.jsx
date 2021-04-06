@@ -1,11 +1,10 @@
 // Libraries + dependencies
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 // Components
 import Map from '../Map/Map'
 import ChatRoom from '../Chat/ChatRoom'
-import { Link } from 'react-router-dom';
 import Logo from '../Home/Logo'
-import CompleteBtn from './CompleteBtn';
 
 const TaskView = (props) => {
   const { ticket, room_id, isVolunteer, volunteerName } = props.location.state;
@@ -66,7 +65,9 @@ const TaskView = (props) => {
           Request Date/Time: {new Date(ticket.task_date).toUTCString()}
         </span>
       </div>
-      <CompleteBtn ticket={ticket} patnerID={partnerID} />
+      <Link to={{pathname: "/task/rating/:task_id", state: { ticket, isVolunteer }}}>
+        <button>Mark Task Complete</button>
+      </Link>
     </div>
   );
 }
