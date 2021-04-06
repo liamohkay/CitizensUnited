@@ -1,10 +1,8 @@
 // Libraries + dependencies
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { Link } from 'react-router-dom';
 // Components
 import AcceptBtn from './AcceptBtn'
-import ChatRoom from '../Chat/ChatRoom';
 
 const styles = {
   profile: {
@@ -61,16 +59,10 @@ const VolunteerTile = ({ ticket }) => {
       </div>
 
       <div className="volunteer-ticket__buttons">
-        <Link
-          to={{ pathname: `/task/${_id}`, state: { ticket, room_id, isVolunteer: true } }}
-          style={{textDecoration: 'none', color: 'black'}}
-        >
-          <AcceptBtn task_id={_id} task_status={task_status} />
-        </Link >
+        <AcceptBtn ticket={ticket} task_id={_id} />
         <button value="Not Now"></button>
       </div>
     </div>
   )
 }
-
 export default VolunteerTile;

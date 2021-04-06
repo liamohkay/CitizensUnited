@@ -4,8 +4,10 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext.js';
 import { chat } from '../../firebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { Link } from 'react-router-dom';
 
-const AcceptBtn = ({ task_id, task_status }) => {
+
+const AcceptBtn = ({ ticket, task_id, task_status }) => {
   const { currentUser } = useAuth();
   const chatRoomRef = chat.collection('chatRooms');
 
@@ -45,17 +47,22 @@ const AcceptBtn = ({ task_id, task_status }) => {
   }
 
   const handleClick = (e) => {
-    e.preventDefault();
     putVolunteer();
     putChatUsers();
   }
 
   return (
-    <>
-      <button onSubmit={handleClick}>
-        { task_status.toLowerCase() === 'accepted' ? <span>Open Chat</span> : <span>Accpets</span> }
+    <Link
+      to={{ pathname: `/task/${task_id}`, state: { ticket, room_id: ticket.room_id, isVolunteer: true } }}
+      style={{textDecoration: 'none', color: 'black'}}
+      onClick={handleClick}
+    >
+      <button >
+        { ticket.task_status.toLowerCase() === 'accepted'
+          ? <span>Open Chat</span>
+          : <span>Accept</span> }
       </button>
-    </>
+    </Link>
   );
 }
 
