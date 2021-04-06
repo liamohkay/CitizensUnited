@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import AcceptBtn from './AcceptBtn'
+import Chat from '../Chat/Chat';
 
 const VolunteerTile = ({ ticket }) => {
   const { currentUser } = useAuth();
@@ -41,7 +42,8 @@ const VolunteerTile = ({ ticket }) => {
         </span>
       </div>
       <div className="volunteer-ticket__buttons">
-        <AcceptBtn task_id={ticket.task_id}/>
+        <AcceptBtn task_id={ticket.task_id} />
+        <Chat room_id={ticket.room_id} />
         <button value="Not Now"></button>
       </div>
     </div>
