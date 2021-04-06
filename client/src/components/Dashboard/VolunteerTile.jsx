@@ -1,11 +1,8 @@
 // Libraries + dependencies
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
 // Components
 import AcceptBtn from './AcceptBtn'
-import ChatRoom from '../Chat/ChatRoom';
 
 const styles = {
   profile: {
@@ -17,7 +14,7 @@ const styles = {
   }
 }
 
-const VolunteerTile = ({ ticket, volunteerName, setTasks }) => {
+const VolunteerTile = ({ ticket, volunteerName, setTasks, setLoaded }) => {
   const { currentUser } = useAuth();
   const {
     _id,
@@ -88,11 +85,10 @@ const VolunteerTile = ({ ticket, volunteerName, setTasks }) => {
         </Link >
 
         <div className="volunteer-ticket__buttons">
-          <AcceptBtn task_id={_id} />
+          <AcceptBtn ticket={ticket} task_id={_id} setLoaded={setLoaded} />
           <button value="hide" onClick={handleHideTask}>Hide</button>
         </div>
       </div>
   )
 }
-
 export default VolunteerTile;
