@@ -10,12 +10,8 @@ import { BrowserRouter as Router, Link, NavLink, Switch, Route, useHistory} from
 const SignUp = ({ isVolunteer }) => {
   const { signup, currentUser } = useAuth();
   const history = useHistory();
-<<<<<<< HEAD
-  const [photoUrl, setPhotoUrl] = useState()
-=======
   const [photoURL, setPhotoURL] = useState();
   const [hoodTitle, setHoodTitle] = useState('Select Neighborhood');
->>>>>>> f3fb3ce6f8063ddcbb30e5c44f3503d169a295e9
   const [fields, setFields] = useState({
     firstName: '',
     lastName: '',
@@ -84,10 +80,6 @@ const SignUp = ({ isVolunteer }) => {
           photo: photoUrl,
           tasks: [],
         }
-<<<<<<< HEAD
-
-=======
->>>>>>> f3fb3ce6f8063ddcbb30e5c44f3503d169a295e9
         axios.post(`/api/users`, params)
           .catch(err => alert(`Failed to create Mongo Account for ${fields.email}`))
           .then(() => {

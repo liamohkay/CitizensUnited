@@ -25,10 +25,10 @@ const usersSchema = new Schema({
 })
 
 const tasksSchema = new Schema({
-  // task_id SERIAL,
-  // user_id INT,
   volunteer_id: String,
   requestor_id: String,
+  requestor_photo: String,
+  room_id: String,
   task_date: String,
   task_status: String, // Pending, Accepted, Hidden, Completed
   task_body: String,

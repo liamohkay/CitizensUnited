@@ -83,6 +83,16 @@ const dbHelpers = {
       })
   },
 
+  putRoom: (req, callback) => {
+    Tasks
+      .update({_id: req.body.task_id}, {
+        $set: {room_id: req.body.room_id}
+      }, (err, data) => {
+        if (err) callback(err)
+        callback(null, data)
+      })
+  },
+
   postNewTask: (req, callback) =>  {
     Tasks
       .create(
@@ -109,7 +119,6 @@ const dbHelpers = {
 
   // after this status of task changed in task collection but doesn't update the status in users collection automatically, you will need to do a getUserInfo request again
   acceptTask: (req, callback) => {
-    console.log('reqbody', req.body);
     Tasks
       .update({_id: req.body.task_id}, {
         $set: {task_status: 'Accepted', volunteer_id: req.body.firebase_id}

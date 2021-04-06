@@ -52,8 +52,17 @@ const controller = {
   },
 
   getOneTask: (req, res) => {
-    console.log('i made it');
     dbHelpers.getOneTask(req, (err, data) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    });
+  },
+
+  putRoom: (req, res) => {
+    dbHelpers.putRoom(req, (err, data) => {
       if (err) {
         res.status(400).send(err);
       } else {

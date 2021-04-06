@@ -73,9 +73,9 @@ const TileList = ({ user }) => {
         </div>
         <div className="dash-ticketfeed">
           {
-            ticketFeed.map(ticket => (
-              !user.isVolunteer
-                ? <RequestTile key={ticket.task_id} ticket={ticket}/>
+            sampleFeed.map(ticket => (
+              !exampleUser.isVolunteer
+                ? <RequestTile key={ticket.task_id} ticket={ticket} />
                 : <VolunteerTile key={ticket.task_id} ticket={ticket} />
             ))
           }
