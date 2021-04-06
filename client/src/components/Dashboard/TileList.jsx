@@ -1,54 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
+import { Button } from 'react-bootstrap'
 import axios from 'axios';
+import { useAuth } from '../../contexts/AuthContext';
 import RequestTile from './RequestTile';
 import VolunteerTile from './VolunteerTile';
-import sampleFeed from './sampleFeed';
 import Logo from '../Home/Logo';
+import TaskModal from './TaskModal';
+import sampleFeed from './sampleFeed';
 
 const TileList = ({ user }) => {
-  const [ticketFeed, setTicketFeed] = useState(sampleFeed);
+  const [ticketFeed, setTicketFeed] = useState([]);
   const [volunteer, setVolunteer] = useState('')
 
   // Gets current signed-in user for displayName and photoURL props
-  const { currentUser, logout } = useAuth();
-
-  // console.log('dbUser-TileList', user)
-  // console.log('authUser-TileList', currentUser)
-
-  let exampleUser = { isVolunteer: true }; // This is just sample so we can bool check for tiles
+  const { currentUser, logout } = useAuth()
 
   // Grab ticket feed on load & re-render
   useEffect(() => {
     getUser()
-      .then(() => getTasks())
   }, [])
 
   const getUser = () => {
-    // Set firebase_id: currentUser.uid for final
     const options = {
       params: {
-        firebase_id: 2
+        firebase_id: currentUser.uid
       }
     }
     return (
       axios.get('/api/users', options)
-        .then((results) =>(setVolunteer(results.data[0].isVolunteer)))
+        .then((results) => {
+          console.log(results.data)
+          setVolunteer(results.data[0].isVolunteer)
+          return (results.data[0])
+        })
+        .then((userData) => {
+          if (userData.isVolunteer === true) {
+            axios.get('/api/tasks', {params: { task_neighborhood: userData.neighborhood}})
+              .then((results) => {
+                setTicketFeed(results.data)
+              })
+              .catch((err) => (console.log(err)))
+
+          } else if (userData.isVolunteer === false) {
+            axios.get('/api/tasks/requester', { params: {firebase_id: userData.firebase_id }})
+              .then((results) => (setTicketFeed(results.data[0].tasks)))
+              .catch((err) => (console.log(err)))
+          }
+        })
         .catch((err) => (console.log(err)))
     )
-  }
-
-  const getTasks = () => {
-    if (volunteer) {
-      axios.get('/api/tasks/volunteer')
-        .then((results) => (setTicketFeed(results.data)))
-        .catch((err) => (console.log(err)))
-    } else {
-      axios.get('/api/tasks/requester')
-        .then((results) => (setTicketFeed(results.data)))
-        .catch((err) => (console.log(err)))
-    }
   }
 
   const logOut = () => {
@@ -61,6 +62,9 @@ const TileList = ({ user }) => {
         <div id="dash-header">
           <Logo />
           <div id="end-links" className="d-flex justify-content-end">
+            <div>
+              <img src={currentUser.photoURL} />
+            </div>
             <div id="Log-In-Button" name="login" >
               <Link to="/login">
                 <button type="submit" id="login-button" name="login" className="btn btn-sm" >Log In</button>
@@ -71,12 +75,18 @@ const TileList = ({ user }) => {
         <div className="dash-welcome">
           <span>Welcome {currentUser.displayName}!</span>
         </div>
+        {
+          !volunteer &&
+            <div className="dash-task-modal">
+              <TaskModal currentUser={currentUser} />
+            </div>
+        }
         <div className="dash-ticketfeed">
           {
-            ticketFeed.map(ticket => (
-              !user.isVolunteer
-                ? <RequestTile key={ticket.task_id} ticket={ticket}/>
-                : <VolunteerTile key={ticket.task_id} ticket={ticket} />
+            ticketFeed.map((ticket) => (
+              volunteer
+                ? <VolunteerTile key={ticket._id} ticket={ticket} />
+                : <RequestTile key={ticket._id} ticket={ticket}/>
             ))
           }
         </div>
