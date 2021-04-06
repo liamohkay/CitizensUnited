@@ -56,7 +56,7 @@ const VolunteerTile = ({ ticket }) => {
       </div>
       <div className="volunteer-ticket__buttons">
         <AcceptBtn task_id={ticket.task_id} />
-        <Chat room_id={ticket.room_id} />
+        {/* <Chat room_id={ticket.room_id} /> */}
         <button value="Not Now"></button>
       </div>
     </div>

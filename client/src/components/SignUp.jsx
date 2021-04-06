@@ -11,7 +11,7 @@ import { BrowserRouter as Router, Link, NavLink, Switch, Route, useHistory} from
 const SignUp = ({ isVolunteer }) => {
   const { signup, currentUser } = useAuth();
   const history = useHistory();
-  const [photoURL, setPhotoURL] = useState();
+  const [photoUrl, setPhotoUrl] = useState();
   const [fields, setFields] = useState({
     firstName: '',
     lastName: '',
@@ -60,7 +60,7 @@ const SignUp = ({ isVolunteer }) => {
       .then((res) => {
         res.user.updateProfile({
           displayName: `${fields.firstName} ${fields.lastName}` ,
-          photoUrl: photoURL,
+          photoUrl: photoUrl,
         });
         let params = {
           firebase_id: res.user.uid,

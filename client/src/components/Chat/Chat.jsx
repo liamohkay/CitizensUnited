@@ -14,37 +14,37 @@ const Chat = ({ room_id }) => {
   const roomRef = chat.collection('chatRooms').doc(room_id);
   // const query = roomRef.limit(25);
   const [formValue, setFormValue] = useState('');
-  const [messages] = useDocumentData(roomRef);
+  // const [messages] = useDocumentData(roomRef);
 
-  // Sends message to chatroom and updates firebase db
-  const sendMessage = (e) => {
-    e.preventDefault();
-    const { uid } = auth.currentUser;
+  // // Sends message to chatroom and updates firebase db
+  // const sendMessage = (e) => {
+  //   e.preventDefault();
+  //   const { uid } = auth.currentUser;
 
-    let msg = {
-      text: formValue,
-      createdAt: new Date(),
-      uid: uid,
-      // photoUrl: auth.currentUser.photoUrl /*user.photo*/
-    }
+  //   let msg = {
+  //     text: formValue,
+  //     createdAt: new Date(),
+  //     uid: uid,
+  //     // photoUrl: auth.currentUser.photoUrl /*user.photo*/
+  //   }
 
-    console.log(msg);
-    roomRef.update({ messages: messages.messages.concat([msg]) })
+  //   console.log(msg);
+  //   roomRef.update({ messages: messages.messages.concat([msg]) })
 
-    setFormValue('');
-    // dummy.current.scrollIntoView({ behavior: 'smooth' });
-  }
+  //   setFormValue('');
+  //   // dummy.current.scrollIntoView({ behavior: 'smooth' });
+  // }
 
   return (
     <div className="chat">
-      <div className="main">
-        {/* {!messages ? null : JSON.stringify(messages.messages)} */}
+      {/* <div className="main">
+        {!messages ? null : JSON.stringify(messages.messages)}
         {!messages ? null : messages.messages.map(msg => <ChatMessage msg={msg} />)}
       </div>
       <form className="chatForm" onSubmit={sendMessage}>
         <input className="input" value={formValue} onChange={(e) => setFormValue(e.target.value)}/>
         <button className="chatBtn" type="submit"> Send Message</button>
-      </form>
+      </form> */}
     </div>
   )
 }

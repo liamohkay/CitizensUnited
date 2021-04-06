@@ -15,7 +15,6 @@ server.use(cors());
 server.use(bodyparser.json());
 server.use(bodyparser.urlencoded({ extended: true }));
 
-
 // Serve up static files
 server.use(express.static(path.join(__dirname, '../client/dist/')));
 
