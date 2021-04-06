@@ -86,13 +86,15 @@ const Dashboard = ({ user }) => {
                 ? <VolunteerTile
                     ticket={ticket}
                     key={ticket._id}
+                    volunteerName={currentUser.displayName}
                     setTasks={setTasks}
                   />
                 : <RequestTile
                     ticket={ticket}
                     key={ticket._id}
                   />
-            )) }
+              ))
+            }
           </div>
 
           { /* Add task modal for requesters only */

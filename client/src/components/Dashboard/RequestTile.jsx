@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import { Link } from 'react-router-dom';
 
 const RequestTile = ({ ticket }) => {
   const { currentUser } = useAuth();
@@ -40,32 +41,73 @@ const RequestTile = ({ ticket }) => {
     return new Date(newDateStr);
   }
 
+  // WT: Added conditional so that if room_id exist (AKA task has been accepted), you can click and render the Map + Chat confirmation
   return (
-    <div className="requestor-ticket">
-      <div className="requestor-ticket__profile-img">
-        <img src={requestor_photo} style={styles.profile} />
+    room_id ?
+    <>
+      <div className="requestor-ticket">
+        <div className="requestor-ticket__profile-img">
+          <img src={requestor_photo} style={styles.profile} />
+        </div>
+        <div className="requestor-ticket__body">
+          <span style={{ display: 'block' }}>
+            Requestor: {requestor_name}
+          </span>
+          <span style={{ display: 'block' }}>
+            Request: {task_body}
+          </span>
+          <span style={{ display: 'block' }}>
+            Duration: {Math.round((reformatDate(task_date, end_time) - reformatDate(task_date, start_time))) / 60000} minutes
+          </span>
+          <span style={{ display: 'block' }}>
+            Neighborhood: {task_neighborhood}
+          </span>
+          <span style={{ display: 'block' }}>
+            Request Date/Time: {new Date(task_date).toUTCString()}
+          </span>
+        </div>
+        <div className="requestor-ticket__buttons">
+          <span id="volunteer-button" className="btn btn-sm" style={{ cursor: "default" }}>{task_status}</span>
+        </div>
       </div>
-      <div className="requestor-ticket__body">
-        <span style={{ display: 'block' }}>
-          Requestor: {requestor_name}
-        </span>
-        <span style={{ display: 'block' }}>
-          Request: {task_body}
-        </span>
-        <span style={{ display: 'block' }}>
-          Duration: {Math.round((reformatDate(task_date, end_time) - reformatDate(task_date, start_time))) / 60000} minutes
-        </span>
-        <span style={{ display: 'block' }}>
-          Neighborhood: {task_neighborhood}
-        </span>
-        <span style={{ display: 'block' }}>
-          Request Date/Time: {new Date(task_date).toUTCString()}
-        </span>
-      </div>
-      <div className="requestor-ticket__buttons">
-        <span id="volunteer-button" className="btn btn-sm" style={{ cursor: "default" }}>{task_status}</span>
-      </div>
-    </div>
+      <Link
+        to={{ pathname: `/task/${_id}`, state: { ticket, room_id, isVolunteer: false } }}
+        style={{textDecoration: 'none', color: 'black'}}>
+          <button type="button">Go To Confirmation Page</button>
+      </Link>
+    </>
+      :
+        <div className="requestor-ticket">
+          <div className="requestor-ticket__profile-img">
+            {
+              // currentUser && currentUser.photoURL
+              //   ? <img src={currentUser.photoURL} style={styles.profile} />
+              //   : <img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTOkHm3_mPQ5PPRvGtU6Si7FJg8DVDtZ47rw&usqp=CAU'} style={styles.profile} />
+
+                <img src={requestor_photo} style={styles.profile} />
+            }
+          </div>
+          <div className="requestor-ticket__body">
+            <span style={{ display: 'block' }}>
+              Requestor: {requestor_name}
+            </span>
+            <span style={{ display: 'block' }}>
+              Request: {task_body}
+            </span>
+            <span style={{ display: 'block' }}>
+              Duration: {Math.round((new Date(task_date + 'T' + end_time) - new Date(task_date + 'T' + start_time))) / 60000} minutes
+            </span>
+            <span style={{ display: 'block' }}>
+              Neighborhood: {task_neighborhood}
+            </span>
+            <span style={{ display: 'block' }}>
+              Request Date/Time: {task_date}
+            </span>
+          </div>
+          <div className="requestor-ticket__buttons">
+            <span id="volunteer-button" className="btn btn-sm" style={{ cursor: "default" }}>{task_status}</span>
+          </div>
+        </div>
   );
 }
 

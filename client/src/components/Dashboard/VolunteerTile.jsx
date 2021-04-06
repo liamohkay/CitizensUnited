@@ -17,7 +17,11 @@ const styles = {
   }
 }
 
+<<<<<<< HEAD
 const VolunteerTile = ({ ticket, setTasks }) => {
+=======
+const VolunteerTile = ({ ticket, volunteerName }) => {
+>>>>>>> dev
   const { currentUser } = useAuth();
   const {
     _id,
@@ -60,7 +64,14 @@ const VolunteerTile = ({ ticket, setTasks }) => {
   }
 
   return (
+<<<<<<< HEAD
 
+=======
+    <Link
+      to={{ pathname: `/task/${_id}`, state: { ticket, room_id, isVolunteer: true, volunteerName } }}
+      style={{textDecoration: 'none', color: 'black'}}
+    >
+>>>>>>> dev
       <div className="volunteer-ticket">
         <div className="volunteer-ticket__profile-img">
           <img src={requestor_photo} style={styles.profile} />
