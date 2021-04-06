@@ -15,8 +15,6 @@ const Rating = (props) => {
       .then(() => (alert('Vote Submitted')))
       .catch((err) => (console.log(err)))
     }
-    console.log('helloooo')
-    // <Link to={{pathname: "/"}}></Link>
   }
 
   const thumbsDown = () => {
@@ -29,7 +27,6 @@ const Rating = (props) => {
       .then(() => (alert('Vote Submitted')))
       .catch((err) => (console.log(err)))
     }
-    // <Link to={{pathname: "/"}}></Link>
   }
 
   return (
