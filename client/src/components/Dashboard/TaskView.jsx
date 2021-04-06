@@ -62,6 +62,9 @@ const TaskView = (props) => {
           Request Date/Time: {new Date(ticket.task_date).toUTCString()}
         </span>
       </div>
+      <Link to={{pathname: "/task/rating/:task_id", state: { ticket }}}>
+        <button>Task Completed</button>
+      </Link>
     </div>
   );
 }
