@@ -6,7 +6,8 @@ import LogIn from './LogIn';
 import SignUp from './SignUp';
 import HomePage from './Home/HomePage';
 import TileList from './Dashboard/TileList';
-import PrivateRoute from './PrivateRoute'
+import PrivateRoute from './PrivateRoute';
+import Map from './Map/Map';
 
 const App = () => {
   const [user, setUser] = useState('');
@@ -16,7 +17,7 @@ const App = () => {
   return (
   <div id="app-container">
     <AuthProvider>
-      <Router>
+      <Router >
         <Switch>
           <PrivateRoute exact path="/" component={TileList} user={user} />
           <Route exact path="/home" render={() => <HomePage setIsVolunteer={setIsVolunteer} />} />
@@ -25,8 +26,8 @@ const App = () => {
         </Switch>
       </Router>
     </AuthProvider>
-    </div>
-  );
+  </div>
+  )
 }
 
 export default App;
