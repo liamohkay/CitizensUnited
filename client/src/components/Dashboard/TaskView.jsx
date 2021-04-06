@@ -3,12 +3,14 @@ import React, { useState, useEffect } from 'react';
 // Components
 import Map from '../Map/Map'
 import ChatRoom from '../Chat/ChatRoom'
+import { Link } from 'react-router-dom';
 import Logo from '../Home/Logo'
 
 const TaskView = (props) => {
+  console.log('props TaskView', props);
   const { ticket, room_id, isVolunteer, volunteerName } = props.location.state;
-  console.log(ticket)
   var neighborhood = ticket.task_neighborhood
+  // console.log('volunteerName', volunteerName)
   return(
     <div className="task-view-container">
       <div>
@@ -25,6 +27,9 @@ const TaskView = (props) => {
       <div id="map"> </div>
       <Map neighborhood={neighborhood}/>
       <ChatRoom room_id={room_id} />
+      <Link to={{ pathname: "/"}}>
+        <button type="button">Go back to Home Page</button>
+      </Link>
       <div id="task-info">
         <span style={{ display: 'block' }}>
           Requestor: {ticket.requestor_name}
