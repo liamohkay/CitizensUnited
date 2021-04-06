@@ -19,7 +19,7 @@ const App = () => {
 
   return (
   <div id="app-container">
-    {/* <AuthProvider>
+    <AuthProvider>
       <Router >
         <Switch>
           <PrivateRoute exact path="/" component={Dashboard} />
@@ -29,7 +29,7 @@ const App = () => {
           <Route exact path="/login" render={() => <LogIn setUser={setUser} />} />
         </Switch>
       </Router>
-    </AuthProvider> */}
+    </AuthProvider>
     <Rating />
   </div>
   )
