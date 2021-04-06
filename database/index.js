@@ -27,6 +27,7 @@ const usersSchema = new Schema({
 const tasksSchema = new Schema({
   volunteer_id: String,
   requestor_id: String,
+  requestor_name: String,
   requestor_photo: String,
   room_id: String,
   task_date: String,

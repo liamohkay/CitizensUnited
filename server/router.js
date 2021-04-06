@@ -47,4 +47,12 @@ router
   .route('/ratings/thumbsDown')
     .put(controller.thumbsDown)
 
+router
+  .route('/ratings/thumbsUp')
+  .put(controller.thumbsUp)
+
+router
+  .route('/ratings/thumbsDown')
+  .put(controller.thumbsDown)
+
 module.exports = router;
