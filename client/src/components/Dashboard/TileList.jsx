@@ -22,7 +22,7 @@ const TileList = ({ user }) => {
   // Grab ticket feed on load & re-render
   useEffect(() => {
     getUser()
-    .then(() => getTasks())
+      .then(() => getTasks())
   }, [])
 
   const getUser = () => {
@@ -42,12 +42,12 @@ const TileList = ({ user }) => {
   const getTasks = () => {
     if (volunteer) {
       axios.get('/api/tasks/volunteer')
-      .then((results) => (setTicketFeed(results.data)))
-      .catch((err) => (console.log(err)))
+        .then((results) => (setTicketFeed(results.data)))
+        .catch((err) => (console.log(err)))
     } else {
       axios.get('/api/tasks/requester')
-      .then((results) => (setTicketFeed(results.data)))
-      .catch((err) => (console.log(err)))
+        .then((results) => (setTicketFeed(results.data)))
+        .catch((err) => (console.log(err)))
     }
   }
 
