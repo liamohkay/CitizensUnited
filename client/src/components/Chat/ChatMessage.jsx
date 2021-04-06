@@ -5,7 +5,6 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 const ChatMessage = (props) => {
   const { text, uid } = props.msg;
-  console.log(text, uid);
   // const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
 
   return (

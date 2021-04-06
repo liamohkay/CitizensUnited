@@ -25,6 +25,7 @@ const VolunteerTile = ({ ticket }) => {
     requestor_photo,
     start_time,
     end_time,
+    room_id
   } = ticket;
 
   return (
@@ -57,7 +58,7 @@ const VolunteerTile = ({ ticket }) => {
       </div>
       <div className="volunteer-ticket__buttons">
         <AcceptBtn task_id={_id} />
-        {/* <Chat room_id={ticket.room_id} /> */}
+        <Chat room_id={room_id} />
         <button value="Not Now"></button>
       </div>
     </div>
