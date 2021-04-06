@@ -60,7 +60,7 @@ const SignUp = ({ isVolunteer }) => {
       .then((res) => {
         res.user.updateProfile({
           displayName: `${fields.firstName} ${fields.lastName}` ,
-          photoUrl: photoUrl,
+          photoURL: photoUrl,
         });
         let params = {
           firebase_id: res.user.uid,

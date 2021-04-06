@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 // Components
 import AcceptBtn from './AcceptBtn'
 import ChatRoom from '../Chat/ChatRoom';
@@ -31,6 +32,11 @@ const VolunteerTile = ({ ticket }) => {
     room_id
   } = ticket;
 
+  const handleHideTask = () => {
+    const body = { firebase_id: _id };
+    axios.put('/api/tasks/hidden', body)
+  }
+
   return (
     <Link
       to={{ pathname: `/task/${_id}`, state: { ticket, room_id, isVolunteer: true } }}
@@ -38,13 +44,7 @@ const VolunteerTile = ({ ticket }) => {
     >
       <div className="volunteer-ticket">
         <div className="volunteer-ticket__profile-img">
-          {
-            // currentUser && currentUser.photoURL
-            //   ? <img src={currentUser.photoURL} />
-            //   : <img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTOkHm3_mPQ5PPRvGtU6Si7FJg8DVDtZ47rw&usqp=CAU'} />
-
-            <img src={requestor_photo} style={styles.profile} />
-          }
+          <img src={requestor_photo} style={styles.profile} />
         </div>
         <div className="volunteer-ticket__body">
           <span style={{ display: 'block' }}>
@@ -65,7 +65,7 @@ const VolunteerTile = ({ ticket }) => {
         </div>
         <div className="volunteer-ticket__buttons">
           <AcceptBtn task_id={_id} />
-          <button value="Not Now"></button>
+          <button value="hide" onClick={handleHideTask}>Hide</button>
         </div>
       </div>
     </Link >
