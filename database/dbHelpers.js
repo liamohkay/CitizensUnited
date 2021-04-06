@@ -11,7 +11,10 @@ const dbHelpers = {
 
   getVolunteerInfo: (req, callback) => {
     Tasks
-      .find({task_neighborhood: req.query.task_neighborhood}, (err, data) => {
+      .find({
+        task_neighborhood: req.query.task_neighborhood,
+        task_status: { $ne: 'Completed' }
+      }, (err, data) => {
         if (err) callback(err)
         Users
           .update({firebase_id: req.query.firebase_id}, {
@@ -29,7 +32,10 @@ const dbHelpers = {
 
   getRequesterInfo : (req, callback) => {
     Tasks
-      .find({requestor_id: req.query.firebase_id}, (err, data) => {
+      .find({
+        requestor_id: req.query.firebase_id,
+        task_status: { $ne: 'Completed' }
+      }, (err, data) => {
         if (err) callback(err)
         Users
           .update({firebase_id: req.query.firebase_id}, {
@@ -69,8 +75,11 @@ const dbHelpers = {
 
   getAllTasks: (req, callback) => {
     Tasks
-      .find({task_neighborhood: req.query.task_neighborhood}, (err, data) => {
+      .find({
+        task_neighborhood: req.query.task_neighborhood,
+        task_status: { $ne: 'Completed' } }, (err, data) => {
         if (err) callback(err)
+        console.log(data);
         callback(null, data)
       })
   },
