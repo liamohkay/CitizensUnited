@@ -30,27 +30,27 @@ const mapData = {
   carthay: [34.0558552, -118.3768057]
 }
 
-const InnerMap = () => {
-  return (
-    <GoogleMap
+export default function Map({neighborhood}) {
+  var hood = mapData[neighborhood]
+  const InnerMap = () => {
+    return (
+      <GoogleMap
       defaultZoom={14}
-      defaultCenter={{lat: mapData.hollywoodHills[0], lng: mapData.hollywoodHills[1]}}
-    >
-      <Marker
-        position={{
-          lat: mapData.hollywoodHills[0],
-          lng: mapData.hollywoodHills[1]
-        }}
-      />
-    </GoogleMap>
-  )
-}
+      defaultCenter={{lat: hood[0], lng: hood[1]}}
+      >
+        <Marker
+          position={{
+            lat: hood[0],
+            lng: hood[1]
+          }}
+          />
+      </GoogleMap>
+    )
+  }
 
-const Wrapped = withScriptjs(withGoogleMap(InnerMap));
-
-export default function Map() {
+  const Wrapped = withScriptjs(withGoogleMap(InnerMap));
   return (
-    <div style={{width: '100vw', height: '100vh'}}>
+    <div style={{width: '50vw', height: '50vh'}}>
       <Wrapped
         googleMapURL={"https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyBYhkZV9wJYaqnfcvAq5Doga7IKh_Fjh1E"}
         loadingElement={<div style={{height: "100%"}} />}
