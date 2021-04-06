@@ -16,7 +16,7 @@ const App = () => {
 
   return (
   <div id="app-container">
-    {/* <AuthProvider>
+    <AuthProvider>
       <Router >
         <Switch>
           <PrivateRoute exact path="/" component={TileList} user={user} />
@@ -25,12 +25,9 @@ const App = () => {
           <Route exact path="/login" render={() => <LogIn setUser={setUser} />} />
         </Switch>
       </Router>
-      </div> */}
-      <div id="map">
-        <Map/>
-      </div>
-    </div>
-  );
+    </AuthProvider>
+  </div>
+  )
 }
 
 export default App;

@@ -30,6 +30,7 @@ const TileList = ({ user }) => {
     return (
       axios.get('/api/users', options)
         .then((results) => {
+          console.log(results.data)
           setVolunteer(results.data[0].isVolunteer)
           return (results.data[0])
         })
