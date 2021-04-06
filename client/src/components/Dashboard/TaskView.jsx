@@ -8,8 +8,9 @@ import Logo from '../Home/Logo'
 
 const TaskView = (props) => {
   console.log('props TaskView', props);
-  const { ticket, room_id, isVolunteer } = props.location.state;
+  const { ticket, room_id, isVolunteer, volunteerName } = props.location.state;
   var neighborhood = ticket.task_neighborhood
+  // console.log('volunteerName', volunteerName)
   return(
     <div className="task-view-container">
       <div>

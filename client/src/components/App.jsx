@@ -7,7 +7,6 @@ import LogIn from './LogIn';
 import SignUp from './SignUp';
 import HomePage from './Home/HomePage';
 import Dashboard from './Dashboard/Dashboard';
-import TileList from './Dashboard/TileList';
 import TaskView from './Dashboard/TaskView';
 import PrivateRoute from './PrivateRoute';
 import Map from './Map/Map';
@@ -21,7 +20,7 @@ const App = () => {
     <AuthProvider>
       <Router >
         <Switch>
-          <PrivateRoute exact path="/" component={TileList} />
+          <PrivateRoute exact path="/" component={Dashboard} />
           <PrivateRoute exact path="/task/:task_id" component={TaskView} user={user} />
           <Route exact path="/home" render={() => <HomePage setIsVolunteer={setIsVolunteer} />} />
           <Route exact path="/signup" render={() => <SignUp isVolunteer={isVolunteer} />} />
