@@ -99,6 +99,7 @@ const dbHelpers = {
         {
         volunteer_id: req.body.volunteer_id,
         requestor_id: req.body.requestor_id,
+        requestor_name: req.body.requestor_name,
         task_date: req.body.task_date,
         task_status: req.body.task_status,
         task_body: req.body.task_body,

@@ -16,7 +16,8 @@ const styles = {
   }
 }
 
-const VolunteerTile = ({ ticket }) => {
+const VolunteerTile = ({ ticket, volunteerName }) => {
+  console.log(volunteerName)
   const { currentUser } = useAuth();
   const {
     _id,
@@ -33,7 +34,7 @@ const VolunteerTile = ({ ticket }) => {
 
   return (
     <Link
-      to={{ pathname: `/task/${_id}`, state: { ticket, room_id, isVolunteer: true } }}
+      to={{ pathname: `/task/${_id}`, state: { ticket, room_id, isVolunteer: true, volunteerName } }}
       style={{textDecoration: 'none', color: 'black'}}
     >
       <div className="volunteer-ticket">
