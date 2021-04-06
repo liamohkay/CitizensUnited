@@ -33,7 +33,7 @@ const VolunteerTile = ({ ticket }) => {
 
   return (
     <Link
-      to={{ pathname: `/${_id}`, state: { ticket, room_id, isVolunteer: true } }}
+      to={{ pathname: `/task/${_id}`, state: { ticket, room_id, isVolunteer: true } }}
       style={{textDecoration: 'none', color: 'black'}}
     >
       <div className="volunteer-ticket">

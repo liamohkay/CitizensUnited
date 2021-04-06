@@ -74,13 +74,13 @@ const Dashboard = ({ user }) => {
           </div>
 
           { /* Tasks / tickets list */ }
-          { tasks.map(task => (
-            <div id="feed-container">
-              { !mongoUser.VolunteerTile
-                  ? <RequestTile ticket={task} key={task._id} />
-                  : <VolunteerTile  ticket={task} key={task._id} /> }
-            </div>
-          )) }
+          <div id="feed-container">
+            { tasks.map(ticket => (
+              mongoUser.isVolunteer
+                ? <VolunteerTile ticket={ticket} key={ticket._id} />
+                : <RequestTile ticket={ticket} key={ticket._id} />
+            )) }
+          </div>
 
           { /* Add task modal for requesters only */ }
           { mongoUser.isVolunteer ? null : <TaskModal currentUser={currentUser} /> }
