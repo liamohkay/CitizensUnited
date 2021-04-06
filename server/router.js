@@ -55,4 +55,4 @@ router
   .route('/ratings/thumbsDown')
   .put(controller.thumbsDown)
 
-module.exports = router;
+module.exports = router

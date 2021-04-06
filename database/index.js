@@ -36,6 +36,9 @@ const tasksSchema = new Schema({
   task_neighborhood: String,
   start_time: String,
   end_time: String,
+  requestor_photo: String,
+  requestor_name: String,
+  room_id: String
 })
 
 
