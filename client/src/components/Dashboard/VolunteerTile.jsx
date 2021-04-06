@@ -16,6 +16,7 @@ const styles = {
 const VolunteerTile = ({ ticket }) => {
   const { currentUser } = useAuth();
   const {
+    _id,
     task_date,
     task_status,
     task_body,
@@ -55,7 +56,7 @@ const VolunteerTile = ({ ticket }) => {
         </span>
       </div>
       <div className="volunteer-ticket__buttons">
-        <AcceptBtn task_id={ticket.task_id} />
+        <AcceptBtn task_id={_id} />
         {/* <Chat room_id={ticket.room_id} /> */}
         <button value="Not Now"></button>
       </div>
