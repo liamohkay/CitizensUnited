@@ -83,7 +83,7 @@ const VolunteerTile = ({ ticket, volunteerName, setTasks, setLoaded }) => {
 
         <div className="volunteer-ticket__buttons">
           <AcceptBtn ticket={ticket} task_id={_id} setLoaded={setLoaded} />
-          <button value="hide" onClick={handleHideTask}>Hide</button>
+          {task_status === "Pending" ? <button value="hide" onClick={handleHideTask}>Hide</button> : null}
         </div>
       </div>
   )
