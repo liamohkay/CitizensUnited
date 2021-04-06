@@ -10,8 +10,8 @@ const Rating = (props) => {
 
   // Marks task complete in database
   const markTaskComplete = () => {
-    let params = { _id: ticket._id }
-    axios.put('/api/tasks/completed', { params })
+    let params = { task_id: ticket._id }
+    axios.put('/api/tasks/completed', params)
       .catch(err => console.log(err))
   }
 
