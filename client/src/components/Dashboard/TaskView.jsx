@@ -5,12 +5,12 @@ import Map from '../Map/Map'
 import ChatRoom from '../Chat/ChatRoom'
 import { Link } from 'react-router-dom';
 import Logo from '../Home/Logo'
+import CompleteBtn from './CompleteBtn';
 
 const TaskView = (props) => {
   console.log('props TaskView', props);
   const { ticket, room_id, isVolunteer, volunteerName } = props.location.state;
   var neighborhood = ticket.task_neighborhood
-  // console.log('volunteerName', volunteerName)
 
   const reformatDate = (dateStr, time) => {
     const pad = (num) => (
@@ -62,6 +62,7 @@ const TaskView = (props) => {
           Request Date/Time: {new Date(ticket.task_date).toUTCString()}
         </span>
       </div>
+      <CompleteBtn />
     </div>
   );
 }
