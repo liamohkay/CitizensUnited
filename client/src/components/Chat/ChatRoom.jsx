@@ -15,8 +15,7 @@ function useDocumentDataSSR(ref, options) {
     return [value, loading, error]
   }
 }
-
-const Chat = ({ room_id }) => {
+const ChatRoom = ({ room_id }) => {
   const { currentUser } = useAuth();
   const roomRef = chat.doc(`chatRooms/${room_id}`);
   const [msgStream] = useDocumentDataSSR(roomRef, { startWith: 'messages' })
@@ -54,4 +53,4 @@ const Chat = ({ room_id }) => {
   )
 }
 
-export default Chat;
+export default ChatRoom;

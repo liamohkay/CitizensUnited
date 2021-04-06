@@ -7,19 +7,21 @@ import RequestTile from './RequestTile';
 import VolunteerTile from './VolunteerTile';
 import Logo from '../Home/Logo';
 import TaskModal from './TaskModal';
-import sampleFeed from './sampleFeed';
 
 const TileList = ({ user }) => {
   const [ticketFeed, setTicketFeed] = useState([]);
   const [volunteer, setVolunteer] = useState('')
 
-  // Gets current signed-in user for displayName and photoURL props
+      // Gets current signed-in user for displayName and photoURL props
   const { currentUser, logout } = useAuth()
 
   // Grab ticket feed on load & re-render
   useEffect(() => {
     getUser()
   }, [])
+
+  //  Log user out
+  const logOut = () => logout();
 
   const getUser = () => {
     const options = {
@@ -50,10 +52,6 @@ const TileList = ({ user }) => {
         })
         .catch((err) => (console.log(err)))
     )
-  }
-
-  const logOut = () => {
-    logout()
   }
 
   if (currentUser) {
