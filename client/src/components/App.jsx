@@ -12,13 +12,15 @@ import TaskView from './Dashboard/TaskView';
 import PrivateRoute from './PrivateRoute';
 import Map from './Map/Map';
 
+import Rating from './Rating.jsx'
+
 const App = () => {
   const [user, setUser] = useState('');
   const [isVolunteer, setIsVolunteer] = useState();
 
   return (
   <div id="app-container">
-    <AuthProvider>
+    {/* <AuthProvider>
       <Router >
         <Switch>
           <PrivateRoute exact path="/" component={Dashboard} />
@@ -28,7 +30,8 @@ const App = () => {
           <Route exact path="/login" render={() => <LogIn setUser={setUser} />} />
         </Switch>
       </Router>
-    </AuthProvider>
+    </AuthProvider> */}
+    <Rating />
   </div>
   )
 }
