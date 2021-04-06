@@ -15,7 +15,6 @@ function useDocumentDataSSR(ref, options) {
     return [value, loading, error]
   }
 }
-
 const ChatRoom = ({ room_id }) => {
   const { currentUser } = useAuth();
   const roomRef = chat.doc(`chatRooms/${room_id}`);
