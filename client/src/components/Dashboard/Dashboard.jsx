@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap'
 import { useAuth } from '../../contexts/AuthContext';
+
 // Components
 import RequestTile from './RequestTile';
 import VolunteerTile from './VolunteerTile';
@@ -15,24 +16,30 @@ const Dashboard = ({ user }) => {
   const { currentUser, logout } = useAuth();
   const [tasks, setTasks] = useState([]);
   const [mongoUser, setMongoUser] = useState();
+  const [loaded, setLoaded] = useState(true);
 
   // Grabs mongo user on load and re-render & sets state for user & feed
-  useEffect(() => getMongoUser(), []);
+  useEffect(() => getMongoUser(), [loaded]);
 
   // Gets tasks volunteer neighborhood & saves them to state
   const getVolunteerTasks = (mongoUsr) => {
-    let params = { task_neighborhood: mongoUsr.neighborhood }
-    axios.get('/api/tasks', { params })
+    let params = {
+      firebase_id: currentUser.uid,
+      task_neighborhood: mongoUsr.neighborhood
+    }
+    axios.get('/api/tasks/volunteer', { params })
       .catch(err => console.log(err))
-      .then(resp => setTasks(resp.data))
+      .then(resp => {
+        setTasks(resp.data[0].tasks)})
   }
 
   // Get requester user tasks & saves them to state
   const getRequesterTasks = (mongoUsr) => {
-    let params = { firebase_id: mongoUsr.firebase_id  }
-    axios.get('/api/tasks/requester', { params })
+    let options = { params: {firebase_id: mongoUsr.firebase_id} };
+    axios.get('/api/tasks/requester', options)
       .catch(err => console.log(err))
-      .then(resp => setTasks(resp.data[0].tasks))
+      .then(resp => {
+        setTasks(resp.data[0].tasks)})
   }
 
   // Finds related mongodb user using authorized currentUser uid (firebase_id)
@@ -77,13 +84,31 @@ const Dashboard = ({ user }) => {
           <div id="feed-container">
             { tasks.map(ticket => (
               mongoUser.isVolunteer
-                ? <VolunteerTile ticket={ticket} key={ticket._id} volunteerName={currentUser.displayName} />
-                : <RequestTile ticket={ticket} key={ticket._id} />
-            )) }
+                ? <VolunteerTile
+                    ticket={ticket}
+                    key={ticket._id}
+                    volunteerName={currentUser.displayName}
+                    setTasks={setTasks}
+                    setLoaded={setLoaded}
+                  />
+                : <RequestTile
+                    ticket={ticket}
+                    key={ticket._id}
+                    setLoaded={setLoaded}
+                  />
+              ))
+            }
           </div>
 
-          { /* Add task modal for requesters only */ }
-          { mongoUser.isVolunteer ? null : <TaskModal currentUser={currentUser} /> }
+          { /* Add task modal for requesters only */
+            mongoUser.isVolunteer
+              ? null
+              : <TaskModal
+                  currentUser={currentUser}
+                  getRequesterTasks={getRequesterTasks}
+                  mongoUser={mongoUser}
+                />
+          }
 
         </div>
       ) }

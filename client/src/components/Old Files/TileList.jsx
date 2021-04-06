@@ -7,7 +7,6 @@ import RequestTile from './RequestTile';
 import VolunteerTile from './VolunteerTile';
 import Logo from '../Home/Logo';
 import TaskModal from './TaskModal';
-import sampleFeed from './sampleFeed';
 
 const TileList = ({ user }) => {
   const [ticketFeed, setTicketFeed] = useState([]);
