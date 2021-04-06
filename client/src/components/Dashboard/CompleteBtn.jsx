@@ -1,10 +1,13 @@
+// Libraries + dependencies
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const CompleteBtn = () => {
+const CompleteBtn = ({ ticket, partnerID }) => {
+  console.log(ticket);
   return (
-    <div>
+    <Link>
       <button>Mark As Complete</button>
-    </div>
+    </Link>
   );
 };
 

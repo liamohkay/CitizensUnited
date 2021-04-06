@@ -8,9 +8,13 @@ import Logo from '../Home/Logo'
 import CompleteBtn from './CompleteBtn';
 
 const TaskView = (props) => {
-  console.log('props TaskView', props);
   const { ticket, room_id, isVolunteer, volunteerName } = props.location.state;
   var neighborhood = ticket.task_neighborhood
+  const [partnerID, setPartnerID] = useState(
+    !isVolunteer
+      ? ticket.volunteer_id
+      : ticket.requestor_id
+  );
 
   const reformatDate = (dateStr, time) => {
     const pad = (num) => (
@@ -62,7 +66,7 @@ const TaskView = (props) => {
           Request Date/Time: {new Date(ticket.task_date).toUTCString()}
         </span>
       </div>
-      <CompleteBtn />
+      <CompleteBtn ticket={ticket} patnerID={partnerID} />
     </div>
   );
 }

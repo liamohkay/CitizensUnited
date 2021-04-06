@@ -1,19 +1,33 @@
+// Libraries + dependencies
 import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
 
-const Rating = () => {
+const Rating = ({ ticket, partnerID }) => {
+  const history = useHistory();
+
+  // Marks task complete in database
+  const markTaskComplete = () => {
+    let params = { _id: ticket._id }
+    axios.put('/api/tasks/completed', { params })
+      .catch(err => console.log(err))
+  }
 
   const thumbsUp = () => {
-    axios.put('/api/ratings/thumbsUp', {firebase_id: '1KFX1nJzwbVvWXVOttsLlc5e3Tu1'})
-    .then(() => (alert('Vote Submitted')))
+    axios.put('/api/ratings/thumbsUp', { firebase_id: partnerID })
     .catch((err) => (console.log(err)))
+    .then(() => (alert('Vote Submitted')))
+    .then(() => markTaskComplete())
+    .then(() => history.push('/'))
   }
 
   const thumbsDown = () => {
-    axios.put('/api/ratings/thumbsDown',{ firebase_id:  '1KFX1nJzwbVvWXVOttsLlc5e3Tu1'})
-    .then(() => (alert('Vote Submitted')))
+    axios.put('/api/ratings/thumbsDown',{ firebase_id: partnerID} )
     .catch((err) => (console.log(err)))
+    .then(() => (alert('Vote Submitted')))
+    .then(() => markTaskComplete())
+    .then(() => history.push('/'))
   }
 
   return (
