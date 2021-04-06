@@ -59,7 +59,7 @@ const RequestTile = ({ ticket }) => {
           Neighborhood: {task_neighborhood}
         </span>
         <span style={{ display: 'block' }}>
-          Request Date/Time: {task_date}
+          Request Date/Time: {new Date(task_date).toUTCString()}
         </span>
       </div>
       <div className="requestor-ticket__buttons">

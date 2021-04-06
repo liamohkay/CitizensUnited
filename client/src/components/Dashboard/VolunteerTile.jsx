@@ -17,7 +17,7 @@ const styles = {
   }
 }
 
-const VolunteerTile = ({ ticket }) => {
+const VolunteerTile = ({ ticket, setTasks }) => {
   const { currentUser } = useAuth();
   const {
     _id,
@@ -25,6 +25,7 @@ const VolunteerTile = ({ ticket }) => {
     task_status,
     task_body,
     task_neighborhood,
+    requestor_id,
     requestor_name,
     requestor_photo,
     start_time,
@@ -33,8 +34,15 @@ const VolunteerTile = ({ ticket }) => {
   } = ticket;
 
   const handleHideTask = () => {
-    const body = { firebase_id: _id };
+    const body = {
+      task_id: _id,
+      firebase_id: requestor_id,
+    };
     axios.put('/api/tasks/hidden', body)
+    .then((res) => {
+      setTasks(res.data[0].tasks)
+    })
+    .catch((err) => console.error(err))
   }
 
   const reformatDate = (dateStr, time) => {
@@ -52,14 +60,15 @@ const VolunteerTile = ({ ticket }) => {
   }
 
   return (
-    <Link
-      to={{ pathname: `/task/${_id}`, state: { ticket, room_id, isVolunteer: true } }}
-      style={{textDecoration: 'none', color: 'black'}}
-    >
+
       <div className="volunteer-ticket">
         <div className="volunteer-ticket__profile-img">
           <img src={requestor_photo} style={styles.profile} />
         </div>
+        <Link
+          to={{ pathname: `/task/${_id}`, state: { ticket, room_id, isVolunteer: true } }}
+          style={{textDecoration: 'none', color: 'black'}}
+        >
         <div className="volunteer-ticket__body">
           <span style={{ display: 'block' }}>
             Requestor: {requestor_name}
@@ -74,15 +83,16 @@ const VolunteerTile = ({ ticket }) => {
             Neighborhood: {task_neighborhood}
           </span>
           <span style={{ display: 'block' }}>
-            Request Date/Time: {task_date}
+            Request Date/Time: {new Date(task_date).toUTCString()}
           </span>
         </div>
+        </Link >
+
         <div className="volunteer-ticket__buttons">
           <AcceptBtn task_id={_id} />
           <button value="hide" onClick={handleHideTask}>Hide</button>
         </div>
       </div>
-    </Link >
   )
 }
 
