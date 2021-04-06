@@ -14,7 +14,7 @@ const styles = {
   }
 }
 
-const VolunteerTile = ({ ticket, setLoaded }) => {
+const VolunteerTile = ({ ticket, volunteerName, setLoaded }) => {
   const { currentUser } = useAuth();
   const {
     _id,
