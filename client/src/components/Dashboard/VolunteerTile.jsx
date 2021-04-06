@@ -1,6 +1,8 @@
 // Libraries + dependencies
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 // Components
 import AcceptBtn from './AcceptBtn'
 
