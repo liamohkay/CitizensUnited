@@ -1,7 +1,7 @@
 // Libraries + dependencies
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
-import { Form, Button, Card } from 'react-bootstrap';
+import { Form, Button, Card, Dropdown, DropdownButton } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext';
 import { storage } from '../firebase';
 import Login from './LogIn';
@@ -10,7 +10,12 @@ import { BrowserRouter as Router, Link, NavLink, Switch, Route, useHistory} from
 const SignUp = ({ isVolunteer }) => {
   const { signup, currentUser } = useAuth();
   const history = useHistory();
+<<<<<<< HEAD
   const [photoUrl, setPhotoUrl] = useState()
+=======
+  const [photoURL, setPhotoURL] = useState();
+  const [hoodTitle, setHoodTitle] = useState('Select Neighborhood');
+>>>>>>> f3fb3ce6f8063ddcbb30e5c44f3503d169a295e9
   const [fields, setFields] = useState({
     firstName: '',
     lastName: '',
@@ -27,6 +32,11 @@ const SignUp = ({ isVolunteer }) => {
       ...fields,
       [e.target.name]: e.target.value
     });
+  }
+
+  const handleSelect = (e, f) => {
+    setFields({...fields, neighborhood: e})
+    setHoodTitle(f.target.innerText)
   }
 
   // Handles firebase photo upload, then saves the firebase url for the photo to state for submit to db
@@ -74,7 +84,10 @@ const SignUp = ({ isVolunteer }) => {
           photo: photoUrl,
           tasks: [],
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> f3fb3ce6f8063ddcbb30e5c44f3503d169a295e9
         axios.post(`/api/users`, params)
           .catch(err => alert(`Failed to create Mongo Account for ${fields.email}`))
           .then(() => {
@@ -140,18 +153,43 @@ const SignUp = ({ isVolunteer }) => {
                 required
               />
             </Form.Group>
-            <Form.Group id="signUpNeighborhood">
-              <Form.Label> Neighborhood </Form.Label>
-              <Form.Control
+              <label>Neighborhood</label>
+              <DropdownButton
+                title={hoodTitle}
                 name="neighborhood"
                 type="neighborhood"
                 value={fields.neighborhood}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-            <label class="form-label" htmlFor="customFile">Upload Profile Pciture</label>
-            <input type="file" class="form-control" id="customFile" accept="image/*" onChange={handlePhoto} />
+                onSelect={handleSelect}>
+                  <Dropdown.Item eventKey="arlingtonHeights">Arlington Heights</Dropdown.Item>
+                  <Dropdown.Item eventKey="carthay">Carthay</Dropdown.Item>
+                  <Dropdown.Item eventKey="beverlyGrove">Beverly Grove</Dropdown.Item>
+                  <Dropdown.Item eventKey="chinatown">Chinatown</Dropdown.Item>
+                  <Dropdown.Item eventKey="downtown">Downtown</Dropdown.Item>
+                  <Dropdown.Item eventKey="eastHollywood">East Hollywood</Dropdown.Item>
+                  <Dropdown.Item eventKey="echoPark">Echo Park</Dropdown.Item>
+                  <Dropdown.Item eventKey="elysianPark">Elysian Park</Dropdown.Item>
+                  <Dropdown.Item eventKey="elysianValley">Elysian Valley</Dropdown.Item>
+                  <Dropdown.Item eventKey="fairfax">Fairfax</Dropdown.Item>
+                  <Dropdown.Item eventKey="griffithPark">Griffith Park</Dropdown.Item>
+                  <Dropdown.Item eventKey="hancockPark">Hancock Park</Dropdown.Item>
+                  <Dropdown.Item eventKey="harvardHeights">Harvard Heights</Dropdown.Item>
+                  <Dropdown.Item eventKey="hollywood">Hollywood</Dropdown.Item>
+                  <Dropdown.Item eventKey="hollywoodHills">Hollywood Hills</Dropdown.Item>
+                  <Dropdown.Item eventKey="hollywoodHillsWest">Hollywood Hills West</Dropdown.Item>
+                  <Dropdown.Item eventKey="koreatown">Koreatown</Dropdown.Item>
+                  <Dropdown.Item eventKey="larchmont">Larchmont</Dropdown.Item>
+                  <Dropdown.Item eventKey="losFeliz">Los Feliz</Dropdown.Item>
+                  <Dropdown.Item eventKey="midCity">Mid-City</Dropdown.Item>
+                  <Dropdown.Item eventKey="midWilshire">Mid-Wilshire</Dropdown.Item>
+                  <Dropdown.Item eventKey="picoUnion">Pico-Union</Dropdown.Item>
+                  <Dropdown.Item eventKey="silverLake">Silver Lake</Dropdown.Item>
+                  <Dropdown.Item eventKey="westHollywood">West Hollywood</Dropdown.Item>
+                  <Dropdown.Item eventKey="westlake">Westlake</Dropdown.Item>
+                  <Dropdown.Item eventKey="windsorSquare">Windsor Square</Dropdown.Item>
+              </DropdownButton>
+              <br />
+            <label className="form-label" htmlFor="customFile">Upload Profile Pciture</label>
+            <input type="file" className="form-control" id="customFile" accept="image/*" onChange={handlePhoto} />
             <Button
               id="signup-button"
               className="w-100"
