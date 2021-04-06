@@ -60,6 +60,8 @@ const TaskModal = ({ currentUser }) => {
     clearState();
   };
 
+  console.log(currentUser);
+
   return (
     <>
       <Button variant="primary" onClick={handleShow}>

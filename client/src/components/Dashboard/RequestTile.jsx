@@ -4,6 +4,7 @@ import { useAuth } from '../../contexts/AuthContext';
 const RequestTile = ({ ticket }) => {
   const { currentUser } = useAuth();
   const {
+    _id,
     task_date,
     task_status,
     task_body,
@@ -12,7 +13,9 @@ const RequestTile = ({ ticket }) => {
     requestor_photo,
     start_time,
     end_time,
+    room_id
   } = ticket;
+
   const styles = {
     profile: {
       width: '50px',
@@ -23,16 +26,12 @@ const RequestTile = ({ ticket }) => {
     }
   }
 
+  console.log(ticket);
+
   return (
     <div className="requestor-ticket">
       <div className="requestor-ticket__profile-img">
-        {
-          // currentUser && currentUser.photoURL
-          //   ? <img src={currentUser.photoURL} style={styles.profile} />
-          //   : <img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTOkHm3_mPQ5PPRvGtU6Si7FJg8DVDtZ47rw&usqp=CAU'} style={styles.profile} />
-
-            <img src={requestor_photo} style={styles.profile} />
-        }
+        <img src={requestor_photo} style={styles.profile} />
       </div>
       <div className="requestor-ticket__body">
         <span style={{ display: 'block' }}>
