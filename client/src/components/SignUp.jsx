@@ -1,16 +1,17 @@
 // Libraries + dependencies
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
-import { Form, Button, Card } from 'react-bootstrap';
+import { Form, Button, Card, Dropdown, DropdownButton } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext';
 import { storage } from '../firebase';
 import Login from './LogIn';
+import Neighborhood from './Neighborhood'
 import { BrowserRouter as Router, Link, NavLink, Switch, Route, useHistory} from 'react-router-dom';
 
 const SignUp = ({ isVolunteer }) => {
   const { signup, currentUser } = useAuth();
   const history = useHistory();
-  const [photoUrl, setPhotoUrl] = useState()
+  const [photoUrl, setPhotoUrl] = useState();
   const [fields, setFields] = useState({
     firstName: '',
     lastName: '',
@@ -59,8 +60,8 @@ const SignUp = ({ isVolunteer }) => {
       .then((res) => {
         res.user.updateProfile({
           displayName: `${fields.firstName} ${fields.lastName}` ,
-          photoUrl: photoUrl,
-        })
+          photoURL: photoUrl,
+        });
         let params = {
           firebase_id: res.user.uid,
           first_name: fields.firstName,
@@ -74,7 +75,6 @@ const SignUp = ({ isVolunteer }) => {
           photo: photoUrl,
           tasks: [],
         }
-
         axios.post(`/api/users`, params)
           .catch(err => alert(`Failed to create Mongo Account for ${fields.email}`))
           .then(() => {
@@ -140,18 +140,11 @@ const SignUp = ({ isVolunteer }) => {
                 required
               />
             </Form.Group>
-            <Form.Group id="signUpNeighborhood">
-              <Form.Label> Neighborhood </Form.Label>
-              <Form.Control
-                name="neighborhood"
-                type="neighborhood"
-                value={fields.neighborhood}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-            <label class="form-label" htmlFor="customFile">Upload Profile Pciture</label>
-            <input type="file" class="form-control" id="customFile" accept="image/*" onChange={handlePhoto} />
+              <label>Neighborhood</label>
+              <Neighborhood setFields={setFields} fields={fields}/>
+              <br />
+            <label className="form-label" htmlFor="customFile">Upload Profile Pciture</label>
+            <input type="file" className="form-control" id="customFile" accept="image/*" onChange={handlePhoto} />
             <Button
               id="signup-button"
               className="w-100"

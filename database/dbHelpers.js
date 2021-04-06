@@ -2,8 +2,34 @@ const {Users, Tasks, Messages} = require('./index.js');
 
 const dbHelpers = {
   getUserInfo: (req, callback) => {
+    Users
+      .find({firebase_id: req.query.firebase_id}, (err, data) => {
+        if (err) callback(err)
+        callback(null, data)
+      })
+  },
+
+  getVolunteerInfo: (req, callback) => {
     Tasks
-      .find({task_neighborhood: req.query.neighborhood}, (err, data) => {
+      .find({task_neighborhood: req.query.task_neighborhood}, (err, data) => {
+        if (err) callback(err)
+        Users
+          .update({firebase_id: req.query.firebase_id}, {
+            $set: {tasks: data}
+          }, (err) => {
+            if (err) callback(err)
+            Users
+              .find({firebase_id: req.query.firebase_id}, (err, updatedData) => {
+                if (err) callback(err)
+                callback(null, updatedData);
+              })
+          })
+      })
+  },
+
+  getRequesterInfo : (req, callback) => {
+    Tasks
+      .find({requestor_id: req.query.firebase_id}, (err, data) => {
         if (err) callback(err)
         Users
           .update({firebase_id: req.query.firebase_id}, {
@@ -57,12 +83,24 @@ const dbHelpers = {
       })
   },
 
+  putRoom: (req, callback) => {
+    Tasks
+      .update({_id: req.body.task_id}, {
+        $set: {room_id: req.body.room_id}
+      }, (err, data) => {
+        if (err) callback(err)
+        callback(null, data)
+      })
+  },
+
   postNewTask: (req, callback) =>  {
     Tasks
       .create(
         {
         volunteer_id: req.body.volunteer_id,
         requestor_id: req.body.requestor_id,
+        requestor_name: req.body.requestor_name,
+        requestor_photo: req.body.requestor_photo,
         task_date: req.body.task_date,
         task_status: req.body.task_status,
         task_body: req.body.task_body,
@@ -83,7 +121,6 @@ const dbHelpers = {
 
   // after this status of task changed in task collection but doesn't update the status in users collection automatically, you will need to do a getUserInfo request again
   acceptTask: (req, callback) => {
-    console.log('reqbody', req.body);
     Tasks
       .update({_id: req.body.task_id}, {
         $set: {task_status: 'Accepted', volunteer_id: req.body.firebase_id}
@@ -97,7 +134,7 @@ const dbHelpers = {
     Users
       .find({firebase_id: req.body.firebase_id}, (err, data) => {
         if (err) callback(err)
-        let oldArr =data[0].tasks;
+        let oldArr = data[0].tasks;
         let newArr = oldArr.filter((obj) => {
           return obj._id.toString() !== req.body.task_id;
         });
@@ -138,7 +175,6 @@ const dbHelpers = {
         }
       )
   },
-
   thumbsDown: (req, callback) => {
     Users
       .findOneAndUpdate(

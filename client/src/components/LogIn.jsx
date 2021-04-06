@@ -25,17 +25,17 @@ const LogIn = ({ setUser }) => {
   const handleClick = (e) => {
     e.preventDefault();
     login(fields.email, fields.password)
-      .catch(err => console.log(err))
-      .then(resp => {
-        axios.get('/api/users', { params: { firebase_id: currentUser.uid }})
+      .catch((err) => console.log(err))
+      .then((res) => {
+        axios.get('/api/users', { params: { firebase_id: res.user.uid }})
           .catch(err => console.log(err))
-          .then(resp => {
+          .then((resp) => {
             setUser(resp.data[0]);
             history.push('/');
-            currentUser.updateProfile({
-              // displayName: `${fields.firstName} ${fields.lastName}` ,
-              photoUrl: res.data[0].photo,
-            })
+            // res.user.updateProfile({
+            //   // displayName: `${fields.firstName} ${fields.lastName}` ,
+            //   photoURL: resp.data[0].photo,
+            // })
           })
       })
   }

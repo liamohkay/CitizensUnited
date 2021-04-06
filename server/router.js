@@ -13,7 +13,19 @@ router
 
 router
   .route('/oneTask')
-    .get(controller.getOneTask)
+  .get(controller.getOneTask)
+
+router
+  .route('/rooms')
+  .put(controller.putRoom)
+
+router
+  .route('/tasks/volunteer')
+  .get(controller.getVolunteerInfo)
+
+router
+  .route('/tasks/requester')
+  .get(controller.getRequesterInfo)
 
 router
   .route('/tasks/accepted')
@@ -35,4 +47,4 @@ router
   .route('/ratings/thumbsDown')
     .put(controller.thumbsDown)
 
-module.exports = router;
+module.exports = router
