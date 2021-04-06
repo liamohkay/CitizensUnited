@@ -11,7 +11,7 @@ const initialState = {
   end_time: '',
 };
 
-const TaskModal = ({ currentUser }) => {
+const TaskModal = ({ currentUser, getRequesterTasks, mongoUser }) => {
   const [show, setShow] = useState(false);
   const [fields, setFields] = useState({
     task: '',
@@ -51,6 +51,7 @@ const TaskModal = ({ currentUser }) => {
         console.log(resp)
         handleClose();
       })
+      .then(() => getRequesterTasks(mongoUser))
       .catch(err => console.log(err));
   }
 

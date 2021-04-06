@@ -29,8 +29,8 @@ const Dashboard = ({ user }) => {
 
   // Get requester user tasks & saves them to state
   const getRequesterTasks = (mongoUsr) => {
-    let params = { firebase_id: mongoUsr.firebase_id  }
-    axios.get('/api/tasks/requester', { params })
+    let options = { params: {firebase_id: mongoUsr.firebase_id} };
+    axios.get('/api/tasks/requester', options)
       .catch(err => console.log(err))
       .then(resp => setTasks(resp.data[0].tasks))
   }
@@ -83,7 +83,7 @@ const Dashboard = ({ user }) => {
           </div>
 
           { /* Add task modal for requesters only */ }
-          { mongoUser.isVolunteer ? null : <TaskModal currentUser={currentUser} /> }
+          { mongoUser.isVolunteer ? null : <TaskModal currentUser={currentUser} getRequesterTasks={getRequesterTasks} mongoUser={mongoUser} /> }
 
         </div>
       ) }

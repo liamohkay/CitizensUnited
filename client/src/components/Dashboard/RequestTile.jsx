@@ -26,8 +26,6 @@ const RequestTile = ({ ticket }) => {
     }
   }
 
-  console.log(ticket);
-
   return (
     <div className="requestor-ticket">
       <div className="requestor-ticket__profile-img">
