@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
 import LogIn from './LogIn';
 import SignUp from './SignUp';
 import HomePage from './Home/HomePage';
+import Dashboard from './Dashboard/Dashboard';
 import TileList from './Dashboard/TileList';
 import TaskView from './Dashboard/TaskView';
 import PrivateRoute from './PrivateRoute';
@@ -20,8 +21,8 @@ const App = () => {
     <AuthProvider>
       <Router >
         <Switch>
-          <PrivateRoute exact path="/" component={TileList} user={user} />
-          <PrivateRoute exact path="/:task_id" component={TaskView} user={user} />
+          <PrivateRoute exact path="/" component={Dashboard} />
+          <PrivateRoute exact path="/task/:task_id" component={TaskView} user={user} />
           <Route exact path="/home" render={() => <HomePage setIsVolunteer={setIsVolunteer} />} />
           <Route exact path="/signup" render={() => <SignUp isVolunteer={isVolunteer} />} />
           <Route exact path="/login" render={() => <LogIn setUser={setUser} />} />
