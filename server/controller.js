@@ -83,7 +83,7 @@ const controller = {
   },
 
   thumbsUp: (req, res) => {
-    dbHelpers.completeTask(req, (err, data) => {
+    dbHelpers.thumbsUp(req, (err, data) => {
       if (err) {
         res.status(400).send(err);
       } else {
@@ -93,7 +93,7 @@ const controller = {
   },
 
   thumbsDown: (req, res) => {
-    dbHelpers.completeTask(req, (err, data) => {
+    dbHelpers.thumbsDown(req, (err, data) => {
       if (err) {
         res.status(400).send(err);
       } else {
