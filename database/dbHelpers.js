@@ -1,6 +1,14 @@
 const {Users, Tasks, Messages} = require('./index.js');
 
 const dbHelpers = {
+  getUserInfo: (req, callback) => {
+    Users
+      .find({firebase_id: req.query.firebase_id}, (err, data) => {
+        if (err) callback(err)
+        callback(null, data)
+      })
+  },
+
   getVolunteerInfo: (req, callback) => {
     Tasks
       .find({task_neighborhood: req.query.neighborhood}, (err, data) => {
