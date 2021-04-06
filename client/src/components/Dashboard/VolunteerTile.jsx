@@ -17,7 +17,6 @@ const styles = {
 }
 
 const VolunteerTile = ({ ticket, volunteerName }) => {
-  console.log(volunteerName)
   const { currentUser } = useAuth();
   const {
     _id,
