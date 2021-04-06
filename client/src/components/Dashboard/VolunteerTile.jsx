@@ -17,11 +17,7 @@ const styles = {
   }
 }
 
-<<<<<<< HEAD
-const VolunteerTile = ({ ticket, setTasks }) => {
-=======
-const VolunteerTile = ({ ticket, volunteerName }) => {
->>>>>>> dev
+const VolunteerTile = ({ ticket, volunteerName, setTasks }) => {
   const { currentUser } = useAuth();
   const {
     _id,
@@ -40,7 +36,7 @@ const VolunteerTile = ({ ticket, volunteerName }) => {
   const handleHideTask = () => {
     const body = {
       task_id: _id,
-      firebase_id: requestor_id,
+      firebase_id: currentUser.uid,
     };
     axios.put('/api/tasks/hidden', body)
     .then((res) => {
@@ -64,14 +60,6 @@ const VolunteerTile = ({ ticket, volunteerName }) => {
   }
 
   return (
-<<<<<<< HEAD
-
-=======
-    <Link
-      to={{ pathname: `/task/${_id}`, state: { ticket, room_id, isVolunteer: true, volunteerName } }}
-      style={{textDecoration: 'none', color: 'black'}}
-    >
->>>>>>> dev
       <div className="volunteer-ticket">
         <div className="volunteer-ticket__profile-img">
           <img src={requestor_photo} style={styles.profile} />
