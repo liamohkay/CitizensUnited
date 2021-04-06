@@ -7,7 +7,6 @@ import LogIn from './LogIn';
 import SignUp from './SignUp';
 import HomePage from './Home/HomePage';
 import Dashboard from './Dashboard/Dashboard';
-import TileList from './Dashboard/TileList';
 import TaskView from './Dashboard/TaskView';
 import PrivateRoute from './PrivateRoute';
 import Map from './Map/Map';

@@ -12,7 +12,7 @@ const TileList = ({ user }) => {
   const [ticketFeed, setTicketFeed] = useState([]);
   const [volunteer, setVolunteer] = useState('')
 
-  // Gets current signed-in user for displayName and photoURL props
+      // Gets current signed-in user for displayName and photoURL props
   const { currentUser, logout } = useAuth()
 
   // Grab ticket feed on load & re-render
