@@ -24,13 +24,13 @@ const App = () => {
         <Switch>
           <PrivateRoute exact path="/" component={Dashboard} />
           <PrivateRoute exact path="/task/:task_id" component={TaskView} user={user} />
+          <PrivateRoute exact path="/task/rating/:task_id" component={Rating} user={user}/>
           <Route exact path="/home" render={() => <HomePage setIsVolunteer={setIsVolunteer} />} />
           <Route exact path="/signup" render={() => <SignUp isVolunteer={isVolunteer} />} />
           <Route exact path="/login" render={() => <LogIn setUser={setUser} />} />
         </Switch>
       </Router>
     </AuthProvider>
-    {/* <Rating /> */}
   </div>
   )
 }
