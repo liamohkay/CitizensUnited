@@ -12,6 +12,7 @@ const RequestTile = ({ ticket }) => {
     requestor_photo,
     start_time,
     end_time,
+    room_id
   } = ticket;
   const styles = {
     profile: {
