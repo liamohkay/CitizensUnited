@@ -127,10 +127,15 @@ const dbHelpers = {
   },
 
   thumbsUp: (req, callback) => {
+    console.log(req.body.firebase_id)
     Users
       .findOneAndUpdate(
         { firebase_id: req.body.firebase_id},
-        { $inc: {thumbsUp: 1} }
+        { $inc: {thumbsUp: 1} },
+        (err ,data) => {
+          if (err) callback(err)
+          callback(null, data)
+        }
       )
   },
 
@@ -138,7 +143,11 @@ const dbHelpers = {
     Users
       .findOneAndUpdate(
         { firebase_id: req.body.firebase_id},
-        { $inc: {thumbsDown: 1} }
+        { $inc: {thumbsDown: 1} },
+        (err ,data) => {
+          if (err) callback(err)
+          callback(null, data)
+        }
       )
   }
 }
