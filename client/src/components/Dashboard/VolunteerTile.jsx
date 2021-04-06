@@ -65,7 +65,7 @@ const VolunteerTile = ({ ticket }) => {
           to={{ pathname: `/task/${_id}`, state: { ticket, room_id, isVolunteer: true } }}
           style={{textDecoration: 'none', color: 'black'}}
         >
-          <AcceptBtn task_id={_id} />
+          <AcceptBtn task_id={_id} task_status={task_status} />
         </Link >
         <button value="Not Now"></button>
       </div>

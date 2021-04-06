@@ -5,7 +5,7 @@ import { useAuth } from '../../contexts/AuthContext.js';
 import { chat } from '../../firebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
-const AcceptBtn = ({ task_id }) => {
+const AcceptBtn = ({ task_id, task_status }) => {
   const { currentUser } = useAuth();
   const chatRoomRef = chat.collection('chatRooms');
 
@@ -52,7 +52,9 @@ const AcceptBtn = ({ task_id }) => {
 
   return (
     <>
-      <button onSubmit={handleClick}>Accept</button>
+      <button onSubmit={handleClick}>
+        { task_status.toLowerCase() === 'accepted' ? <span>Open Chat</span> : <span>Accpets</span> }
+      </button>
     </>
   );
 }
