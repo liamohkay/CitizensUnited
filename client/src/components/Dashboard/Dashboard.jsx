@@ -77,7 +77,7 @@ const Dashboard = ({ user }) => {
           <div id="feed-container">
             { tasks.map(ticket => (
               mongoUser.isVolunteer
-                ? <VolunteerTile ticket={ticket} key={ticket._id} />
+                ? <VolunteerTile ticket={ticket} key={ticket._id} volunteerName={currentUser.displayName} />
                 : <RequestTile ticket={ticket} key={ticket._id} />
             )) }
           </div>
