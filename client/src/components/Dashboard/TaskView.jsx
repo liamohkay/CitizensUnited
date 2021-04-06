@@ -6,7 +6,7 @@ import ChatRoom from '../Chat/ChatRoom'
 
 const TaskView = (props) => {
   const { ticket, room_id, isVolunteer } = props.location.state;
-  console.log(ticket);
+  console.log('ticket', ticket);
   return(
     <div className="task-view-container">
       {/* <Map /> */}
