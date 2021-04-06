@@ -52,7 +52,7 @@ const AcceptBtn = ({ task_id }) => {
 
   return (
     <>
-      <button onClick={handleClick}>Accept</button>
+      <button onSubmit={handleClick}>Accept</button>
     </>
   );
 }

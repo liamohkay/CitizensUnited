@@ -32,43 +32,44 @@ const VolunteerTile = ({ ticket }) => {
   } = ticket;
 
   return (
-    <Link
-      to={{ pathname: `/task/${_id}`, state: { ticket, room_id, isVolunteer: true } }}
-      style={{textDecoration: 'none', color: 'black'}}
-    >
-      <div className="volunteer-ticket">
-        <div className="volunteer-ticket__profile-img">
-          {
-            // currentUser && currentUser.photoURL
-            //   ? <img src={currentUser.photoURL} />
-            //   : <img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTOkHm3_mPQ5PPRvGtU6Si7FJg8DVDtZ47rw&usqp=CAU'} />
+    <div className="volunteer-ticket">
+      <div className="volunteer-ticket__profile-img">
+        {
+          // currentUser && currentUser.photoURL
+          //   ? <img src={currentUser.photoURL} />
+          //   : <img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTOkHm3_mPQ5PPRvGtU6Si7FJg8DVDtZ47rw&usqp=CAU'} />
 
-            <img src={requestor_photo} style={styles.profile} />
-          }
-        </div>
-        <div className="volunteer-ticket__body">
-          <span style={{ display: 'block' }}>
-            Requestor: {requestor_name}
-          </span>
-          <span style={{ display: 'block' }}>
-            Request: {task_body}
-          </span>
-          <span style={{ display: 'block' }}>
-            Duration: {Math.round((new Date(task_date + 'T' + end_time) - new Date(task_date + 'T' + start_time)) / 60000)} minutes
-          </span>
-          <span style={{ display: 'block' }}>
-            Neighborhood: {task_neighborhood}
-          </span>
-          <span style={{ display: 'block' }}>
-            Request Date/Time: {task_date}
-          </span>
-        </div>
-        <div className="volunteer-ticket__buttons">
-          <AcceptBtn task_id={_id} />
-          <button value="Not Now"></button>
-        </div>
+          <img src={requestor_photo} style={styles.profile} />
+        }
       </div>
-    </Link >
+      <div className="volunteer-ticket__body">
+        <span style={{ display: 'block' }}>
+          Requestor: {requestor_name}
+        </span>
+        <span style={{ display: 'block' }}>
+          Request: {task_body}
+        </span>
+        <span style={{ display: 'block' }}>
+          Duration: {Math.round((new Date(task_date + 'T' + end_time) - new Date(task_date + 'T' + start_time)) / 60000)} minutes
+        </span>
+        <span style={{ display: 'block' }}>
+          Neighborhood: {task_neighborhood}
+        </span>
+        <span style={{ display: 'block' }}>
+          Request Date/Time: {task_date}
+        </span>
+      </div>
+
+      <div className="volunteer-ticket__buttons">
+        <Link
+          to={{ pathname: `/task/${_id}`, state: { ticket, room_id, isVolunteer: true } }}
+          style={{textDecoration: 'none', color: 'black'}}
+        >
+          <AcceptBtn task_id={_id} />
+        </Link >
+        <button value="Not Now"></button>
+      </div>
+    </div>
   )
 }
 
