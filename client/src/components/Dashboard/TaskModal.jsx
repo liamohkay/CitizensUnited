@@ -61,8 +61,6 @@ const TaskModal = ({ currentUser, getRequesterTasks, mongoUser }) => {
     clearState();
   };
 
-  console.log(currentUser);
-
   return (
     <>
       <Button variant="primary" onClick={handleShow}>

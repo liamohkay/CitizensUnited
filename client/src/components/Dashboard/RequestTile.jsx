@@ -26,6 +26,20 @@ const RequestTile = ({ ticket }) => {
     }
   }
 
+  const reformatDate = (dateStr, time) => {
+    const pad = (num) => (
+      num.toString().length < 2
+        ? ('0' + num)
+        : (num)
+    )
+    const date = new Date(dateStr);
+    const year = date.getFullYear();
+    const month = pad(date.getMonth());
+    const day = pad(date.getUTCDate());
+    const newDateStr = `${year}-${month}-${day}T${time}`;
+    return new Date(newDateStr);
+  }
+
   return (
     <div className="requestor-ticket">
       <div className="requestor-ticket__profile-img">
@@ -39,7 +53,7 @@ const RequestTile = ({ ticket }) => {
           Request: {task_body}
         </span>
         <span style={{ display: 'block' }}>
-          Duration: {Math.round((new Date(task_date + 'T' + end_time) - new Date(task_date + 'T' + start_time))) / 60000} minutes
+          Duration: {Math.round((reformatDate(task_date, end_time) - reformatDate(task_date, start_time))) / 60000} minutes
         </span>
         <span style={{ display: 'block' }}>
           Neighborhood: {task_neighborhood}
