@@ -15,9 +15,10 @@ const Dashboard = ({ user }) => {
   const { currentUser, logout } = useAuth();
   const [tasks, setTasks] = useState([]);
   const [mongoUser, setMongoUser] = useState();
+  const [loaded, setLoaded] = useState(true);
 
   // Grabs mongo user on load and re-render & sets state for user & feed
-  useEffect(() => getMongoUser(), []);
+  useEffect(() => getMongoUser(), [loaded]);
 
   // Gets tasks volunteer neighborhood & saves them to state
   const getVolunteerTasks = (mongoUsr) => {
@@ -77,8 +78,8 @@ const Dashboard = ({ user }) => {
           <div id="feed-container">
             { tasks.map(ticket => (
               mongoUser.isVolunteer
-                ? <VolunteerTile ticket={ticket} key={ticket._id} />
-                : <RequestTile ticket={ticket} key={ticket._id} />
+                ? <VolunteerTile ticket={ticket} setLoaded={setLoaded} key={ticket._id} />
+                : <RequestTile ticket={ticket} setLoaded={setLoaded} key={ticket._id} />
             )) }
           </div>
 

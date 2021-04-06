@@ -14,7 +14,7 @@ const styles = {
   }
 }
 
-const VolunteerTile = ({ ticket }) => {
+const VolunteerTile = ({ ticket, setLoaded }) => {
   const { currentUser } = useAuth();
   const {
     _id,
@@ -57,9 +57,8 @@ const VolunteerTile = ({ ticket }) => {
           Request Date/Time: {task_date}
         </span>
       </div>
-
       <div className="volunteer-ticket__buttons">
-        <AcceptBtn ticket={ticket} task_id={_id} />
+        <AcceptBtn ticket={ticket} task_id={_id} setLoaded={setLoaded} />
         <button value="Not Now"></button>
       </div>
     </div>
