@@ -32,4 +32,4 @@ router
     .put(controller.completeTask)
 
 
-module.exports = router;
+module.exports = router
