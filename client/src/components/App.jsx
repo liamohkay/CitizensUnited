@@ -8,7 +8,6 @@ import SignUp from './SignUp';
 import HomePage from './Home/HomePage';
 import TileList from './Dashboard/TileList';
 import PrivateRoute from './PrivateRoute';
-import Chat from './Chat/Chat.jsx'
 import Map from './Map/Map';
 
 const App = () => {

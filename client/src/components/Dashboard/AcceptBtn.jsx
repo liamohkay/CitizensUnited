@@ -28,7 +28,6 @@ const AcceptBtn = ({ task_id }) => {
     axios.get('/api/oneTask', { params: { task_id }})
       .catch(err => console.log(err))
       .then(resp => {
-        console.log(resp.data[0]);
         const { requestor_id, volunteer_id } = resp.data[0];
         // Insert both ids into chatroom by id
         chatRoomRef.add({

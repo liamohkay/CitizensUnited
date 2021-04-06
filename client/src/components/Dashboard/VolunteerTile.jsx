@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import AcceptBtn from './AcceptBtn'
-import Chat from '../Chat/Chat';
+import ChatRoom from '../Chat/ChatRoom';
 
 const styles = {
   profile: {
@@ -58,7 +58,7 @@ const VolunteerTile = ({ ticket }) => {
       </div>
       <div className="volunteer-ticket__buttons">
         <AcceptBtn task_id={_id} />
-        <Chat room_id={room_id} />
+        <ChatRoom room_id={room_id} />
         <button value="Not Now"></button>
       </div>
     </div>
