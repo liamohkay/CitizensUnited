@@ -2,6 +2,7 @@
 /node_modules
 /package-lock.json
 /coverage
-client/src/firebaseConfig.js
+/client/src/firebaseConfig.js
 /database/dbConfig.js
 package-lock.json
+.env.local
