@@ -27,7 +27,7 @@ const RequestTile = ({ ticket }) => {
   }
 
 
-  // Added conditional so that if room_id exist (AKA task has been accepted), you can click and render the Map + Chat confirmation
+  // WT: Added conditional so that if room_id exist (AKA task has been accepted), you can click and render the Map + Chat confirmation
   return (
     room_id ?
       <Link
