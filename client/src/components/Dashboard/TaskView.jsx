@@ -5,6 +5,7 @@ import Map from '../Map/Map'
 import ChatRoom from '../Chat/ChatRoom'
 
 const TaskView = (props) => {
+  console.log('props TaskView', props);
   const { ticket, room_id, isVolunteer } = props.location.state;
   var neighborhood = ticket.task_neighborhood
   return(
