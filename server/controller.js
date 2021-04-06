@@ -51,6 +51,26 @@ const controller = {
     })
   },
 
+  getOneTask: (req, res) => {
+    dbHelpers.getOneTask(req, (err, data) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    });
+  },
+
+  putRoom: (req, res) => {
+    dbHelpers.putRoom(req, (err, data) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    });
+  },
+
   postNewTask: (req, res) => {
     dbHelpers.postNewTask(req, (err, data) => {
       if (err) {
@@ -83,6 +103,45 @@ const controller = {
 
   completeTask: (req, res) => {
     dbHelpers.completeTask(req, (err, data) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    })
+  },
+
+  thumbsUp: (req, res) => {
+    dbHelpers.completeTask(req, (err, data) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    })
+  },
+
+  thumbsDown: (req, res) => {
+    dbHelpers.completeTask(req, (err, data) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    })
+  },
+
+  thumbsUp: (req, res) => {
+    dbHelpers.thumbsUp(req, (err, data) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    })
+  },
+  thumbsDown: (req, res) => {
+    dbHelpers.thumbsDown(req, (err, data) => {
       if (err) {
         res.status(400).send(err);
       } else {

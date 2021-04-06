@@ -75,6 +75,24 @@ const dbHelpers = {
       })
   },
 
+  getOneTask: (req, callback) => {
+    Tasks
+      .find({_id: req.query.task_id}, (err, data) => {
+        if (err) callback(err)
+        callback(null, data)
+      })
+  },
+
+  putRoom: (req, callback) => {
+    Tasks
+      .update({_id: req.body.task_id}, {
+        $set: {room_id: req.body.room_id}
+      }, (err, data) => {
+        if (err) callback(err)
+        callback(null, data)
+      })
+  },
+
   postNewTask: (req, callback) =>  {
     Tasks
       .create(
@@ -142,6 +160,30 @@ const dbHelpers = {
       callback(null, data)
     })
   },
+
+  thumbsUp: (req, callback) => {
+    console.log(req.body.firebase_id)
+    Users
+      .findOneAndUpdate(
+        { firebase_id: req.body.firebase_id},
+        { $inc: {thumbsUp: 1} },
+        (err ,data) => {
+          if (err) callback(err)
+          callback(null, data)
+        }
+      )
+  },
+  thumbsDown: (req, callback) => {
+    Users
+      .findOneAndUpdate(
+        { firebase_id: req.body.firebase_id},
+        { $inc: {thumbsDown: 1} },
+        (err ,data) => {
+          if (err) callback(err)
+          callback(null, data)
+        }
+      )
+  }
 }
 
 module.exports = dbHelpers;

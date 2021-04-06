@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import AcceptBtn from './AcceptBtn'
+import ChatRoom from '../Chat/ChatRoom';
 
 const styles = {
   profile: {
@@ -14,6 +16,7 @@ const styles = {
 const VolunteerTile = ({ ticket }) => {
   const { currentUser } = useAuth();
   const {
+    _id,
     task_date,
     task_status,
     task_body,
@@ -22,6 +25,7 @@ const VolunteerTile = ({ ticket }) => {
     requestor_photo,
     start_time,
     end_time,
+    room_id
   } = ticket;
 
   return (
@@ -53,8 +57,9 @@ const VolunteerTile = ({ ticket }) => {
         </span>
       </div>
       <div className="volunteer-ticket__buttons">
-        <button value="Accept">Accept</button>
-        <button value="Not Now">Hide</button>
+        <AcceptBtn task_id={_id} />
+        <ChatRoom room_id={room_id} />
+        <button value="Not Now"></button>
       </div>
     </div>
   )

@@ -2,7 +2,7 @@ import config from './firebaseConfig.js';
 import firebase from 'firebase/app';
 import "firebase/storage";
 import 'firebase/auth';
-// import 'firebase/analytics';
+import 'firebase/firestore';
 
 const fb = firebase.initializeApp({
   apiKey: config.apiKey,
@@ -13,7 +13,7 @@ const fb = firebase.initializeApp({
   appId: config.appId
 });
 
-// export const analytics = fb.analytics();
 export const storage = fb.storage();
+export const chat = fb.firestore();
 export const auth = fb.auth();
 export default fb;
