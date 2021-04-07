@@ -89,10 +89,15 @@ const Dashboard = ({ user }) => {
           { /* Change location for volunteer only */
             !mongoUser.isVolunteer
               ? null
-              : <Neighborhood
-                  fields={neighborhood}
-                  setFields={setNeighborhood}
-                />
+              : (
+                <div>
+                  <Neighborhood
+                    fields={neighborhood}
+                    setFields={setNeighborhood}
+                  />
+                  <span>Currently Selected: {neighborhood.neighborhood}</span>
+                </div>
+              )
           }
 
           { /* Tasks / tickets list */ }
