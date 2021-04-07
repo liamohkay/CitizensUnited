@@ -30,10 +30,6 @@ const SignUp = ({ isVolunteer }) => {
     });
   }
 
-  const noImage = () => {
-    alert("Please wait for picture to upload")
-  }
-
   // Handles firebase photo upload, then saves the firebase url for the photo to state for submit to db
   const handlePhoto = (e) => {
     e.preventDefault();
