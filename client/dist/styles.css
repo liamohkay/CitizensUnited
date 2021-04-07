@@ -181,7 +181,7 @@ input[type=radio] {
   width: 50%;
 }
 
-#volunteer-neighborhood, .neighborhood-dropdown {
+#volunteer-neighborhood + .neighborhood-dropdown {
   text-align: center;
 }
 
@@ -203,11 +203,16 @@ input[type=radio] {
   margin-top: 10px;
 }
 
-.volunteer-ticket__buttons {
+.volunteer-ticket__buttons, .requestor-ticket__buttons {
   display: grid;
   grid-template-rows: 1fr 1fr;
   justify-items: center;
   align-items: center;
+}
+
+#submit-request {
+  display: block;
+  margin: 0 auto;
 }
 
 #accept-btn {

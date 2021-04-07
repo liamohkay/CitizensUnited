@@ -62,7 +62,7 @@ const TaskModal = ({ currentUser, getRequesterTasks, mongoUser }) => {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button id="submit-request" variant="primary" onClick={handleShow}>
         SUBMIT NEW REQUEST
       </Button>
       <Modal show={show} onHide={handleClose}>
