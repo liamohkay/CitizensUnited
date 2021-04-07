@@ -11,7 +11,7 @@ export default function HomePage ({ setIsVolunteer }) {
   return (
     <div>
       <div id="Home-Page">
-          <Logo />
+        <Logo />
         <div id="end-links" className="d-flex justify-content-end">
           <div id="Log-In-Button" name="login" >
             <Link to="/login">
@@ -19,9 +19,6 @@ export default function HomePage ({ setIsVolunteer }) {
             </Link>
           </div>
         </div>
-      </div>
-      <div id="mission-statement">
-        Mission Statement Here
       </div>
         <Card className="banner" id="banner" >
           <Card.Img src='story.png' />
@@ -35,15 +32,6 @@ export default function HomePage ({ setIsVolunteer }) {
             </div>
           </Link>
         </div>
-      <div>
-        <Link to="/dashboard">
-          <div className="d-flex justify-content-around">
-              <button type="submit" id="volunteer-button" className="btn btn-lg" name="volunteer" >
-                Link to Dashboard
-              </button>
-          </div>
-        </Link>
-      </div>
     </div>
   )
 }
