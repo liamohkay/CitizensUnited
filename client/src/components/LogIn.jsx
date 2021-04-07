@@ -25,15 +25,15 @@ const LogIn = ({ setUser }) => {
   const handleClick = (e) => {
     e.preventDefault();
     login(fields.email, fields.password)
-      .catch((err) => console.log(err))
       .then((res) => {
         axios.get('/api/users', { params: { firebase_id: res.user.uid }})
-          .catch(err => console.log(err))
-          .then((resp) => {
-            setUser(resp.data[0]);
-            history.push('/');
-          })
+        .then((resp) => {
+          setUser(resp.data[0]);
+          history.push('/');
+        })
+        .catch(err => console.log(err))
       })
+      .catch((err) => alert(err))
   }
 
   return (
