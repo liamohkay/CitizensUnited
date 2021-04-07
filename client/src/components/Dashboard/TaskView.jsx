@@ -44,7 +44,7 @@ const TaskView = (props) => {
 
         <div id="task-view-info">
           <div id="task-view-info-title">
-            <h3>{ ticket.task_status }</h3>
+            <h3>{ isVolunteer ? ticket.task_status : `${ticket.volunteer_name} has accepted your task!` }</h3>
           </div>
 
           <div>
