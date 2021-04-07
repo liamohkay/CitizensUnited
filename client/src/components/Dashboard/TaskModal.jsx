@@ -48,7 +48,6 @@ const TaskModal = ({ currentUser, getRequesterTasks, mongoUser }) => {
     }
     axios.post('/api/tasks', body)
       .then(resp => {
-        console.log(resp)
         handleClose();
       })
       .then(() => getRequesterTasks(mongoUser))
