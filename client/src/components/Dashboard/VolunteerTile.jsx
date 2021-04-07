@@ -87,7 +87,7 @@ const VolunteerTile = ({ mongoUser, ticket, volunteerName, setTasks, setLoaded }
               ? null
               : <AcceptBtn mongoUser={mongoUser} ticket={ticket} task_id={_id} setLoaded={setLoaded} />
           }
-          {task_status === "Pending" ? <button value="hide" onClick={handleHideTask}>Hide</button> : null}
+          {task_status === "Pending" ? <button style={{width: '67px', backgroundColor: "#8DA5ED", border: "2px solid #8DA5ED", borderRadius: ".25rem" }} value="hide" onClick={handleHideTask}>Hide</button> : null}
         </div>
       </div>
   )

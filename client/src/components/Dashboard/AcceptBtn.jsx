@@ -52,16 +52,16 @@ const AcceptBtn = ({ mongoUser, ticket, task_id, setLoaded }) => {
   }
 
   return (
-    <div id="accept-btn">
+    <div  id="accept-btn">
     <Link
       to={{ pathname: `/task/${task_id}`, state: { mongoUser, ticket, room_id: ticket.room_id, isVolunteer: true } }}
-      style={{textDecoration: 'none', color: 'black'}}
+      style={{textDecoration: 'none',  color: 'black'}}
       onClick={handleClick}
     >
-      <button >
+      <button style={{ background: "none", border: "none" }}>
         { ticket.task_status.toLowerCase() === 'accepted'
-          ? <span>Open Chat</span>
-          : <span>Accept</span> }
+          ? <button id="chat-btn" style={{ width: "67px", backgroundColor: "#aaf8a7", border: "2px solid #aaf8a7", borderRadius: ".25rem" }}>Chat</button>
+          : <button id="acceptBTN" style={{ width: "67px", backgroundColor: "#FFAF7A", border: "2px solid #FFAF7A", borderRadius: ".25rem" }}>Accept</button> }
       </button>
     </Link>
     </div>
