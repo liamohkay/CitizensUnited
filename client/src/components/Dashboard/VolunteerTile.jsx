@@ -59,6 +59,7 @@ const VolunteerTile = ({ mongoUser, ticket, volunteerName, setTasks, setLoaded }
     return new Date(newDateStr);
   }
 
+  console.log(ticket)
   return (
       <div className="volunteer-ticket">
         <div className="volunteer-ticket__profile-img">
@@ -79,6 +80,9 @@ const VolunteerTile = ({ mongoUser, ticket, volunteerName, setTasks, setLoaded }
           </span>
           <span style={{ display: 'block' }}>
             Request Date/Time: {new Date(task_date).toUTCString()}
+          </span>
+          <span style={{ display: 'block' }}>
+            Requestor Rating: {}
           </span>
         </div>
 
