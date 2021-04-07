@@ -16,7 +16,7 @@ const styles = {
   }
 }
 
-const VolunteerTile = ({ ticket, volunteerName, setTasks, setLoaded }) => {
+const VolunteerTile = ({ mongoUser, ticket, volunteerName, setTasks, setLoaded }) => {
   const { currentUser } = useAuth();
   const {
     _id,
@@ -27,6 +27,7 @@ const VolunteerTile = ({ ticket, volunteerName, setTasks, setLoaded }) => {
     requestor_id,
     requestor_name,
     requestor_photo,
+    volunteer_id,
     start_time,
     end_time,
     room_id
@@ -65,27 +66,28 @@ const VolunteerTile = ({ ticket, volunteerName, setTasks, setLoaded }) => {
         </div>
         <div className="volunteer-ticket__body">
           <span style={{ display: 'block' }}>
-            <b>Requestor</b>: {requestor_name}
+            Requestor: {requestor_name}
           </span>
           <span style={{ display: 'block' }}>
-            <b>Request</b>: {task_body}
+            Request: {task_body}
           </span>
           <span style={{ display: 'block' }}>
-            <b>Duration</b>: {Math.round((reformatDate(task_date, end_time) - reformatDate(task_date, start_time))) / 60000} minutes
+            Duration: {Math.round((reformatDate(task_date, end_time) - reformatDate(task_date, start_time))) / 60000} minutes
           </span>
           <span style={{ display: 'block' }}>
-            <b>Neighborhood</b>: {task_neighborhood}
+            Neighborhood: {task_neighborhood}
           </span>
           <span style={{ display: 'block' }}>
-            <b>Request Date/Time</b>: {new Date(task_date).toUTCString()}
+            Request Date/Time: {new Date(task_date).toUTCString()}
           </span>
         </div>
 
         <div className="volunteer-ticket__buttons">
-          <AcceptBtn ticket={ticket} task_id={_id} setLoaded={setLoaded} />
-          {task_status === "Pending"
-          ? <div id="hide-btn"> <button value="hide" onClick={handleHideTask}>Hide</button> </div>
-          : null}
+          { task_status === "Accepted" && volunteer_id !== currentUser.uid
+              ? null
+              : <AcceptBtn mongoUser={mongoUser} ticket={ticket} task_id={_id} setLoaded={setLoaded} />
+          }
+          {task_status === "Pending" ? <button value="hide" onClick={handleHideTask}>Hide</button> : null}
         </div>
       </div>
   )

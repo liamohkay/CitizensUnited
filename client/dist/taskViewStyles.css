@@ -1,0 +1,14 @@
+#task-view-info-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5% 0% 0% 0%;
+}
+
+#task-view-main-conatiner {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+#task-view-info {
+  padding: 0% 5% 5% 5%;
+}

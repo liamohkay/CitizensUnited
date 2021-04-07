@@ -18,8 +18,7 @@ const SignUp = ({ isVolunteer }) => {
     firstName: '',
     lastName: '',
     phone: '',
-    neighborhood: '',
-    type: ''
+    neighborhood: ''
   });
 
   // Tracks user input on form fields

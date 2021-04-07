@@ -24,7 +24,11 @@ const Dashboard = ({ user }) => {
 
   // Grabs mongo user on load and re-render & sets state for user & feed
   useEffect(() => getMongoUser(), [loaded]);
-  useEffect(() => getVolunteerTasks(), [neighborhood])
+  useEffect(() => {
+    if (mongoUser && mongoUser.isVolunteer) {
+      getVolunteerTasks();
+    }
+  }, [neighborhood]);
 
   // Gets tasks volunteer neighborhood & saves them to state
   const getVolunteerTasks = (mongoUsr) => {
@@ -104,6 +108,7 @@ const Dashboard = ({ user }) => {
             { tasks.map(ticket => (
               mongoUser.isVolunteer
                 ? <VolunteerTile
+                    mongoUser={mongoUser}
                     ticket={ticket}
                     key={ticket._id}
                     volunteerName={currentUser.displayName}
@@ -111,6 +116,7 @@ const Dashboard = ({ user }) => {
                     setLoaded={setLoaded}
                   />
                 : <RequestTile
+                    mongoUser={mongoUser}
                     ticket={ticket}
                     key={ticket._id}
                     setLoaded={setLoaded}

@@ -15,14 +15,12 @@ function useDocumentDataSSR(ref, options) {
     return [value, loading, error]
   }
 }
-const ChatRoom = ({ room_id }) => {
+const ChatRoom = ({ room_id, mongoUser }) => {
   const dummy = useRef();
   const { currentUser } = useAuth();
   const roomRef = chat.doc(`chatRooms/${room_id}`);
   const [msgStream] = useDocumentDataSSR(roomRef, { startWith: 'messages' })
   const [newMsg, setNewMsg] = useState('');
-
-  console.log('room_id', room_id)
 
   // Sends message to chatroom and updates firebase db
   const sendMessage = (e) => {
@@ -32,9 +30,8 @@ const ChatRoom = ({ room_id }) => {
       createdAt: new Date(),
       uid: currentUser.uid,
       displayName: currentUser.displayName,
-      photoURL: currentUser.photoURL
+      photoURL: mongoUser.photo
     }
-    console.log('msg', msg)
 
     roomRef.update({ messages: msgStream.messages.concat([msg]) })
     setNewMsg('');
