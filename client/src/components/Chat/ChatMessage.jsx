@@ -6,7 +6,6 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 const ChatMessage = (props) => {
   const { text, uid, displayName, photoURL, createdAt } = props.msg;
   const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
-  // console.log('props.msg', props.msg)
 
   return (
     <>
@@ -17,7 +16,8 @@ const ChatMessage = (props) => {
         <div>{new Date().toUTCString()}</div>
         </div>
       </div>
-    </>)
+    </>
+  );
 }
 
 export default ChatMessage;

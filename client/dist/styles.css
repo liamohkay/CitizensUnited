@@ -151,9 +151,8 @@ input[type=radio] {
 
 
 /* Chat */
-.chat-conntainer {
-  text-align: center;
-  max-width: 728px;
+.chat-container {
+  max-height: 25vh;
   margin: 0 auto;
 }
 
