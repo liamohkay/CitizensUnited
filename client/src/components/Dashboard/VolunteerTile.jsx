@@ -16,7 +16,7 @@ const styles = {
   }
 }
 
-const VolunteerTile = ({ ticket, volunteerName, setTasks, setLoaded }) => {
+const VolunteerTile = ({ mongoUser, ticket, volunteerName, setTasks, setLoaded }) => {
   const { currentUser } = useAuth();
   const {
     _id,
@@ -82,7 +82,7 @@ const VolunteerTile = ({ ticket, volunteerName, setTasks, setLoaded }) => {
         </div>
 
         <div className="volunteer-ticket__buttons">
-          <AcceptBtn ticket={ticket} task_id={_id} setLoaded={setLoaded} />
+          <AcceptBtn mongoUser={mongoUser} ticket={ticket} task_id={_id} setLoaded={setLoaded} />
           {task_status === "Pending" ? <button value="hide" onClick={handleHideTask}>Hide</button> : null}
         </div>
       </div>

@@ -109,6 +109,7 @@ const Dashboard = ({ user }) => {
             { tasks.map(ticket => (
               mongoUser.isVolunteer
                 ? <VolunteerTile
+                    mongoUser={mongoUser}
                     ticket={ticket}
                     key={ticket._id}
                     volunteerName={currentUser.displayName}
@@ -116,6 +117,7 @@ const Dashboard = ({ user }) => {
                     setLoaded={setLoaded}
                   />
                 : <RequestTile
+                    mongoUser={mongoUser}
                     ticket={ticket}
                     key={ticket._id}
                     setLoaded={setLoaded}

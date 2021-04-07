@@ -53,7 +53,7 @@ const RequestTile = ({ ticket }) => {
     room_id && requestor_id ? (
       <div className="requestor-ticket">
         <Link
-          to={{ pathname: `/task/${_id}`, state: { ticket, room_id, isVolunteer: false } }}
+          to={{ pathname: `/task/${_id}`, state: { mongoUser, ticket, room_id, isVolunteer: false } }}
           style={{textDecoration: 'none', color: 'black'}}
         >
           <div className="requestor-ticket__profile-img">

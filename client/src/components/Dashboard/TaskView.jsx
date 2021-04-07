@@ -7,7 +7,7 @@ import ChatRoom from '../Chat/ChatRoom'
 import Logo from '../Home/Logo'
 
 const TaskView = (props) => {
-  const { ticket, room_id, isVolunteer, volunteerName } = props.location.state;
+  const { mongoUser, ticket, room_id, isVolunteer, volunteerName } = props.location.state;
   var neighborhood = ticket.task_neighborhood
   const [partnerID, setPartnerID] = useState(
     !isVolunteer
@@ -65,7 +65,7 @@ const TaskView = (props) => {
           <button>Mark Task Complete</button>
         </Link>
       </div>
-      <ChatRoom room_id={room_id} />
+      <ChatRoom mongoUser={mongoUser} room_id={room_id} />
 
 
       <div id="map-chat-container">
