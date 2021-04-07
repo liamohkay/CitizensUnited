@@ -64,6 +64,9 @@ const SignUp = ({ isVolunteer }) => {
       } else if (key === 'phone' && fields[key].length !== 10) {
         alert('Phone number must be 10 digits');
         throw 'Phone number must be 10 digits';
+      } else if (progress !== 100) {
+        alert('Please wait for picture to upload');
+        throw 'Please wait for picture to upload';
       }
     });
   }
@@ -71,11 +74,6 @@ const SignUp = ({ isVolunteer }) => {
   // Submits sign up to firebase & creates new user
   const submitForm = (e) => {
     e.preventDefault();
-
-    if (progress !== 100) {
-      alert("Please wait for picture to upload")
-      return;
-    }
 
     signup(fields.email, fields.password)
       .catch(err => console.log(err))
