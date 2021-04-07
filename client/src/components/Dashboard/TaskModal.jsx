@@ -90,8 +90,8 @@ const TaskModal = ({ currentUser, getRequesterTasks, mongoUser }) => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
+          <Button id="submit-button" className="w-100" onClick={handleClick}>Submit</Button>
           <Button id="cancel-button" className="w-100" onClick={handleClose}>Cancel</Button>
-          <Button id="login-button" className="w-100" onClick={handleClick}>Submit</Button>
         </Modal.Footer>
       </Modal>
     </>

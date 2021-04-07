@@ -51,23 +51,23 @@ const RequestTile = ({ ticket }) => {
         </div>
         <div className="requestor-ticket__body">
           <span style={{ display: 'block' }}>
-            Requestor: {requestor_name}
+            <b>Requestor</b>: {requestor_name}
           </span>
           <span style={{ display: 'block' }}>
-            Request: {task_body}
+            <b>Request</b>: {task_body}
           </span>
           <span style={{ display: 'block' }}>
-            Duration: {Math.round((reformatDate(task_date, end_time) - reformatDate(task_date, start_time))) / 60000} minutes
+            <b>Duration</b>: {Math.round((reformatDate(task_date, end_time) - reformatDate(task_date, start_time))) / 60000} minutes
           </span>
           <span style={{ display: 'block' }}>
-            Neighborhood: {task_neighborhood}
+            <b>Neighborhood</b>: {task_neighborhood}
           </span>
           <span style={{ display: 'block' }}>
-            Request Date/Time: {new Date(task_date).toUTCString()}
+            <b>Request Date/Time</b>: {new Date(task_date).toUTCString()}
           </span>
         </div>
         <div className="requestor-ticket__buttons">
-          <span id="volunteer-button" className="btn btn-sm" style={{ cursor: "default" }}>{task_status}</span>
+          <span id="requester-status" className="btn btn-sm" style={{ cursor: "default", backgroundColor: "#aaf8a7" }}>{task_status}</span>
         </div>
       </div>
       <Link
@@ -83,23 +83,23 @@ const RequestTile = ({ ticket }) => {
           </div>
           <div className="requestor-ticket__body">
             <span style={{ display: 'block' }}>
-              Requestor: {requestor_name}
+              <b>Requestor</b>: {requestor_name}
             </span>
             <span style={{ display: 'block' }}>
-              Request: {task_body}
+              <b>Request</b>: {task_body}
             </span>
             <span style={{ display: 'block' }}>
-              Duration: {Math.round((reformatDate(task_date, end_time) - reformatDate(task_date, start_time))) / 60000} minutes
+              <b>Duration</b>: {Math.round((reformatDate(task_date, end_time) - reformatDate(task_date, start_time))) / 60000} minutes
             </span>
             <span style={{ display: 'block' }}>
-              Neighborhood: {task_neighborhood}
+              <b>Neighborhood</b>: {task_neighborhood}
             </span>
             <span style={{ display: 'block' }}>
-              Request Date/Time: {new Date(task_date).toUTCString()}
+              <b>Request Date/Time</b>: {new Date(task_date).toUTCString()}
             </span>
           </div>
           <div className="requestor-ticket__buttons">
-            <span id="volunteer-button" className="btn btn-sm" style={{ cursor: "default" }}>{task_status}</span>
+            <span id="requester-status" className="btn btn-sm" style={{ cursor: "default", backgroundColor: "#FFAF7A" }}>{task_status}</span>
           </div>
         </div>
   );
