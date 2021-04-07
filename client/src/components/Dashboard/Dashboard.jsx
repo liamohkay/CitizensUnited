@@ -110,6 +110,17 @@ const Dashboard = ({ user }) => {
               )
           }
 
+        { /* Add task modal for requesters only */
+            mongoUser.isVolunteer
+              ? null
+              : <TaskModal
+                  mongoUser={mongoUser}
+                  currentUser={currentUser}
+                  getRequesterTasks={getRequesterTasks}
+                  mongoUser={mongoUser}
+                />
+          }
+
           { /* Tasks / tickets list */ }
           <div id="feed-container">
             { tasks.map(ticket => (
@@ -131,16 +142,6 @@ const Dashboard = ({ user }) => {
               ))
             }
           </div>
-
-          { /* Add task modal for requesters only */
-            mongoUser.isVolunteer
-              ? null
-              : <TaskModal
-                  currentUser={currentUser}
-                  getRequesterTasks={getRequesterTasks}
-                  mongoUser={mongoUser}
-                />
-          }
 
         </div>
       ) }
