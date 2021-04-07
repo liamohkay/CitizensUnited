@@ -11,7 +11,7 @@ const initialState = {
   end_time: '',
 };
 
-const TaskModal = ({ currentUser, getRequesterTasks, mongoUser }) => {
+const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
   const [show, setShow] = useState(false);
   const [fields, setFields] = useState({
     task: '',
@@ -39,6 +39,7 @@ const TaskModal = ({ currentUser, getRequesterTasks, mongoUser }) => {
       requestor_id: currentUser.uid,
       requestor_name: currentUser.displayName,
       requestor_photo: currentUser.photoURL,
+      requestor_thumbsUp: mongoUser.thumbsUp,
       task_date: new Date(),
       task_status: 'Pending',
       task_body: fields.task,

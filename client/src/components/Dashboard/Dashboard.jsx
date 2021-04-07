@@ -129,6 +129,7 @@ const Dashboard = ({ user }) => {
             mongoUser.isVolunteer
               ? null
               : <TaskModal
+                  mongoUser={mongoUser}
                   currentUser={currentUser}
                   getRequesterTasks={getRequesterTasks}
                   mongoUser={mongoUser}
