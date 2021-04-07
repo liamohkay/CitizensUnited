@@ -6,3 +6,4 @@
 /database/dbConfig.js
 package-lock.json
 .env.local
+*.pem
