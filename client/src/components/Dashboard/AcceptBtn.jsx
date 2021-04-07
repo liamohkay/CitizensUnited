@@ -19,7 +19,14 @@ const AcceptBtn = ({ mongoUser, ticket, task_id, setLoaded }) => {
 
   // Adds volunteer id into task in tasks collection
   const putVolunteer = () => {
-    axios.put('/api/tasks/accepted', { task_id, firebase_id: currentUser.uid })
+    axios.put(
+      '/api/tasks/accepted',
+    { task_id,
+      firebase_id: currentUser.uid,
+      volunteer_name: currentUser.displayName,
+      volunteer_thumbsUp: mongoUser.thumbsUp,
+      volunteer_photo: mongoUser.photo
+    })
       .catch(err => console.log(err))
       .then(() => null)
   }
