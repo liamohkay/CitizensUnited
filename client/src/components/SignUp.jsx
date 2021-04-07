@@ -69,8 +69,9 @@ const SignUp = ({ isVolunteer }) => {
     e.preventDefault();
 
     signup(fields.email, fields.password)
-      .catch(err => validateFields())
+      .catch(err => console.log(err))
       .then((res) => {
+        validateFields();
         res.user.updateProfile({
           displayName: `${fields.firstName} ${fields.lastName}` ,
           photoURL: photoUrl,
