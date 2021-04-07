@@ -11,7 +11,7 @@ export default function HomePage ({ setIsVolunteer }) {
   return (
     <div>
       <div id="Home-Page">
-          <Logo />
+        <Logo />
         <div id="end-links" className="d-flex justify-content-end">
           <div id="Log-In-Button" name="login" >
             <Link to="/login">

@@ -13,12 +13,12 @@ const SignUp = ({ isVolunteer }) => {
   const history = useHistory();
   const [photoUrl, setPhotoUrl] = useState();
   const [fields, setFields] = useState({
+    email: '',
+    password: '',
     firstName: '',
     lastName: '',
     phone: '',
     neighborhood: '',
-    email: '',
-    password: '',
     type: ''
   });
 
@@ -51,12 +51,25 @@ const SignUp = ({ isVolunteer }) => {
     )
   }
 
+  // Checks for any blank fields & that phone number is 10 digits
+  const validateFields = () => {
+    Object.keys(fields).map(key => {
+      if (fields[key].length === 0) {
+        alert(`${key} cannot be blank`);
+        throw `${key} cannot be blank`;
+      } else if (key === 'phone' && fields[key].length !== 10) {
+        alert('Phone number must be 10 digits');
+        throw 'Phone number must be 10 digits';
+      }
+    });
+  }
+
   // Submits sign up to firebase & creates new user
   const submitForm = (e) => {
     e.preventDefault();
 
     signup(fields.email, fields.password)
-      .catch(err => console.log(err))
+      .catch(err => validateFields())
       .then((res) => {
         res.user.updateProfile({
           displayName: `${fields.firstName} ${fields.lastName}` ,
