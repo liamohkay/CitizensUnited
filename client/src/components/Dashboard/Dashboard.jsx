@@ -10,6 +10,7 @@ import RequestTile from './RequestTile';
 import VolunteerTile from './VolunteerTile';
 import Logo from '../Home/Logo';
 import TaskModal from './TaskModal';
+import Neighborhood from '../Neighborhood';
 
 const Dashboard = ({ user }) => {
   // Gets current signed-in firebase user for displayName and photoURL props
@@ -17,15 +18,19 @@ const Dashboard = ({ user }) => {
   const [tasks, setTasks] = useState([]);
   const [mongoUser, setMongoUser] = useState();
   const [loaded, setLoaded] = useState(true);
+  const [neighborhood, setNeighborhood] = useState({
+    neighborhood: '',
+  });
 
   // Grabs mongo user on load and re-render & sets state for user & feed
   useEffect(() => getMongoUser(), [loaded]);
+  useEffect(() => getVolunteerTasks(), [neighborhood])
 
   // Gets tasks volunteer neighborhood & saves them to state
   const getVolunteerTasks = (mongoUsr) => {
     let params = {
       firebase_id: currentUser.uid,
-      task_neighborhood: mongoUsr.neighborhood
+      task_neighborhood: neighborhood.neighborhood,
     }
     axios.get('/api/tasks/volunteer', { params })
       .catch(err => console.log(err))
@@ -50,6 +55,7 @@ const Dashboard = ({ user }) => {
       .then(resp => {
         let mongoUsr = resp.data[0];
         setMongoUser(mongoUsr);
+        setNeighborhood({ neighborhood: mongoUsr.neighborhood });
 
         // Get tasks based on user type
         if (mongoUsr.isVolunteer) {
@@ -79,6 +85,15 @@ const Dashboard = ({ user }) => {
               </button>
             </div>
           </div>
+
+          { /* Change location for volunteer only */
+            !mongoUser.isVolunteer
+              ? null
+              : <Neighborhood
+                  fields={neighborhood}
+                  setFields={setNeighborhood}
+                />
+          }
 
           { /* Tasks / tickets list */ }
           <div id="feed-container">
