@@ -37,37 +37,44 @@ const Dashboard = ({ user }) => {
       task_neighborhood: neighborhood.neighborhood,
     }
     axios.get('/api/tasks/volunteer', { params })
-      .catch(err => console.log(err))
       .then(resp => {
-        setTasks(resp.data[0].tasks)})
+        setTasks(resp.data[0].tasks)
+      })
+      .catch(err => console.log(err))
   }
 
   // Get requester user tasks & saves them to state
   const getRequesterTasks = (mongoUsr) => {
     let options = { params: {firebase_id: mongoUsr.firebase_id} };
     axios.get('/api/tasks/requester', options)
-      .catch(err => console.log(err))
       .then(resp => {
-        setTasks(resp.data[0].tasks)})
+        setTasks(resp.data[0].tasks)
+      })
+      .catch(err => console.log(err))
   }
 
   // Finds related mongodb user using authorized currentUser uid (firebase_id)
   const getMongoUser = () => {
     let params = { firebase_id: currentUser.uid }
     axios.get('/api/users', { params })
-      .catch(err => console.log(err))
       .then(resp => {
         let mongoUsr = resp.data[0];
         setMongoUser(mongoUsr);
-        setNeighborhood({ neighborhood: mongoUsr.neighborhood });
+        if (mongoUsr) {
+          setNeighborhood({ neighborhood: mongoUsr.neighborhood });
+        }
 
         // Get tasks based on user type
-        if (mongoUsr.isVolunteer) {
-          getVolunteerTasks(mongoUsr);
-        } else {
-          getRequesterTasks(mongoUsr);
+        if (mongoUsr) {
+          if (mongoUsr.isVolunteer) {
+            getVolunteerTasks(mongoUsr);
+          } else {
+            getRequesterTasks(mongoUsr);
+          }
         }
       })
+      .catch(err => console.log(err))
+
   }
 
   return (

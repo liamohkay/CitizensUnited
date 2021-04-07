@@ -82,12 +82,22 @@ const VolunteerTile = ({ mongoUser, ticket, volunteerName, setTasks, setLoaded }
         </span>
       </div>
 
+<<<<<<< HEAD
       <div className="volunteer-ticket__buttons">
         { task_status === "Accepted" && volunteer_id !== currentUser.uid
             ? null
             : <AcceptBtn mongoUser={mongoUser} ticket={ticket} task_id={_id} setLoaded={setLoaded} />
         }
         {task_status === "Pending" ? <button value="hide" onClick={handleHideTask}>Hide</button> : null}
+=======
+        <div className="volunteer-ticket__buttons">
+          { task_status === "Accepted" && volunteer_id !== currentUser.uid
+              ? null
+              : <AcceptBtn mongoUser={mongoUser} ticket={ticket} task_id={_id} setLoaded={setLoaded} />
+          }
+          {task_status === "Pending" ? <button id="hide-btn" value="hide" onClick={handleHideTask}>Hide</button> : null}
+        </div>
+>>>>>>> 0b331af988528e66522aa15b6e349ee7bf7bdae5
       </div>
     </div>
   )
