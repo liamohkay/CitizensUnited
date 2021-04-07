@@ -6,7 +6,7 @@ import { chat } from '../../firebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { Link } from 'react-router-dom';
 
-const AcceptBtn = ({ ticket, task_id, setLoaded }) => {
+const AcceptBtn = ({ mongoUser, ticket, task_id, setLoaded }) => {
   const { currentUser } = useAuth();
   const chatRoomRef = chat.collection('chatRooms');
 
@@ -53,7 +53,7 @@ const AcceptBtn = ({ ticket, task_id, setLoaded }) => {
 
   return (
     <Link
-      to={{ pathname: `/task/${task_id}`, state: { ticket, room_id: ticket.room_id, isVolunteer: true } }}
+      to={{ pathname: `/task/${task_id}`, state: { mongoUser, ticket, room_id: ticket.room_id, isVolunteer: true } }}
       style={{textDecoration: 'none', color: 'black'}}
       onClick={handleClick}
     >

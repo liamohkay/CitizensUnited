@@ -7,7 +7,7 @@ import ChatRoom from '../Chat/ChatRoom'
 import Logo from '../Home/Logo'
 
 const TaskView = (props) => {
-  const { ticket, room_id, isVolunteer, volunteerName } = props.location.state;
+  const { mongoUser, ticket, room_id, isVolunteer, volunteerName } = props.location.state;
   var neighborhood = ticket.task_neighborhood
   const [partnerID, setPartnerID] = useState(
     !isVolunteer
@@ -30,44 +30,51 @@ const TaskView = (props) => {
   }
 
   return (
-    <div className="task-view-container">
-      <div>
+    <div id="task-view-container">
+      <div id="task-view-header">
         <Logo />
           <div id="user-name" className="d-flex justify-content-end">
             {volunteerName}
           </div>
       </div>
-      <span style={{ display: 'block' }}>
-          <h2>
-            {ticket.task_status}
-            </h2>
-        </span>
-      <div id="map"> </div>
+
       <Map neighborhood={neighborhood}/>
-      <ChatRoom room_id={room_id} />
-      <Link to={{ pathname: "/"}}>
-        <button type="button">Go back to Home Page</button>
-      </Link>
-      <div id="task-info">
-        <span style={{ display: 'block' }}>
-          Requestor: {ticket.requestor_name}
-        </span>
-        <span style={{ display: 'block' }}>
-          Request: {ticket.task_body}
-        </span>
-        <span style={{ display: 'block' }}>
-          Duration: {Math.round((reformatDate(ticket.task_date, ticket.end_time) - reformatDate(ticket.task_date, ticket.start_time))) / 60000} minutes
-        </span>
-        <span style={{ display: 'block' }}>
-          Neighborhood: {ticket.task_neighborhood}
-        </span>
-        <span style={{ display: 'block' }}>
-          Request Date/Time: {new Date(ticket.task_date).toUTCString()}
-        </span>
+
+      <div id="task-view-main-conatiner">
+
+        <div id="task-view-info">
+          <div id="task-view-info-title">
+            <h3>{ ticket.task_status }</h3>
+          </div>
+
+          <div>
+            <span style={{ display: 'block' }}>
+                <b>Requestor:</b> {ticket.requestor_name}
+            </span>
+            <span style={{ display: 'block' }}>
+              < b>Request:</b> {ticket.task_body}
+            </span>
+            <span style={{ display: 'block' }}>
+              <b>Duration:</b> {Math.round((reformatDate(ticket.task_date, ticket.end_time) - reformatDate(ticket.task_date, ticket.start_time))) / 60000} minutes
+            </span>
+            <span style={{ display: 'block' }}>
+              <b>Neighborhood:</b> {ticket.task_neighborhood}
+            </span>
+            <span style={{ display: 'block' }}>
+              <b>Task Start:</b> {new Date(ticket.task_date).toUTCString()}
+            </span>
+            <Link to={{ pathname: "/"}}>
+              <button type="button">Go back to Home Page</button>
+            </Link>
+            <Link to={{pathname: "/task/rating/:task_id", state: { ticket, isVolunteer }}}>
+              <button>Mark Task Complete</button>
+            </Link>
+          </div>
+
+        </div>
+
+        <ChatRoom mongoUser={mongoUser} room_id={room_id} />
       </div>
-      <Link to={{pathname: "/task/rating/:task_id", state: { ticket, isVolunteer }}}>
-        <button>Mark Task Complete</button>
-      </Link>
     </div>
   );
 }

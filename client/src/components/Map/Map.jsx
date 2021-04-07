@@ -50,7 +50,7 @@ export default function Map({neighborhood}) {
 
   const Wrapped = withScriptjs(withGoogleMap(InnerMap));
   return (
-    <div style={{width: '50vw', height: '50vh'}}>
+    <div style={{width: '100vw', height: '75vh'}}>
       <Wrapped
         googleMapURL={"https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyBYhkZV9wJYaqnfcvAq5Doga7IKh_Fjh1E"}
         loadingElement={<div style={{height: "100%"}} />}
