@@ -63,10 +63,6 @@ const VolunteerTile = ({ ticket, volunteerName, setTasks, setLoaded }) => {
         <div className="volunteer-ticket__profile-img">
           <img src={requestor_photo} style={styles.profile} />
         </div>
-        <Link
-          to={{ pathname: `/task/${_id}`, state: { ticket, room_id, isVolunteer: true } }}
-          style={{textDecoration: 'none', color: 'black'}}
-        >
         <div className="volunteer-ticket__body">
           <span style={{ display: 'block' }}>
             Requestor: {requestor_name}
@@ -84,11 +80,10 @@ const VolunteerTile = ({ ticket, volunteerName, setTasks, setLoaded }) => {
             Request Date/Time: {new Date(task_date).toUTCString()}
           </span>
         </div>
-        </Link >
 
         <div className="volunteer-ticket__buttons">
           <AcceptBtn ticket={ticket} task_id={_id} setLoaded={setLoaded} />
-          <button value="hide" onClick={handleHideTask}>Hide</button>
+          {task_status === "Pending" ? <button value="hide" onClick={handleHideTask}>Hide</button> : null}
         </div>
       </div>
   )

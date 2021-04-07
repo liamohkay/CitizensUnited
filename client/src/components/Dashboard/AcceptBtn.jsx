@@ -29,18 +29,20 @@ const AcceptBtn = ({ ticket, task_id, setLoaded }) => {
     axios.get('/api/oneTask', { params: { task_id }})
       .catch(err => console.log(err))
       .then(resp => {
-        const { requestor_id, volunteer_id } = resp.data[0];
+        const { requestor_id, volunteer_id, room_id } = resp.data[0];
         // Insert both ids into chatroom by id
-        chatRoomRef.add({
-          users: [requestor_id, volunteer_id],
-          messages: []
-        })
-          .catch(err => console.log(err))
-          .then(resp => {
-            axios.put('/api/rooms', { task_id, room_id: resp._delegate._key.path.segments[1] })
-              // Force dashboard to rerender on click to update info on return
-              .then(() => setLoaded(prev => !prev))
+        if (!room_id) {
+          chatRoomRef.add({
+            users: [requestor_id, volunteer_id],
+            messages: []
           })
+            .catch(err => console.log(err))
+            .then(resp => {
+              axios.put('/api/rooms', { task_id, room_id: resp._delegate._key.path.segments[1] })
+                // Force dashboard to rerender on click to update info on return
+                .then(() => setLoaded(prev => !prev))
+            })
+        }
     })
   }
 

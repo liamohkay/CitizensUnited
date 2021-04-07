@@ -1,16 +1,19 @@
 // Libraries + dependencies
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 // Components
 import Map from '../Map/Map'
 import ChatRoom from '../Chat/ChatRoom'
-import { Link } from 'react-router-dom';
 import Logo from '../Home/Logo'
 
 const TaskView = (props) => {
-  console.log('props TaskView', props);
   const { ticket, room_id, isVolunteer, volunteerName } = props.location.state;
   var neighborhood = ticket.task_neighborhood
-  // console.log('volunteerName', volunteerName)
+  const [partnerID, setPartnerID] = useState(
+    !isVolunteer
+      ? ticket.volunteer_id
+      : ticket.requestor_id
+  );
 
   const reformatDate = (dateStr, time) => {
     const pad = (num) => (
@@ -62,8 +65,8 @@ const TaskView = (props) => {
           Request Date/Time: {new Date(ticket.task_date).toUTCString()}
         </span>
       </div>
-      <Link to={{pathname: "/task/rating/:task_id", state: { ticket }}}>
-        <button>Task Completed</button>
+      <Link to={{pathname: "/task/rating/:task_id", state: { ticket, isVolunteer }}}>
+        <button>Mark Task Complete</button>
       </Link>
     </div>
   );
