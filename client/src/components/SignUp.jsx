@@ -78,7 +78,6 @@ const SignUp = ({ isVolunteer }) => {
     }
 
     signup(fields.email, fields.password)
-      .catch(err => console.log(err))
       .then((res) => {
         validateFields();
         res.user.updateProfile({
@@ -105,6 +104,8 @@ const SignUp = ({ isVolunteer }) => {
             history.push('/login');
           })
       })
+      .catch(err => alert(err))
+
   }
 
 
