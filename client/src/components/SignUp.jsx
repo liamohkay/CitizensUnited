@@ -64,6 +64,9 @@ const SignUp = ({ isVolunteer }) => {
       } else if (key === 'phone' && fields[key].length !== 10) {
         alert('Phone number must be 10 digits');
         throw 'Phone number must be 10 digits';
+      } else if (progress !== 100) {
+        alert('Please wait for picture to upload');
+        throw 'Please wait for picture to upload';
       }
     });
   }
@@ -72,13 +75,7 @@ const SignUp = ({ isVolunteer }) => {
   const submitForm = (e) => {
     e.preventDefault();
 
-    if (progress !== 100) {
-      alert("Please wait for picture to upload")
-      return;
-    }
-
     signup(fields.email, fields.password)
-      .catch(err => console.log(err))
       .then((res) => {
         validateFields();
         res.user.updateProfile({
@@ -105,6 +102,8 @@ const SignUp = ({ isVolunteer }) => {
             history.push('/login');
           })
       })
+      .catch(err => alert(err))
+
   }
 
 

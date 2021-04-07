@@ -60,36 +60,35 @@ const VolunteerTile = ({ mongoUser, ticket, volunteerName, setTasks, setLoaded }
   }
 
   return (
-      <div className="volunteer-ticket">
-        <div className="volunteer-ticket__profile-img">
-          <img src={requestor_photo} style={styles.profile} />
-        </div>
-        <div className="volunteer-ticket__body">
-          <span style={{ display: 'block' }}>
-            Requestor: {requestor_name}
-          </span>
-          <span style={{ display: 'block' }}>
-            Request: {task_body}
-          </span>
-          <span style={{ display: 'block' }}>
-            Duration: {Math.round((reformatDate(task_date, end_time) - reformatDate(task_date, start_time))) / 60000} minutes
-          </span>
-          <span style={{ display: 'block' }}>
-            Neighborhood: {task_neighborhood}
-          </span>
-          <span style={{ display: 'block' }}>
-            Request Date/Time: {new Date(task_date).toUTCString()}
-          </span>
-        </div>
-
-        <div className="volunteer-ticket__buttons">
-          { task_status === "Accepted" && volunteer_id !== currentUser.uid
-              ? null
-              : <AcceptBtn mongoUser={mongoUser} ticket={ticket} task_id={_id} setLoaded={setLoaded} />
-          }
-          {task_status === "Pending" ? <button value="hide" onClick={handleHideTask}>Hide</button> : null}
-        </div>
+    <div className="volunteer-ticket">
+      <div className="volunteer-ticket__profile-img">
+        <img src={requestor_photo} style={styles.profile} />
       </div>
+      <div className="volunteer-ticket__body">
+        <span style={{ display: 'block' }}>
+          Requestor: {requestor_name}
+        </span>
+        <span style={{ display: 'block' }}>
+          Request: {task_body}
+        </span>
+        <span style={{ display: 'block' }}>
+          Duration: {Math.round((reformatDate(task_date, end_time) - reformatDate(task_date, start_time))) / 60000} minutes
+        </span>
+        <span style={{ display: 'block' }}>
+          Neighborhood: {task_neighborhood}
+        </span>
+        <span style={{ display: 'block' }}>
+          Request Date/Time: {new Date(task_date).toUTCString()}
+        </span>
+      </div>
+      <div className="volunteer-ticket__buttons">
+        { task_status === "Accepted" && volunteer_id !== currentUser.uid
+            ? null
+            : <AcceptBtn mongoUser={mongoUser} ticket={ticket} task_id={_id} setLoaded={setLoaded} />
+        }
+        {task_status === "Pending" ? <button id="hide-btn" value="hide" onClick={handleHideTask}>Hide</button> : null}
+      </div>
+    </div>
   )
 }
 export default VolunteerTile;
