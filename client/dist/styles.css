@@ -296,3 +296,82 @@ input[type=radio] {
 .displayname {
   font-size: 10px;
 }
+
+#vote-container {
+  display: grid;
+  width: 100vw;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 0.2fr 0.8fr;
+  gap: 0px 0px;
+  grid-template-areas:
+  "vote-title vote-title"
+  "thumbs-up thumbs-down";
+  justify-items: center;
+  align-items: center;
+}
+
+#vote-title{
+  margin-top: 25px;
+  color: #007bff;
+  grid-area: vote-title;
+}
+
+#thumbs-up{
+  grid-area: thumbs-up;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 0.7fr 1fr 1.3fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "thumbs-up-header thumbs-up-header thumbs-up-header"
+    ". thumbsup-logo ."
+    ". paragraph1 .";
+  justify-items: center;
+  align-items: center;
+}
+
+#thumbs-up-header {
+  grid-area: thumbs-up-header;
+}
+
+#thumbsup-logo {
+  grid-area: thumbsup-logo;
+  justify-self: center;
+}
+
+#thumbs-down{
+  grid-area: thumbs-down;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 0.7fr 1fr 1.3fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "thumbs-down-header thumbs-down-header thumbs-down-header"
+    ". thumbsdown-logo ."
+    ". paragraph2 .";
+  justify-items: center;
+  align-items: center;
+}
+
+#thumbs-down-header {
+  grid-area: thumbs-down-header;
+}
+
+#thumbsdown-logo {
+  grid-area: thumbsdown-logo;
+  justify-self: center;
+}
+
+#thumbsdown-logo:hover, #thumbsup-logo:hover {
+  color: #007bff
+}
+
+#paragraph1 {
+  grid-area: paragraph1;
+  font-weight: 500;
+}
+
+#paragraph2 {
+  grid-area: paragraph2;
+  font-weight: 500;
+}
