@@ -74,11 +74,10 @@ const Dashboard = ({ user }) => {
     <>
       { !currentUser || !mongoUser ? null : (
         <div id="dashboard-container">
-
           { /* Header */ }
-          <div className="d-flex justify-content-between align-items-center">
+          <div className="dash-header-container">
             <Logo />
-            <div className="d-flex justify-content-between align-items-center">
+            <div id="user-welcome">
               <img
                 src={mongoUser.photo}
                 style={{ width: '50px', height: '50px', borderRadius: '100%'}}
@@ -94,12 +93,12 @@ const Dashboard = ({ user }) => {
             !mongoUser.isVolunteer
               ? null
               : (
-                <div>
+                <div id="volunteer-neighborhood">
                   <Neighborhood
                     fields={neighborhood}
                     setFields={setNeighborhood}
                   />
-                  <span>Currently Selected: {neighborhood.neighborhood}</span>
+                  <span id="current-neighborhood">Currently Selected: {neighborhood.neighborhood}</span>
                 </div>
               )
           }

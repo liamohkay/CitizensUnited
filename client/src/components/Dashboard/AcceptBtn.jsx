@@ -52,6 +52,7 @@ const AcceptBtn = ({ mongoUser, ticket, task_id, setLoaded }) => {
   }
 
   return (
+    <div id="accept-btn">
     <Link
       to={{ pathname: `/task/${task_id}`, state: { mongoUser, ticket, room_id: ticket.room_id, isVolunteer: true } }}
       style={{textDecoration: 'none', color: 'black'}}
@@ -63,6 +64,8 @@ const AcceptBtn = ({ mongoUser, ticket, task_id, setLoaded }) => {
           : <span>Accept</span> }
       </button>
     </Link>
+    </div>
+
   );
 }
 
