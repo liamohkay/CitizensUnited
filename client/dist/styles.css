@@ -52,11 +52,19 @@ table {
 #app {
   margin: auto;
   width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "app-container app-container app-container";
+  align-items: center;
+  justify-content: space-between;
 }
 
 #app-container {
   margin: auto;
   display: flex;
+  grid-area: app-container;
   align-items: center;
   justify-content: space-between;
 }
@@ -140,7 +148,7 @@ input[type=radio] {
 
 #signUp-container {
   margin: auto;
-  width: 40%;
+  width: 80%;
 }
 
 #login-container {
