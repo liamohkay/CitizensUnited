@@ -12,6 +12,7 @@ const SignUp = ({ isVolunteer }) => {
   const { signup, currentUser } = useAuth();
   const history = useHistory();
   const [photoUrl, setPhotoUrl] = useState();
+  const [progress, setProgress] = useState(0);
   const [fields, setFields] = useState({
     email: '',
     password: '',
@@ -29,6 +30,10 @@ const SignUp = ({ isVolunteer }) => {
     });
   }
 
+  const noImage = () => {
+    alert("Please wait for picture to upload")
+  }
+
   // Handles firebase photo upload, then saves the firebase url for the photo to state for submit to db
   const handlePhoto = (e) => {
     e.preventDefault();
@@ -38,7 +43,11 @@ const SignUp = ({ isVolunteer }) => {
 
     task.on(
       'state_changed',
-      snapshot => { },
+      snapshot => {
+        const transferred = snapshot.bytesTransferred === 0 ?  1 : snapshot.bytesTransferred;
+        const progress = Math.round((transferred / snapshot.totalBytes) * 100);
+        setProgress(progress)
+       },
       error => { console.log(error) },
       () => {
         storage
@@ -67,12 +76,17 @@ const SignUp = ({ isVolunteer }) => {
   const submitForm = (e) => {
     e.preventDefault();
 
+    if (progress !== 100) {
+      alert("Please wait for picture to upload")
+      return;
+    }
+
     signup(fields.email, fields.password)
       .catch(err => console.log(err))
       .then((res) => {
         validateFields();
         res.user.updateProfile({
-          displayName: `${fields.firstName} ${fields.lastName}` ,
+          displayName: `${fields.firstName} ${fields.lastName}`,
           photoURL: photoUrl,
         });
         let params = {
@@ -96,6 +110,8 @@ const SignUp = ({ isVolunteer }) => {
           })
       })
   }
+
+
 
   return (
     <div id="signUp-container" name="signup">
@@ -156,15 +172,17 @@ const SignUp = ({ isVolunteer }) => {
               <label>Neighborhood</label>
               <Neighborhood setFields={setFields} fields={fields}/>
               <br />
-            <label className="form-label" htmlFor="customFile">Upload Profile Pciture</label>
+            <label className="form-label" htmlFor="customFile">Upload Profile Picture</label>
+            <progress value={progress} max="100" id="uploader"></progress>
             <input type="file" className="form-control" id="customFile" accept="image/*" onChange={handlePhoto} />
-            <Button
+              <Button
               id="signup-button"
               className="w-100"
               type="submit"
               onClick={submitForm}
             > Sign Up
             </Button>
+            <img src=""></img>
           </Form>
         </Card.Body>
       </Card>
