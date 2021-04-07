@@ -24,7 +24,11 @@ const Dashboard = ({ user }) => {
 
   // Grabs mongo user on load and re-render & sets state for user & feed
   useEffect(() => getMongoUser(), [loaded]);
-  useEffect(() => getVolunteerTasks(), [neighborhood])
+  useEffect(() => {
+    if (mongoUser && mongoUser.isVolunteer) {
+      getVolunteerTasks();
+    }
+  }, [neighborhood]);
 
   // Gets tasks volunteer neighborhood & saves them to state
   const getVolunteerTasks = (mongoUsr) => {
