@@ -8,7 +8,7 @@ const ConditionalLink = ({ children, to, condition }) => {
       : <>{children}</>;
 };
 
-const RequestTile = ({ ticket }) => {
+const RequestTile = ({ mongoUser, ticket }) => {
   const { currentUser } = useAuth();
   const {
     _id,
@@ -77,7 +77,7 @@ const RequestTile = ({ ticket }) => {
             </span>
           </div>
           <div className="requestor-ticket__buttons">
-            <span id="volunteer-button" className="btn btn-sm" style={{ cursor: "default" }}>{task_status}</span>
+            <span id="requester-status" className="btn btn-sm" style={{ cursor: "default", backgroundColor: "#aaf8a7" }}>{task_status}</span>
           </div>
         </Link>
       </div>
@@ -104,7 +104,7 @@ const RequestTile = ({ ticket }) => {
           </span>
         </div>
         <div className="requestor-ticket__buttons">
-          <span id="volunteer-button" className="btn btn-sm" style={{ cursor: "default" }}>{task_status}</span>
+          <span id="requester-status" className="btn btn-sm" style={{ cursor: "default", backgroundColor: "#FFAF7A" }}>{task_status}</span>
         </div>
       </div>
     )

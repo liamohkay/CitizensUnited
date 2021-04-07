@@ -10,7 +10,7 @@ const Neighborhood = ({ fields, setFields }) => {
   }
 
   return (
-    <div>
+    <div className="neighborhood-dropdown">
       <DropdownButton
         title={hoodTitle}
         name="neighborhood"
