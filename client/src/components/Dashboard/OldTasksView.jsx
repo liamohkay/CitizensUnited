@@ -10,6 +10,7 @@ import RequestTile from './RequestTile';
 const OldTasksView = () => {
   const { currentUser } = useAuth();
   const [oldTasks, setOldTasks] = useState();
+  const [renderOld, setRenderOld] = useState(false);
 
   // Retrieves users completed tasks from database
   useEffect(() => {
@@ -17,12 +18,12 @@ const OldTasksView = () => {
     axios.get('/api/oldtasks', { params })
       .then(resp => setOldTasks(resp.data))
       .catch(err => console.log(err))
-  }, []);
+  }, [renderOld]);
 
   return (
     <div>
       { !oldTasks ? null : (
-        oldTasks.map(ticket => <RequestTile ticket={ticket} old={true} />)
+        oldTasks.map(ticket => <RequestTile ticket={ticket} old={true} setRenderOld={setRenderOld} />)
       )}
     </div>
   );

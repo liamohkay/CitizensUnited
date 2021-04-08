@@ -99,6 +99,11 @@ const dbHelpers = {
   },
 
   postNewTask: (req, callback) =>  {
+    console.log(req.body._id);
+    Tasks.find({ _id: req.body._id }).remove()
+      .then(() => console.log('Deleted old post'))
+      .catch(err => console.log(err))
+
     Tasks
       .create(
         {

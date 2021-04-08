@@ -14,7 +14,7 @@ const initialState = {
   duration: 0
 };
 
-const EditTaskModal = ({ ticket, mongoUser }) => {
+const EditTaskModal = ({ ticket, setRenderOld }) => {
   const { currentUser } = useAuth();
   const [show, setShow] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
@@ -28,7 +28,6 @@ const EditTaskModal = ({ ticket, mongoUser }) => {
       ...fields,
       [e.target.name]: e.target.value
     });
-    console.log(fields);
   };
 
   // Store ticket in firebase
@@ -39,8 +38,8 @@ const EditTaskModal = ({ ticket, mongoUser }) => {
       requestor_id: currentUser.uid,
       requestor_name: currentUser.displayName,
       requestor_photo: currentUser.photoURL,
-      requestor_thumbsUp: mongoUser.thumbsUp,
-      requestor_thumbsDown: mongoUser.thumbsDown,
+      requestor_thumbsUp: fields.thumbsUp,
+      requestor_thumbsDown: fields.thumbsDown,
       task_date: startDate,
       task_status: 'Pending',
       task_body: fields.task_body,
@@ -51,7 +50,7 @@ const EditTaskModal = ({ ticket, mongoUser }) => {
     }
     axios.post('/api/tasks', body)
       .then(resp => handleClose())
-      .then(() => null)
+      .then(() => setRenderOld(prev => !prev))
       .catch(err => console.log(err));
   }
 

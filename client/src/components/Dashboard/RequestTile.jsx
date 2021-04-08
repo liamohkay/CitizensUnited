@@ -3,7 +3,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 import EditTaskModal from './EditTaskModal';
 
-const RequestTile = ({ mongoUser, ticket, old }) => {
+const RequestTile = ({ mongoUser, ticket, old, setRenderOld }) => {
   const { currentUser } = useAuth();
   const {
     _id,
@@ -77,7 +77,7 @@ const RequestTile = ({ mongoUser, ticket, old }) => {
             { old
               ?
               (
-                <EditTaskModal ticket={ticket} mongoUser={mongoUser} />
+                <EditTaskModal ticket={ticket} mongoUser={mongoUser} setRenderOld={setRenderOld} />
               )
               :
               (
