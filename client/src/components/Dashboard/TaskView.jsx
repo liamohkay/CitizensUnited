@@ -67,10 +67,11 @@ const TaskView = (props) => {
           <span style={{ display: 'block' }}>
             <b>Requester:</b> {ticket.requestor_name}
           </span>
-          <span style={{ display: 'block' }}>
+          <span style={{ display: 'flex' }}>
             <b>Requester Score:</b>
-            <i id="thumbs-up" className="far fa-thumbs-up fa-1x"></i>{ ticket.volunteer_thumbsUp }
-            <i id="thumbs-down" className="far fa-thumbs-down fa-1x"></i> { ticket.volunteer_thumbsDown }
+            <i className="far fa-thumbs-up fa-1x"></i>
+            <span>{ ticket.volunteer_thumbsUp } </span>
+            <i className="far fa-thumbs-down fa-1x"></i> { ticket.volunteer_thumbsDown }
           </span>
         </div>
 
@@ -78,10 +79,10 @@ const TaskView = (props) => {
           <span style={{ display: 'block' }}>
             < b>Volunteer:</b> {ticket.volunteer_name}
           </span>
-          <span style={{ display: 'block' }}>
+          <span style={{ display: 'flex' }}>
             < b>Volunteer Score:</b>
-            <i id="thumbs-up" className="far fa-thumbs-up fa-1x"></i>{ ticket.requestor_thumbsUp }
-            <i id="thumbs-down" className="far fa-thumbs-down fa-1x"></i> { ticket.requestor_thumbsDown }
+            <i className="far fa-thumbs-up fa-1x"></i> { ticket.requestor_thumbsUp }
+            <i className="far fa-thumbs-down fa-1x"></i> { ticket.requestor_thumbsDown }
           </span>
         </div>
 
