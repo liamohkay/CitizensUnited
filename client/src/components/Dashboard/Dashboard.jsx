@@ -83,14 +83,13 @@ const Dashboard = ({ user }) => {
         <div id="dashboard-container">
           { /* Header */ }
           <div className="dash-header-container">
-            <Logo />
             <div id="user-welcome">
               <img
                 src={mongoUser.photo}
                 style={{ width: '50px', height: '50px', borderRadius: '100%'}}
               />
-              <span>Welcome {currentUser.displayName}!</span>
-              <button className="btn btn-secondary" onClick={() => logout()}>
+              <span id="welcome">Welcome {currentUser.displayName}</span>
+              <button id="logout" className="btn btn-secondary" onClick={() => logout()}>
                 Log Out
               </button>
             </div>
@@ -105,7 +104,7 @@ const Dashboard = ({ user }) => {
                     fields={neighborhood}
                     setFields={setNeighborhood}
                   />
-                  <span id="current-neighborhood">Currently Selected: {neighborhood.neighborhood}</span>
+                  <div id="current-neighborhood">Currently Selected: {neighborhood.neighborhood}</div>
                 </div>
               )
           }

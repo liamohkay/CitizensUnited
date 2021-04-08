@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { Form, Button, Card } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext.js';
 import { useHistory } from 'react-router-dom';
+import Logo from './Home/Logo.jsx';
 
 const LogIn = ({ setUser }) => {
   const { login, currentUser } = useAuth();
@@ -54,7 +55,6 @@ const LogIn = ({ setUser }) => {
           </Form>
         </Card.Body>
       </Card>
-      <div className="w-100 text-center mt-2"></div>
     </div>
   )
 }
