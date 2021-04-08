@@ -14,7 +14,6 @@ const TaskView = (props) => {
       ? ticket.volunteer_id
       : ticket.requestor_id
   );
-  console.log('ticket', ticket)
 
   const reformatDate = (dateStr, time) => {
     const pad = (num) => (

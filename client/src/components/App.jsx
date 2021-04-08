@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { AuthProvider } from '../contexts/AuthContext';
 import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
+
 // Components
 import Logo from './Home/Logo.jsx';
 import LogIn from './LogIn';
@@ -9,6 +10,7 @@ import SignUp from './SignUp';
 import HomePage from './Home/HomePage';
 import Dashboard from './Dashboard/Dashboard';
 import TaskView from './Dashboard/TaskView';
+import OldTasksView from './Dashboard/OldTasksView';
 import PrivateRoute from './PrivateRoute';
 import Map from './Map/Map';
 

@@ -7,7 +7,6 @@ import Neighborhood from '../Neighborhood.jsx';
 import Calendar from './Calendar';
 import TimeSelector from './TimeSelector';
 
-
 const initialState = {
   task: '',
   neighborhood: '',
@@ -15,26 +14,16 @@ const initialState = {
   duration: 0
 };
 
-const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
+const EditTaskModal = ({ ticket, setRenderOld }) => {
+  console.log(ticket);
+  const { currentUser } = useAuth();
   const [show, setShow] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
-  const [startTime, setStartTime] = useState(new Date());
-  const [endTime, setEndTime] = useState(new Date(new Date().setHours(startTime.getHours(), startTime.getMinutes() + 5)));
-  const [fields, setFields] = useState({
-    task: '',
-    neighborhood: '',
-  });
+  const [startTime, setStartTime] = useState(new Date(ticket.start_time));
+  const [endTime, setEndTime] = useState(new Date(ticket.end_time));
+  const [fields, setFields] = useState(ticket);
 
-  useEffect(() => {
-    if (endTime <= startTime) {
-      setEndTime(new Date(new Date().setHours(startTime.getHours(), startTime.getMinutes() + 5)))
-    }
-  }, [startTime])
-
-  const clearState = () => {
-    setFields({ ...initialState });
-  };
-
+  // console.log(endTime);
   // Tracks user input on form fields
   const handleChange = (e) => {
     setFields({
@@ -47,60 +36,64 @@ const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
   const handleClick = (e) => {
     e.preventDefault();
     const body = {
+      _id: fields._id,
       requestor_id: currentUser.uid,
       requestor_name: currentUser.displayName,
       requestor_photo: currentUser.photoURL,
-      requestor_thumbsUp: mongoUser.thumbsUp,
-      requestor_thumbsDown: mongoUser.thumbsDown,
+      requestor_thumbsUp: fields.thumbsUp,
+      requestor_thumbsDown: fields.thumbsDown,
       task_date: startDate,
       task_status: 'Pending',
-      task_body: fields.task,
-      task_neighborhood: fields.neighborhood,
+      task_body: fields.task_body,
+      task_neighborhood: fields.task_neighborhood,
       start_time: startTime,
       end_time: endTime,
       duration: Math.round((endTime - startTime) / 60000),
     }
     axios.post('/api/tasks', body)
       .then(resp => handleClose())
-      .then(() => getRequesterTasks(mongoUser))
+      .then(() => setRenderOld(prev => !prev))
       .catch(err => console.log(err));
   }
 
   const handleShow = () => setShow(true);
-  const handleClose = () => {
-    setShow(false);
-    clearState();
-  };
+  const handleClose = () => setShow(false);
 
   return (
     <>
-      <Button id="submit-request" variant="primary" onClick={handleShow}>
-        SUBMIT NEW REQUEST
-      </Button>
+      <button
+        id="chat-btn"
+        onClick={handleShow}
+        style={{ width: "79px", backgroundColor: "#aaf8a7", border: "2px solid #aaf8a7", borderRadius: ".25rem" }}
+      >
+        Edit
+      </button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>
-            Create New Task
+            Edit Old Task
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
             <Form.Group id="task">
               <Form.Label>Task:</Form.Label>
-              <Form.Control  name="task" type="text" value={fields.task} onChange={handleChange} required />
+              <Form.Control  name="task_body" type="text" value={fields.task_body} onChange={handleChange} required />
             </Form.Group>
             <Form.Group id="neighborhood">
               <Form.Label>Neighborhood:</Form.Label>
               <Form.Control
+                name="neighborhood"
                 as={Neighborhood}
+                value={fields.neighborhood}
                 fields={fields}
                 setFields={setFields}
               />
-              {/* <Neighborhood fields={fields} setFields={setFields} /> */}
             </Form.Group>
             <Form.Group id="start-date">
               <Form.Label>Task Date:</Form.Label>
               <Form.Control
+                name="task_date"
                 as={Calendar}
                 startDate={startDate}
                 setStartDate={setStartDate}
@@ -109,26 +102,29 @@ const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
             <Form.Group id="start-time">
               <Form.Label>Starts At:</Form.Label>
               <Form.Control
+                name="start_time"
                 as={TimeSelector}
+                value={startTime}
                 time={startTime}
-                setTime={setStartTime}
                 startDate={startDate}
+                setTime={setStartTime}
               />
             </Form.Group>
             <Form.Group id="end-time">
               <Form.Label>Ends At:</Form.Label>
               <Form.Control
+                name="end_time"
                 as={TimeSelector}
+                value={fields.end_time}
                 time={endTime}
-                setTime={setEndTime}
                 startDate={startDate}
-                startTime={startTime}
+                setTime={setEndTime}
               />
             </Form.Group>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button id="submit-button" className="w-100" onClick={handleClick}>Submit</Button>
+          <Button id="submit-button" className="w-100" onClick={handleClick}>Repost</Button>
           <Button id="cancel-button" className="w-100" onClick={handleClose}>Cancel</Button>
         </Modal.Footer>
       </Modal>
@@ -136,4 +132,4 @@ const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
   )
 }
 
-export default TaskModal;
+export default EditTaskModal;
