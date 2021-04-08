@@ -19,11 +19,17 @@ const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
   const [show, setShow] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [startTime, setStartTime] = useState(new Date());
-  const [endTime, setEndTime] = useState(new Date());
+  const [endTime, setEndTime] = useState(new Date(new Date().setHours(startTime.getHours(), startTime.getMinutes() + 5)));
   const [fields, setFields] = useState({
     task: '',
     neighborhood: '',
   });
+
+  useEffect(() => {
+    if (endTime <= startTime) {
+      setEndTime(new Date(new Date().setHours(startTime.getHours(), startTime.getMinutes() + 5)))
+    }
+  }, [startTime])
 
   const clearState = () => {
     setFields({ ...initialState });
@@ -106,6 +112,7 @@ const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
                 as={TimeSelector}
                 time={startTime}
                 setTime={setStartTime}
+                startDate={startDate}
               />
             </Form.Group>
             <Form.Group id="end-time">
@@ -114,6 +121,8 @@ const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
                 as={TimeSelector}
                 time={endTime}
                 setTime={setEndTime}
+                startDate={startDate}
+                startTime={startTime}
               />
             </Form.Group>
           </Form>

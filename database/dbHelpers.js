@@ -10,11 +10,15 @@ const dbHelpers = {
   },
 
   getVolunteerInfo: (req, callback) => {
+    let query;
+    req.query.task_neighborhood ? query = {
+      task_neighborhood: req.query.task_neighborhood,
+      task_status: { $ne: 'Completed' }
+    } : query = {
+      task_status: { $ne: 'Completed' }
+    }
     Tasks
-      .find({
-        task_neighborhood: req.query.task_neighborhood,
-        task_status: { $ne: 'Completed' }
-      }, (err, data) => {
+      .find(query, (err, data) => {
         if (err) callback(err)
         Users
           .update({firebase_id: req.query.firebase_id}, {

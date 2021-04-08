@@ -8,6 +8,7 @@ const Calendar = ({ startDate, setStartDate }) => {
       <DatePicker
         selected={startDate}
         onChange={date => setStartDate(date)}
+        minDate={new Date()}
       />
     </div>
   );
