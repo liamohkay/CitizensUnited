@@ -7,7 +7,7 @@ const TimeSelector = ({ time, setTime, startDate, startTime }) => {
   let min_time = new Date();
 
   if (startTime) {
-    min_time = startTime;
+    min_time = new Date(new Date().setHours(startTime.getHours(), startTime.getMinutes() + 5));
   }
   else if (startDate.getDate() !== currentDate.getDate()) {
     min_time.setHours(0, 0);
