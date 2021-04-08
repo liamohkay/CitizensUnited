@@ -51,8 +51,8 @@ const TaskView = (props) => {
             </span>
             <span style={{ display: 'block' }}>
               <b>Requester Score:</b>
-              <i id="thumbs-up" className="far fa-thumbs-up fa-1x"></i>{ requestor_thumbsUp }
-              <i id="thumbs-down" className="far fa-thumbs-down fa-1x"></i> { requestor_thumbsDown }
+              <i id="thumbs-up" className="far fa-thumbs-up fa-1x"></i>{ ticket.requestor_thumbsUp }
+              <i id="thumbs-down" className="far fa-thumbs-down fa-1x"></i> { ticket.requestor_thumbsDown }
             </span>
             <span style={{ display: 'block' }}>
               < b>Request:</b> {ticket.task_body}
@@ -62,8 +62,8 @@ const TaskView = (props) => {
             </span>
             <span style={{ display: 'block' }}>
               < b>Volunteer Score:</b>
-              <i id="thumbs-up" className="far fa-thumbs-up fa-1x"></i>{ volunteer_thumbsUp }
-              <i id="thumbs-down" className="far fa-thumbs-down fa-1x"></i> { volunteer_thumbsDown }
+              <i id="thumbs-up" className="far fa-thumbs-up fa-1x"></i>{ ticket.volunteer_thumbsUp }
+              <i id="thumbs-down" className="far fa-thumbs-down fa-1x"></i> { ticket.volunteer_thumbsDown }
             </span>
             <span style={{ display: 'block' }}>
               <b>Duration:</b> {Math.round((reformatDate(ticket.task_date, ticket.end_time) - reformatDate(ticket.task_date, ticket.start_time))) / 60000} minutes
