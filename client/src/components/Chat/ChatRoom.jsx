@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { chat, auth } from '../../firebase';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
+import moment from  'moment';
 // Components
 import ChatMessage from './ChatMessage.jsx'
 
@@ -27,7 +28,7 @@ const ChatRoom = ({ room_id, mongoUser }) => {
     e.preventDefault();
     let msg = {
       text: newMsg,
-      createdAt: new Date(),
+      createdAt: moment().format('LT'),
       uid: currentUser.uid,
       displayName: currentUser.displayName,
       photoURL: mongoUser.photo
@@ -37,7 +38,6 @@ const ChatRoom = ({ room_id, mongoUser }) => {
     setNewMsg('');
     dummy.current.scrollIntoView({ behavior: 'smooth' });
   }
-
   return (
     <div className="chat-container">
       <div className="main">
