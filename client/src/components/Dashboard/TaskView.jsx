@@ -14,6 +14,7 @@ const TaskView = (props) => {
       ? ticket.volunteer_id
       : ticket.requestor_id
   );
+  console.log('ticket', ticket)
 
   const reformatDate = (dateStr, time) => {
     const pad = (num) => (
@@ -67,7 +68,9 @@ const TaskView = (props) => {
             <b>Requester:</b> {ticket.requestor_name}
           </span>
           <span style={{ display: 'block' }}>
-            <b>Requester Score:</b> {ticket.requestor_thumbsUp}
+            <b>Requester Score:</b>
+            <i id="thumbs-up" className="far fa-thumbs-up fa-1x"></i>{ ticket.volunteer_thumbsUp }
+            <i id="thumbs-down" className="far fa-thumbs-down fa-1x"></i> { ticket.volunteer_thumbsDown }
           </span>
         </div>
 
@@ -76,7 +79,9 @@ const TaskView = (props) => {
             < b>Volunteer:</b> {ticket.volunteer_name}
           </span>
           <span style={{ display: 'block' }}>
-            < b>Volunteer Score:</b> {ticket.volunteer_thumbsUp}
+            < b>Volunteer Score:</b>
+            <i id="thumbs-up" className="far fa-thumbs-up fa-1x"></i>{ ticket.requestor_thumbsUp }
+            <i id="thumbs-down" className="far fa-thumbs-down fa-1x"></i> { ticket.requestor_thumbsDown }
           </span>
         </div>
 
