@@ -50,7 +50,7 @@ table {
 
 /* App Styles */
 #app {
-  margin: auto;
+  /* margin: auto; */
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -264,7 +264,7 @@ input[type=radio] {
 
 .main {
   padding: 10px;
-  height: 80vh;
+  /* height: 60vh; */
   /* margin: 5vh 0 5vh; */
   overflow-y: scroll;
   display: flex;

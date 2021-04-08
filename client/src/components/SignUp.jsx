@@ -102,7 +102,7 @@ const SignUp = ({ isVolunteer }) => {
             history.push('/login');
           })
       })
-      .catch(err => alert(err))
+      .catch(err => console.log(err))
 
   }
 
