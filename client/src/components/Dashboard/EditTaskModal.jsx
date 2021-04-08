@@ -15,13 +15,15 @@ const initialState = {
 };
 
 const EditTaskModal = ({ ticket, setRenderOld }) => {
+  console.log(ticket);
   const { currentUser } = useAuth();
   const [show, setShow] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
-  const [startTime, setStartTime] = useState(Date.parse(ticket.start_time));
-  const [endTime, setEndTime] = useState(Date.parse(ticket.end_time));
+  const [startTime, setStartTime] = useState(new Date(ticket.start_time));
+  const [endTime, setEndTime] = useState(new Date(ticket.end_time));
   const [fields, setFields] = useState(ticket);
 
+  // console.log(endTime);
   // Tracks user input on form fields
   const handleChange = (e) => {
     setFields({
@@ -87,7 +89,6 @@ const EditTaskModal = ({ ticket, setRenderOld }) => {
                 fields={fields}
                 setFields={setFields}
               />
-              {/* <Neighborhood fields={fields} setFields={setFields} /> */}
             </Form.Group>
             <Form.Group id="start-date">
               <Form.Label>Task Date:</Form.Label>
@@ -103,8 +104,9 @@ const EditTaskModal = ({ ticket, setRenderOld }) => {
               <Form.Control
                 name="start_time"
                 as={TimeSelector}
-                value={Date.parse(fields.start_time)}
+                value={startTime}
                 time={startTime}
+                startDate={startDate}
                 setTime={setStartTime}
               />
             </Form.Group>
@@ -113,8 +115,9 @@ const EditTaskModal = ({ ticket, setRenderOld }) => {
               <Form.Control
                 name="end_time"
                 as={TimeSelector}
-                value={Date.parse(fields.end_time)}
+                value={fields.end_time}
                 time={endTime}
+                startDate={startDate}
                 setTime={setEndTime}
               />
             </Form.Group>

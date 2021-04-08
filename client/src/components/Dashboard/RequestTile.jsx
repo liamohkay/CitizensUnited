@@ -77,7 +77,7 @@ const RequestTile = ({ mongoUser, ticket, old, setRenderOld }) => {
             { old
               ?
               (
-                <EditTaskModal ticket={ticket} mongoUser={mongoUser} setRenderOld={setRenderOld} />
+                <EditTaskModal ticket={ticket} setRenderOld={setRenderOld} />
               )
               :
               (
