@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-mongoose.connect('mongodb://54.177.82.68:80/citizens', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb://13.56.238.64/citizens', {useNewUrlParser: true, useUnifiedTopology: true});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -34,28 +34,19 @@ const tasksSchema = new Schema({
   requestor_photo: String,
   requestor_thumbsUp: Number,
   task_date: String,
-  task_status: String, // Pending, Accepted, Hidden, Completed
+  task_status: String, // Pending, Accepted, Completed
   task_body: String,
   task_neighborhood: String,
   start_time: String,
   end_time: String,
+  duration: Number,
   room_id: String
-})
-
-
-// *** Need to determine schema
-const roomsSchema = new Schema({
-  volunteer_id: String,
-  requester_id: String,
-  message_body: String,
 })
 
 const Users = mongoose.model('Users', usersSchema);
 const Tasks = mongoose.model('Tasks', tasksSchema);
-const Messages = mongoose.model('Messages', roomsSchema);
 
 module.exports = {
   Users,
   Tasks,
-  Messages
 }

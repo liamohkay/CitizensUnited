@@ -12,6 +12,7 @@ const initialState = {
   task: '',
   neighborhood: '',
   end_time: '',
+  duration: 0
 };
 
 const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
