@@ -2,14 +2,10 @@ import React from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { chat, auth } from '../../firebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-// import moment from  'moment';
 
 const ChatMessage = (props) => {
   const { text, uid, displayName, photoURL, createdAt } = props.msg;
   const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
-
-  // const date = new Date().toUTCString();
-  // const time = moment().format('LT');
 
   return (
     <>

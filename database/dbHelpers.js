@@ -74,14 +74,24 @@ const dbHelpers = {
   },
 
   getAllTasks: (req, callback) => {
-    Tasks
-      .find({
-        task_neighborhood: req.query.task_neighborhood,
-        task_status: { $ne: 'Completed' } }, (err, data) => {
-        if (err) callback(err)
-        console.log(data);
-        callback(null, data)
-      })
+    if (req.query.task_neighborhood) {
+      Tasks
+        .find({
+          task_neighborhood: req.query.task_neighborhood,
+          task_status: { $ne: 'Completed' } }, (err, data) => {
+          if (err) callback(err)
+          // console.log(data);
+          callback(null, data)
+        })
+    } else {
+      Tasks
+        .find({
+          task_status: { $ne: 'Completed' } }, (err, data) => {
+          if (err) callback(err)
+          // console.log(data);
+          callback(null, data)
+        })
+    }
   },
 
   getOneTask: (req, callback) => {
@@ -111,6 +121,7 @@ const dbHelpers = {
         requestor_name: req.body.requestor_name,
         requestor_photo: req.body.requestor_photo,
         requestor_thumbsUp: req.body.requestor_thumbsUp,
+        requestor_thumbsDown: req.body.requestor_thumbsDown,
         task_date: req.body.task_date,
         task_status: req.body.task_status,
         task_body: req.body.task_body,
@@ -139,7 +150,8 @@ const dbHelpers = {
           volunteer_id: req.body.firebase_id,
           volunteer_photo: req.body.volunteer_photo,
           volunteer_name: req.body.volunteer_name,
-          volunteer_thumbsUp: req.body.volunteer_thumbsUp
+          volunteer_thumbsUp: req.body.volunteer_thumbsUp,
+          volunteer_thumbsDown: req.body.volunteer_thumbsDown
         }
       }, (err, data) => {
         if (err) callback(err)

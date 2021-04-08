@@ -10,7 +10,6 @@ db.once('open', function() {
 
 
 const usersSchema = new Schema({
-  // user_id SERIAL,
   firebase_id: {type: String, required: true, index: true},
   first_name: String,
   last_name: String,
@@ -29,10 +28,12 @@ const tasksSchema = new Schema({
   volunteer_name: String,
   volunteer_photo: String,
   volunteer_thumbsUp: Number,
+  volunteer_thumbsDown: Number,
   requestor_id: String,
   requestor_name: String,
   requestor_photo: String,
   requestor_thumbsUp: Number,
+  requestor_thumbsDown: Number,
   task_date: String,
   task_status: String, // Pending, Accepted, Completed
   task_body: String,
