@@ -24,8 +24,9 @@ const AcceptBtn = ({ mongoUser, ticket, task_id, setLoaded }) => {
     { task_id,
       firebase_id: currentUser.uid,
       volunteer_name: currentUser.displayName,
+      volunteer_photo: mongoUser.photo,
       volunteer_thumbsUp: mongoUser.thumbsUp,
-      volunteer_photo: mongoUser.photo
+      volunteer_thumbsDown: mongoUser.thumbsDown,
     })
       .catch(err => console.log(err))
       .then(() => null)
