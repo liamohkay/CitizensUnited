@@ -18,7 +18,7 @@
 
 #task-view-chat {
   grid-area: 2 / 2 / 3 / 3;
-  /* place-self: center; */
+  place-self: center;
 }
 
 #back-homepage-btn {
