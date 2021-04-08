@@ -30,6 +30,14 @@ const RequestTile = ({ mongoUser, ticket, old, setRenderOld }) => {
     }
   }
 
+  const dateOptions = {
+    year: '2-digit',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+  }
+
   // WT: Added conditional so that if room_id exist (AKA task has been accepted), you can click and render the Map + Chat confirmation
   return (
     room_id && requestor_id ? (
@@ -52,7 +60,7 @@ const RequestTile = ({ mongoUser, ticket, old, setRenderOld }) => {
               <b>Neighborhood</b>: {task_neighborhood}
             </span>
             <span style={{ display: 'block' }}>
-              <b>Request Date/Time</b>: {new Date(task_date).toUTCString()}
+              <b>Request Date/Time</b>: {new Date(start_time).toLocaleString('en-US', dateOptions)}
             </span>
           </div>
           <div className="requestor-ticket__buttons">
@@ -99,7 +107,7 @@ const RequestTile = ({ mongoUser, ticket, old, setRenderOld }) => {
             <b>Neighborhood</b>: {task_neighborhood}
           </span>
           <span style={{ display: 'block' }}>
-            <b>Request Date/Time</b>: {new Date(task_date).toUTCString()}
+            <b>Request Date/Time</b>: {new Date(start_time).toLocaleString('en-US', dateOptions)}
           </span>
         </div>
         <div className="requestor-ticket__buttons">
