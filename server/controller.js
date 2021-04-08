@@ -132,7 +132,6 @@ const controller = {
   },
 
   getOldTasks: (req, res) => {
-    console.log('im hitting');
     dbHelpers.getOldTasks(req, (err, data) => {
       if (err) res.status(400).send(err);
       res.status(200).send(data);

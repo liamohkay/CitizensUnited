@@ -9,7 +9,7 @@ const OldTasksView = () => {
 
   // Retrieves users completed tasks from database
   useEffect(() => {
-    axios.get('/api/oldtasks', { firebase_id: currentUser.uid })
+    axios.get('/api/tasks', { firebase_id: currentUser.uid })
       .then(resp => console.log(resp))
       .catch(err => console.log(err))
   }, []);

@@ -73,25 +73,11 @@ const dbHelpers = {
       })
   },
 
-  getAllTasks: (req, callback) => {
-    if (req.query.task_neighborhood) {
-      Tasks
-        .find({
-          task_neighborhood: req.query.task_neighborhood,
-          task_status: { $ne: 'Completed' } }, (err, data) => {
-          if (err) callback(err)
-          // console.log(data);
-          callback(null, data)
-        })
-    } else {
-      Tasks
-        .find({
-          task_status: { $ne: 'Completed' } }, (err, data) => {
-          if (err) callback(err)
-          // console.log(data);
-          callback(null, data)
-        })
-    }
+  getOldTasks: (req, callback) => {
+    Tasks.find({
+      firebase_id: req.body.firebase_id,
+      task_status: 'Completed'
+    }, (err, data) => callback(err, data))
   },
 
   getOneTask: (req, callback) => {
@@ -213,14 +199,6 @@ const dbHelpers = {
           callback(null, data)
         }
       )
-  },
-
-  // Retrieves tasks marked completed from a specific user
-  getOldtasks: (req, callback) => {
-    Tasks.find({
-      firebase_id: req.body.firebase_id,
-      task_status: 'Completed'
-    }, (err, data) => callback(err, data))
   },
 }
 
