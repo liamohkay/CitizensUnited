@@ -77,20 +77,11 @@ const dbHelpers = {
       })
   },
 
-  getAllTasks: (req, callback) => {
-    let query;
-    req.query.task_neighborhood ? query = {
-      task_neighborhood: req.query.task_neighborhood,
-      task_status: { $ne: 'Completed' }
-    } : query = {
-      task_status: { $ne: 'Completed' }
-    }
-    Tasks
-      .find(query, (err, data) => {
-        if (err) callback(err)
-        // console.log(data);
-        callback(null, data)
-      })
+  getOldTasks: (req, callback) => {
+    Tasks.find({
+      requestor_id: req.query.requestor_id,
+      task_status: 'Completed'
+    }, (err, data) => callback(err, data))
   },
 
   getOneTask: (req, callback) => {
@@ -112,6 +103,11 @@ const dbHelpers = {
   },
 
   postNewTask: (req, callback) =>  {
+    console.log(req.body._id);
+    Tasks.find({ _id: req.body._id }).remove()
+      .then(() => console.log('Deleted old post'))
+      .catch(err => console.log(err))
+
     Tasks
       .create(
         {
@@ -192,7 +188,6 @@ const dbHelpers = {
   },
 
   thumbsUp: (req, callback) => {
-    console.log(req.body.firebase_id)
     Users
       .findOneAndUpdate(
         { firebase_id: req.body.firebase_id},
@@ -213,7 +208,7 @@ const dbHelpers = {
           callback(null, data)
         }
       )
-  }
+  },
 }
 
 module.exports = dbHelpers;

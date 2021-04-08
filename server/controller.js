@@ -130,6 +130,13 @@ const controller = {
       }
     })
   },
+
+  getOldTasks: (req, res) => {
+    dbHelpers.getOldTasks(req, (err, data) => {
+      if (err) res.status(400).send(err);
+      res.status(200).send(data);
+    });
+  },
 }
 
 module.exports = controller;

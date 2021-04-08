@@ -8,8 +8,11 @@ router
 
 router
   .route('/tasks')
-  .get(controller.getAllTasks)
   .post(controller.postNewTask)
+
+router
+  .route('/oldtasks')
+  .get(controller.getOldTasks)
 
 router
   .route('/oneTask')

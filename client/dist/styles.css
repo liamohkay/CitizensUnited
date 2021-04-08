@@ -16,7 +16,7 @@ time, mark, audio, video {
   padding: 0;
   border: 0;
   font-size: 100%;
-  vertical-align: baseline;
+  vertical-align: bottom;
 }
 strong {
   font-weight: 400;
@@ -51,14 +51,14 @@ table {
 /* App Styles */
 #app {
   /* margin: auto; */
-  width: 100%;
+  /* width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 0px 0px;
   grid-template-areas:
     "app-container app-container app-container";
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; */
 }
 
 #app-container {
@@ -73,11 +73,15 @@ table {
   background-color: #8DA5ED;
   margin: 5px;
   margin-top: 25px;
+  color: white;
 }
 
 #login-button {
   background-color: #8DA5ED;
   margin-top: 5px;
+  width: 82px;
+  height: 36px;
+  font-size: 1em;
 }
 
 #submit-button {
@@ -85,7 +89,7 @@ table {
 }
 
 #banner {
-  background-color: #ffff9abd;
+  background-color: #ffff93
 }
 
 #Help, #About-Us, #Log-In-Button {
@@ -105,17 +109,19 @@ table {
 }
 
 #logo-container {
-  margin: 5px;
+  margin-left: 100px;
   margin-top: 15px;
   margin-bottom: 0px;
   color: #8DA5ED;
   font-size: 35px;
   font-weight: 500;
   align-content: space-evenly;
+  position: absolute;
 }
 
 #dot {
   margin-right: 5px;
+  margin-bottom: 10px;
   height: 40px;
   width: 40px;
   background-color: #FFAF7A;
@@ -123,9 +129,13 @@ table {
   display: inline-block;
 }
 
+#home {
+  margin: auto;
+}
+
 #Home-Page {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* display: grid;
+  grid-template-columns: 1fr 1fr; */
 }
 
 #mission-statement {
@@ -148,16 +158,37 @@ input[type=radio] {
 
 #signUp-container {
   margin: auto;
+  margin-top: 110px;
   width: 80%;
+  width: 35vw;
+  box-shadow: 5px 5px 4px #e6e6e6;
+}
+
+.login-page {
+  width: 100vw;
+  height: 100vh;
 }
 
 #login-container {
   margin: 50px;
   margin: auto;
+  width: 35vw;
+  position: absolute;
+  top: 25%;
+  left: 450px;
+  box-shadow: 5px 5px 4px #e6e6e6;
+  border: none;
 }
 
 #login {
   margin: 5px;
+  color: white;
+}
+
+#logout {
+  margin-left: 20px;
+  background-color: #8DA5ED;
+  border: none;
 }
 
 /* Tiles/Tickets */
@@ -167,26 +198,42 @@ input[type=radio] {
 
 .dash-header-container {
   display: grid;
-  grid-template-columns: 40% auto 25%;
+  grid-template-columns: 50%;
   grid-template-areas: "logo . welcome";
 }
 
 .dash-header-container #logo-container {
   grid-area: logo;
+  margin-left: 30px;
 }
 
 #user-welcome {
+  display: inline-block;
   grid-area: welcome;
+  margin: 15px;
+  margin-bottom: 0px;
+  position: relative;
+}
+
+#welcome {
+  margin-left: 10px;
+  font-size: x-large;
 }
 
 #feed-container {
   margin: auto;
   width: 50%;
+  margin-top: 20px;
 }
 
 #volunteer-neighborhood {
   margin: auto;
+  margin-top: 50px;
   width: 50%;
+}
+
+#current-neighborhood {
+  margin-top: 15px;
 }
 
 #volunteer-neighborhood + .neighborhood-dropdown {
@@ -204,6 +251,8 @@ input[type=radio] {
   border: 1px solid;
   width: 50vw;
   margin-bottom: 10px;
+  box-shadow: 5px 5px 4px #e6e6e6;
+  border-radius: 10px;
 }
 
 .volunteer-ticket__profile-img, .requestor-ticket__profile-img {
@@ -221,6 +270,7 @@ input[type=radio] {
 #submit-request {
   display: block;
   margin: 0 auto;
+  margin-top: 50px;
 }
 
 #accept-btn {
@@ -229,6 +279,10 @@ input[type=radio] {
 
 #hide-btn {
   margin-bottom: 20px;
+}
+
+.btn_btn-secondary {
+  margin-left: 20px;
 }
 
 /* Chat */
@@ -266,14 +320,14 @@ input[type=radio] {
 
 .main {
   padding: 10px;
-  height: 60vh;
+  height: 50vh;
   /* margin: 5vh 0 5vh; */
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   border: 1px solid black;
   border-radius: 10px;
-  box-shadow: 10px 10px 8px #888888;
+  box-shadow: 5px 5px 4px #e6e6e6;
 }
 
 .main::-webkit-scrollbar {
@@ -285,7 +339,7 @@ input[type=radio] {
 }
 
 .main::-webkit-scrollbar-thumb {
-  background: #6649b8;
+  background: #8DA5ED;
 }
 
 .chatForm {

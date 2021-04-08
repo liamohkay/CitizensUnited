@@ -1,7 +1,7 @@
 // Libraries + dependencies
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap'
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -10,6 +10,7 @@ import RequestTile from './RequestTile';
 import VolunteerTile from './VolunteerTile';
 import Logo from '../Home/Logo';
 import TaskModal from './TaskModal';
+import OldTasksBtn from './OldTasksBtn';
 import Neighborhood from '../Neighborhood';
 import DurationFilter from '../DurationFilter';
 
@@ -112,14 +113,13 @@ const Dashboard = ({ user }) => {
         <div id="dashboard-container">
           { /* Header */ }
           <div className="dash-header-container">
-            <Logo />
             <div id="user-welcome">
               <img
                 src={mongoUser.photo}
                 style={{ width: '50px', height: '50px', borderRadius: '100%'}}
               />
-              <span>Welcome {currentUser.displayName}!</span>
-              <button className="btn btn-secondary" onClick={() => logout()}>
+              <span id="welcome">Welcome {currentUser.displayName}</span>
+              <button id="logout" className="btn btn-secondary" onClick={() => logout()}>
                 Log Out
               </button>
             </div>
@@ -147,13 +147,18 @@ const Dashboard = ({ user }) => {
         { /* Add task modal for requesters only */
             mongoUser.isVolunteer
               ? null
-              : <TaskModal
-                  mongoUser={mongoUser}
-                  currentUser={currentUser}
-                  getRequesterTasks={getRequesterTasks}
-                  mongoUser={mongoUser}
-                />
-          }
+              : (
+                <div id="volunteer-btns-container">
+                  <TaskModal
+                    mongoUser={mongoUser}
+                    currentUser={currentUser}
+                    getRequesterTasks={getRequesterTasks}
+                    mongoUser={mongoUser}
+                  />
+                  <OldTasksBtn />
+                </div>
+              )
+        }
 
           { /* Tasks / tickets list */ }
           <div id="feed-container">
