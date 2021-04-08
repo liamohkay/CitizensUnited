@@ -3,25 +3,15 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
 const TimeSelector = ({ time, setTime, startDate, startTime }) => {
-  // For start time, minTime should be current time if selected date (startDate) is today; and 1200AM if selected date is not current date
-  // For end time, minTime should always be startTime
   const currentDate = new Date();
-
-  console.log(startDate.getDate() === currentDate.getDate())
-  console.log('start', startDate, 'current', currentDate)
+  let min_time = new Date();
 
   if (startTime) {
-    let minTime = startTime;
+    min_time = startTime;
   }
-  else if (startDate.getDate() === currentDate.getDate()) {
-    let minTime = new Date();
-
-  } else {
-    // reset time to 00:00 AM
-    let minTime = new Date();
-    minTime.setHours(0, 0);
+  else if (startDate.getDate() !== currentDate.getDate()) {
+    min_time.setHours(0, 0);
   }
-
 
   return (
     <div>
@@ -33,11 +23,12 @@ const TimeSelector = ({ time, setTime, startDate, startTime }) => {
         timeIntervals={5}
         timeCaption="Time"
         dateFormat="h:mm aa"
-        minTime={minTime}
+        minTime={min_time}
         maxTime={currentDate.setHours(23, 55)}
       />
     </div>
-  );
+
+  )
 };
 
 export default TimeSelector;
