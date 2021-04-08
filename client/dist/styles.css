@@ -233,7 +233,7 @@ input[type=radio] {
 
 /* Chat */
 .chat-container {
-  max-height: 25vh;
+  width: 80%;
   margin: 0 auto;
 }
 
@@ -298,6 +298,7 @@ input[type=radio] {
   max-width: 728px;
   display: flex;
   font-size: 1.5rem;
+  margin: auto;
 }
 
 /* .chatForm button {
@@ -307,7 +308,7 @@ input[type=radio] {
 
 
 .input {
-  width: 80%;
+  width: 100%;
   font-size: 1.5rem;
   background: white;
   color: black;
