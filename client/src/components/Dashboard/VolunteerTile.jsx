@@ -28,6 +28,7 @@ const VolunteerTile = ({ mongoUser, ticket, volunteerName, setTasks, setLoaded }
     requestor_name,
     requestor_photo,
     requestor_thumbsUp,
+    requestor_thumbsDown,
     volunteer_id,
     start_time,
     end_time,
@@ -70,7 +71,9 @@ const VolunteerTile = ({ mongoUser, ticket, volunteerName, setTasks, setLoaded }
             <b>Requester</b>: {requestor_name}
           </span>
           <span style={{ display: 'block' }}>
-            <b>Requester Rating</b>: { requestor_thumbsUp }
+            <b>Score</b>:
+            <i id="thumbs-up" className="far fa-thumbs-up fa-1x"></i>{ requestor_thumbsUp }
+            <i id="thumbs-down" className="far fa-thumbs-down fa-1x"></i> { requestor_thumbsDown }
           </span>
           <span style={{ display: 'block' }}>
             <b>Request</b>: {task_body}

@@ -29,10 +29,12 @@ const tasksSchema = new Schema({
   volunteer_name: String,
   volunteer_photo: String,
   volunteer_thumbsUp: Number,
+  volunteer_thumbsDown: Number,
   requestor_id: String,
   requestor_name: String,
   requestor_photo: String,
   requestor_thumbsUp: Number,
+  requestor_thumbsDown: Number,
   task_date: String,
   task_status: String, // Pending, Accepted, Hidden, Completed
   task_body: String,
