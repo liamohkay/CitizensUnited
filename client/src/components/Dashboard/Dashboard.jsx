@@ -1,7 +1,7 @@
 // Libraries + dependencies
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap'
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -10,6 +10,7 @@ import RequestTile from './RequestTile';
 import VolunteerTile from './VolunteerTile';
 import Logo from '../Home/Logo';
 import TaskModal from './TaskModal';
+import OldTasksBtn from './OldTasksBtn';
 import Neighborhood from '../Neighborhood';
 
 const Dashboard = ({ user }) => {
@@ -74,7 +75,6 @@ const Dashboard = ({ user }) => {
         }
       })
       .catch(err => console.log(err))
-
   }
 
   return (
@@ -113,13 +113,18 @@ const Dashboard = ({ user }) => {
         { /* Add task modal for requesters only */
             mongoUser.isVolunteer
               ? null
-              : <TaskModal
-                  mongoUser={mongoUser}
-                  currentUser={currentUser}
-                  getRequesterTasks={getRequesterTasks}
-                  mongoUser={mongoUser}
-                />
-          }
+              : (
+                <div id="volunteer-btns-container">
+                  <TaskModal
+                    mongoUser={mongoUser}
+                    currentUser={currentUser}
+                    getRequesterTasks={getRequesterTasks}
+                    mongoUser={mongoUser}
+                  />
+                  <OldTasksBtn />
+                </div>
+              )
+        }
 
           { /* Tasks / tickets list */ }
           <div id="feed-container">
