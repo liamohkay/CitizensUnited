@@ -9,6 +9,7 @@ const initialState = {
   neighborhood: '',
   start_time: '',
   end_time: '',
+  duration: 0
 };
 
 const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
@@ -18,6 +19,7 @@ const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
     neighborhood: '',
     start_time: '',
     end_time: '',
+    duration: 0
   });
 
   const clearState = () => {
@@ -46,6 +48,7 @@ const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
       task_neighborhood: fields.neighborhood,
       start_time: fields.start_time,
       end_time: fields.end_time,
+      duration: fields.duration
     }
     axios.post('/api/tasks', body)
       .then(resp => {

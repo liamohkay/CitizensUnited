@@ -116,6 +116,7 @@ const dbHelpers = {
         task_neighborhood: req.body.task_neighborhood,
         start_time: req.body.start_time,
         end_time: req.body.end_time,
+        duration: req.body.duration,
       }, (err, data) => {
         if (err) callback(err)
         Users

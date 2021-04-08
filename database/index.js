@@ -40,25 +40,16 @@ const tasksSchema = new Schema({
   task_neighborhood: String,
   start_time: String,
   end_time: String,
+  duration: Number,
   requestor_photo: String,
   requestor_name: String,
   room_id: String
 })
 
-
-// *** Need to determine schema
-const roomsSchema = new Schema({
-  volunteer_id: String,
-  requester_id: String,
-  message_body: String,
-})
-
 const Users = mongoose.model('Users', usersSchema);
 const Tasks = mongoose.model('Tasks', tasksSchema);
-const Messages = mongoose.model('Messages', roomsSchema);
 
 module.exports = {
   Users,
   Tasks,
-  Messages
 }
