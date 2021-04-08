@@ -46,10 +46,19 @@ const TaskView = (props) => {
           </div>
           <div>
             <span style={{ display: 'block' }}>
-                <b>Requestor:</b> {ticket.requestor_name}
+              <b>Requester:</b> {ticket.requestor_name}
+            </span>
+            <span style={{ display: 'block' }}>
+              <b>Requester Score:</b> {ticket.requestor_thumbsUp}
             </span>
             <span style={{ display: 'block' }}>
               < b>Request:</b> {ticket.task_body}
+            </span>
+            <span style={{ display: 'block' }}>
+              < b>Volunteer:</b> {ticket.volunteer_name}
+            </span>
+            <span style={{ display: 'block' }}>
+              < b>Volunteer Score:</b> {ticket.volunteer_thumbsUp}
             </span>
             <span style={{ display: 'block' }}>
               <b>Duration:</b> {Math.round((reformatDate(ticket.task_date, ticket.end_time) - reformatDate(ticket.task_date, ticket.start_time))) / 60000} minutes

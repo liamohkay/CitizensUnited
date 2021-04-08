@@ -127,9 +127,8 @@ const SignUp = ({ isVolunteer }) => {
           })
           .catch(err => alert(`Failed to create Mongo Account for ${fields.email}`))
       })
-      // Changed to console.log(err) so the err isn't alerted twice
-      .catch(err => console.log(err))
-
+      .catch(err => alert(err))
+    }
   }
 
   return (
