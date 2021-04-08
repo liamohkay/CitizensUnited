@@ -70,6 +70,9 @@ const VolunteerTile = ({ mongoUser, ticket, volunteerName, setTasks, setLoaded }
             <b>Requester</b>: {requestor_name}
           </span>
           <span style={{ display: 'block' }}>
+            <b>Requester Rating</b>: {}
+          </span>
+          <span style={{ display: 'block' }}>
             <b>Request</b>: {task_body}
           </span>
           <span style={{ display: 'block' }}>
@@ -80,9 +83,6 @@ const VolunteerTile = ({ mongoUser, ticket, volunteerName, setTasks, setLoaded }
           </span>
           <span style={{ display: 'block' }}>
             <b>Request Date/Time</b>: {new Date(task_date).toUTCString()}
-          </span>
-          <span style={{ display: 'block' }}>
-            <b>Requester Rating</b>: {}
           </span>
         </div>
 
