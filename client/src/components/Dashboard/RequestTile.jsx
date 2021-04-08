@@ -16,7 +16,8 @@ const RequestTile = ({ mongoUser, ticket, old, setRenderOld }) => {
     requestor_photo,
     start_time,
     end_time,
-    room_id
+    room_id,
+    duration
   } = ticket;
 
   const styles = {
@@ -27,20 +28,6 @@ const RequestTile = ({ mongoUser, ticket, old, setRenderOld }) => {
       backgroundPosition: 'center center',
       backgroundSize: 'cover',
     }
-  }
-
-  const reformatDate = (dateStr, time) => {
-    const pad = (num) => (
-      num.toString().length < 2
-        ? ('0' + num)
-        : (num)
-    )
-    const date = new Date(dateStr);
-    const year = date.getFullYear();
-    const month = pad(date.getMonth());
-    const day = pad(date.getUTCDate());
-    const newDateStr = `${year}-${month}-${day}T${time}`;
-    return new Date(newDateStr);
   }
 
   // WT: Added conditional so that if room_id exist (AKA task has been accepted), you can click and render the Map + Chat confirmation
@@ -59,7 +46,7 @@ const RequestTile = ({ mongoUser, ticket, old, setRenderOld }) => {
               <b>Request</b>: {task_body}
             </span>
             <span style={{ display: 'block' }}>
-              <b>Duration</b>: {Math.round((reformatDate(task_date, end_time) - reformatDate(task_date, start_time))) / 60000} minutes
+              <b>Duration</b>: {duration} minutes
             </span>
             <span style={{ display: 'block' }}>
               <b>Neighborhood</b>: {task_neighborhood}
@@ -106,7 +93,7 @@ const RequestTile = ({ mongoUser, ticket, old, setRenderOld }) => {
             <b>Request</b>: {task_body}
           </span>
           <span style={{ display: 'block' }}>
-            <b>Duration</b>: {Math.round((reformatDate(task_date, end_time) - reformatDate(task_date, start_time))) / 60000} minutes
+            <b>Duration</b>: {duration} minutes
           </span>
           <span style={{ display: 'block' }}>
             <b>Neighborhood</b>: {task_neighborhood}

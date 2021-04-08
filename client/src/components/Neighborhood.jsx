@@ -9,6 +9,12 @@ const Neighborhood = ({ fields, setFields }) => {
     setHoodTitle(f.target.innerText)
   }
 
+  const handleDuration = (e) => {
+    console.log(selectedDuration)
+    setSelectedDuration(Number(e))
+    durationFilter()
+  }
+
   return (
     <div className="neighborhood-dropdown">
       <DropdownButton
@@ -17,6 +23,7 @@ const Neighborhood = ({ fields, setFields }) => {
         type="neighborhood"
         value={fields.neighborhood}
         onSelect={handleSelect}>
+          <Dropdown.Item eventKey="All Neighborhoods">All Neighborhoods</Dropdown.Item>
           <Dropdown.Item eventKey="arlingtonHeights">Arlington Heights</Dropdown.Item>
           <Dropdown.Item eventKey="carthay">Carthay</Dropdown.Item>
           <Dropdown.Item eventKey="beverlyGrove">Beverly Grove</Dropdown.Item>

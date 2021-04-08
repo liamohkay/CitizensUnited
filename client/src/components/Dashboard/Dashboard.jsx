@@ -12,6 +12,7 @@ import Logo from '../Home/Logo';
 import TaskModal from './TaskModal';
 import OldTasksBtn from './OldTasksBtn';
 import Neighborhood from '../Neighborhood';
+import DurationFilter from '../DurationFilter';
 
 const Dashboard = ({ user }) => {
   // Gets current signed-in firebase user for displayName and photoURL props
@@ -22,24 +23,41 @@ const Dashboard = ({ user }) => {
   const [neighborhood, setNeighborhood] = useState({
     neighborhood: '',
   });
+  const [selectedDuration, setSelectedDuration] = useState();
+  const [filtered, setFiltered] = useState(false);
+  const [temp, setTemp] = useState([]);
 
   // Grabs mongo user on load and re-render & sets state for user & feed
   useEffect(() => getMongoUser(), [loaded]);
   useEffect(() => {
     if (mongoUser && mongoUser.isVolunteer) {
       getVolunteerTasks();
+      setSelectedDuration(1000);
     }
   }, [neighborhood]);
+  useEffect(()=> {
+    if (mongoUser && mongoUser.isVolunteer) {
+      durationFilter();
+    }
+  }, [selectedDuration]);
 
   // Gets tasks volunteer neighborhood & saves them to state
   const getVolunteerTasks = (mongoUsr) => {
-    let params = {
-      firebase_id: currentUser.uid,
-      task_neighborhood: neighborhood.neighborhood,
+    let params;
+    if (neighborhood.neighborhood === "All Neighborhoods") {
+      params = {
+        firebase_id: currentUser.uid,
+      }
+    } else {
+      params = {
+        firebase_id: currentUser.uid,
+        task_neighborhood: neighborhood.neighborhood,
+      }
     }
     axios.get('/api/tasks/volunteer', { params })
       .then(resp => {
         setTasks(resp.data[0].tasks)
+        setTemp(resp.data[0].tasks)
       })
       .catch(err => console.log(err))
   }
@@ -77,6 +95,18 @@ const Dashboard = ({ user }) => {
       .catch(err => console.log(err))
   }
 
+  const durationFilter = () => {
+    setFiltered(true);
+    setTemp(tasks.filter((object) => {
+      return (
+        object.duration <= selectedDuration
+        )
+      })
+    )
+  }
+
+  console.log(temp)
+
   return (
     <>
       { !currentUser || !mongoUser ? null : (
@@ -104,7 +134,12 @@ const Dashboard = ({ user }) => {
                     fields={neighborhood}
                     setFields={setNeighborhood}
                   />
-                  <div id="current-neighborhood">Currently Selected: {neighborhood.neighborhood}</div>
+                  <DurationFilter
+                    selectedDuration={selectedDuration}
+                    setSelectedDuration={setSelectedDuration}
+                    durationFilter={durationFilter}
+                  />
+                  <span id="current-neighborhood">Currently Selected: {neighborhood.neighborhood}</span>
                 </div>
               )
           }
@@ -127,26 +162,36 @@ const Dashboard = ({ user }) => {
 
           { /* Tasks / tickets list */ }
           <div id="feed-container">
-            { tasks.map(ticket => (
-              mongoUser.isVolunteer
-                ? <VolunteerTile
+            { filtered
+              ? temp.map(ticket => (
+                mongoUser.isVolunteer &&
+                <VolunteerTile
                     mongoUser={mongoUser}
                     ticket={ticket}
                     key={ticket._id}
                     volunteerName={currentUser.displayName}
                     setTasks={setTasks}
                     setLoaded={setLoaded}
-                  />
-                : <RequestTile
-                    mongoUser={mongoUser}
-                    ticket={ticket}
-                    key={ticket._id}
-                    setLoaded={setLoaded}
-                  />
+                  /> ))
+              : tasks.map(ticket => (
+                mongoUser.isVolunteer
+                  ? <VolunteerTile
+                      mongoUser={mongoUser}
+                      ticket={ticket}
+                      key={ticket._id}
+                      volunteerName={currentUser.displayName}
+                      setTasks={setTasks}
+                      setLoaded={setLoaded}
+                    />
+                  : <RequestTile
+                      mongoUser={mongoUser}
+                      ticket={ticket}
+                      key={ticket._id}
+                      setLoaded={setLoaded}
+                    />
               ))
             }
           </div>
-
         </div>
       ) }
   </>
