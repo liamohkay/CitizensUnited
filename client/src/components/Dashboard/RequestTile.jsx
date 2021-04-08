@@ -2,12 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 
-const ConditionalLink = ({ children, to, condition }) => {
-  (!!condition && to)
-      ? <Link to={to} >{children}</Link>
-      : <>{children}</>;
-};
-
 const RequestTile = ({ mongoUser, ticket }) => {
   const { currentUser } = useAuth();
   const {
