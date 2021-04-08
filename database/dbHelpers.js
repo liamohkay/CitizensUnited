@@ -10,11 +10,15 @@ const dbHelpers = {
   },
 
   getVolunteerInfo: (req, callback) => {
+    let query;
+    req.query.task_neighborhood ? query = {
+      task_neighborhood: req.query.task_neighborhood,
+      task_status: { $ne: 'Completed' }
+    } : query = {
+      task_status: { $ne: 'Completed' }
+    }
     Tasks
-      .find({
-        task_neighborhood: req.query.task_neighborhood,
-        task_status: { $ne: 'Completed' }
-      }, (err, data) => {
+      .find(query, (err, data) => {
         if (err) callback(err)
         Users
           .update({firebase_id: req.query.firebase_id}, {
@@ -74,24 +78,19 @@ const dbHelpers = {
   },
 
   getAllTasks: (req, callback) => {
-    if (req.query.task_neighborhood) {
-      Tasks
-        .find({
-          task_neighborhood: req.query.task_neighborhood,
-          task_status: { $ne: 'Completed' } }, (err, data) => {
-          if (err) callback(err)
-          // console.log(data);
-          callback(null, data)
-        })
-    } else {
-      Tasks
-        .find({
-          task_status: { $ne: 'Completed' } }, (err, data) => {
-          if (err) callback(err)
-          // console.log(data);
-          callback(null, data)
-        })
+    let query;
+    req.query.task_neighborhood ? query = {
+      task_neighborhood: req.query.task_neighborhood,
+      task_status: { $ne: 'Completed' }
+    } : query = {
+      task_status: { $ne: 'Completed' }
     }
+    Tasks
+      .find(query, (err, data) => {
+        if (err) callback(err)
+        // console.log(data);
+        callback(null, data)
+      })
   },
 
   getOneTask: (req, callback) => {
