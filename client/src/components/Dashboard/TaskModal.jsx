@@ -35,6 +35,7 @@ const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
   // Store ticket in firebase
   const handleClick = (e) => {
     e.preventDefault();
+    console.log('mongo user thumbs', mongoUser.thumbsUp);
     const body = {
       requestor_id: currentUser.uid,
       requestor_name: currentUser.displayName,
@@ -48,9 +49,7 @@ const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
       end_time: fields.end_time,
     }
     axios.post('/api/tasks', body)
-      .then(resp => {
-        handleClose();
-      })
+      .then(resp => handleClose())
       .then(() => getRequesterTasks(mongoUser))
       .catch(err => console.log(err));
   }
