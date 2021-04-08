@@ -40,10 +40,11 @@ const TaskView = (props) => {
 
       <div id="task-view-main-container">
 
+        <div id="task-view-info-title">
+          <h3 style={{textAlign: "center"}}>{ isVolunteer ? ticket.task_status : `${ticket.volunteer_name} has accepted your task!` }</h3>
+        </div>
+
         <div id="task-view-info">
-          <div id="task-view-info-title">
-            <h3 style={{textAlign: "center"}}>{ isVolunteer ? ticket.task_status : `${ticket.volunteer_name} has accepted your task!` }</h3>
-          </div>
           <div>
             <span style={{ display: 'block' }}>
               <b>Requester:</b> {ticket.requestor_name}
