@@ -41,12 +41,12 @@ const EditTaskModal = ({ ticket, mongoUser }) => {
       requestor_photo: currentUser.photoURL,
       requestor_thumbsUp: mongoUser.thumbsUp,
       requestor_thumbsDown: mongoUser.thumbsDown,
-      task_date: fields.startDate,
+      task_date: startDate,
       task_status: 'Pending',
       task_body: fields.task_body,
       task_neighborhood: fields.task_neighborhood,
-      start_time: fields.startTime,
-      end_time: fields.endTime,
+      start_time: startTime,
+      end_time: endTime,
       duration: Math.round((endTime - startTime) / 60000),
     }
     axios.post('/api/tasks', body)
@@ -57,7 +57,7 @@ const EditTaskModal = ({ ticket, mongoUser }) => {
 
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
-  console.log(fields);
+
   return (
     <>
       <button

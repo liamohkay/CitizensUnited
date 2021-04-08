@@ -75,7 +75,7 @@ const dbHelpers = {
 
   getOldTasks: (req, callback) => {
     Tasks.find({
-      firebase_id: req.body.firebase_id,
+      requestor_id: req.query.requestor_id,
       task_status: 'Completed'
     }, (err, data) => callback(err, data))
   },
