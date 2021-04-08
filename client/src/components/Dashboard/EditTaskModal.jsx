@@ -14,20 +14,13 @@ const initialState = {
   duration: 0
 };
 
-const EditTaskModal = ({ mongoUser }) => {
+const EditTaskModal = ({ ticket, mongoUser }) => {
   const { currentUser } = useAuth();
   const [show, setShow] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
-  const [startTime, setStartTime] = useState(new Date());
-  const [endTime, setEndTime] = useState(new Date());
-  const [fields, setFields] = useState({
-    task: '',
-    neighborhood: '',
-  });
-
-  const clearState = () => {
-    setFields({ ...initialState });
-  };
+  const [startTime, setStartTime] = useState(Date.parse(ticket.start_time));
+  const [endTime, setEndTime] = useState(Date.parse(ticket.end_time));
+  const [fields, setFields] = useState(ticket);
 
   // Tracks user input on form fields
   const handleChange = (e) => {
@@ -35,38 +28,36 @@ const EditTaskModal = ({ mongoUser }) => {
       ...fields,
       [e.target.name]: e.target.value
     });
+    console.log(fields);
   };
 
   // Store ticket in firebase
   const handleClick = (e) => {
     e.preventDefault();
     const body = {
+      _id: fields._id,
       requestor_id: currentUser.uid,
       requestor_name: currentUser.displayName,
       requestor_photo: currentUser.photoURL,
       requestor_thumbsUp: mongoUser.thumbsUp,
       requestor_thumbsDown: mongoUser.thumbsDown,
-      task_date: startDate,
+      task_date: fields.startDate,
       task_status: 'Pending',
-      task_body: fields.task,
-      task_neighborhood: fields.neighborhood,
-      start_time: startTime,
-      end_time: endTime,
+      task_body: fields.task_body,
+      task_neighborhood: fields.task_neighborhood,
+      start_time: fields.startTime,
+      end_time: fields.endTime,
       duration: Math.round((endTime - startTime) / 60000),
     }
-    console.log('Body', body)
     axios.post('/api/tasks', body)
       .then(resp => handleClose())
-      .then(() => getRequesterTasks(mongoUser))
+      .then(() => null)
       .catch(err => console.log(err));
   }
 
   const handleShow = () => setShow(true);
-  const handleClose = () => {
-    setShow(false);
-    clearState();
-  };
-
+  const handleClose = () => setShow(false);
+  console.log(fields);
   return (
     <>
       <button
@@ -86,12 +77,14 @@ const EditTaskModal = ({ mongoUser }) => {
           <Form>
             <Form.Group id="task">
               <Form.Label>Task:</Form.Label>
-              <Form.Control  name="task" type="text" value={fields.task} onChange={handleChange} required />
+              <Form.Control  name="task_body" type="text" value={fields.task_body} onChange={handleChange} required />
             </Form.Group>
             <Form.Group id="neighborhood">
               <Form.Label>Neighborhood:</Form.Label>
               <Form.Control
+                name="neighborhood"
                 as={Neighborhood}
+                value={fields.neighborhood}
                 fields={fields}
                 setFields={setFields}
               />
@@ -100,6 +93,7 @@ const EditTaskModal = ({ mongoUser }) => {
             <Form.Group id="start-date">
               <Form.Label>Task Date:</Form.Label>
               <Form.Control
+                name="task_date"
                 as={Calendar}
                 startDate={startDate}
                 setStartDate={setStartDate}
@@ -108,7 +102,9 @@ const EditTaskModal = ({ mongoUser }) => {
             <Form.Group id="start-time">
               <Form.Label>Starts At:</Form.Label>
               <Form.Control
+                name="start_time"
                 as={TimeSelector}
+                value={Date.parse(fields.start_time)}
                 time={startTime}
                 setTime={setStartTime}
               />
@@ -116,7 +112,9 @@ const EditTaskModal = ({ mongoUser }) => {
             <Form.Group id="end-time">
               <Form.Label>Ends At:</Form.Label>
               <Form.Control
+                name="end_time"
                 as={TimeSelector}
+                value={Date.parse(fields.end_time)}
                 time={endTime}
                 setTime={setEndTime}
               />

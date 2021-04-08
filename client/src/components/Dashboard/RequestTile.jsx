@@ -77,7 +77,7 @@ const RequestTile = ({ mongoUser, ticket, old }) => {
             { old
               ?
               (
-                <EditTaskModal mongoUser={mongoUser} />
+                <EditTaskModal ticket={ticket} mongoUser={mongoUser} />
               )
               :
               (
