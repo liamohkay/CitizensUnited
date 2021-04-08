@@ -60,7 +60,6 @@ const VolunteerTile = ({ mongoUser, ticket, volunteerName, setTasks, setLoaded }
     return new Date(newDateStr);
   }
 
-  console.log(ticket);
   return (
       <div className="volunteer-ticket">
         <div className="volunteer-ticket__profile-img">

@@ -51,9 +51,9 @@ const TaskView = (props) => {
             <span style={{ display: 'block' }}>
               <b>Requester:</b> {ticket.requestor_name}
             </span>
-            {/* <span style={{ display: 'block' }}>
-              <b>Requester Score:</b> {ticket.requestor_name}
-            </span> */}
+            <span style={{ display: 'block' }}>
+              <b>Requester Score:</b> {ticket.requestor_thumbsUp}
+            </span>
             <span style={{ display: 'block' }}>
               < b>Request:</b> {ticket.task_body}
             </span>
