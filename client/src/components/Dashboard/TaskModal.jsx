@@ -12,6 +12,7 @@ const initialState = {
   task: '',
   neighborhood: '',
   end_time: '',
+  duration: 0
 };
 
 const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
@@ -44,6 +45,7 @@ const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
       requestor_name: currentUser.displayName,
       requestor_photo: currentUser.photoURL,
       requestor_thumbsUp: mongoUser.thumbsUp,
+      requestor_thumbsDown: mongoUser.thumbsDown,
       task_date: startDate,
       task_status: 'Pending',
       task_body: fields.task,
