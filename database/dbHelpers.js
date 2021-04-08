@@ -74,14 +74,24 @@ const dbHelpers = {
   },
 
   getAllTasks: (req, callback) => {
-    Tasks
-      .find({
-        task_neighborhood: req.query.task_neighborhood,
-        task_status: { $ne: 'Completed' } }, (err, data) => {
-        if (err) callback(err)
-        console.log(data);
-        callback(null, data)
-      })
+    if (req.query.task_neighborhood) {
+      Tasks
+        .find({
+          task_neighborhood: req.query.task_neighborhood,
+          task_status: { $ne: 'Completed' } }, (err, data) => {
+          if (err) callback(err)
+          // console.log(data);
+          callback(null, data)
+        })
+    } else {
+      Tasks
+        .find({
+          task_status: { $ne: 'Completed' } }, (err, data) => {
+          if (err) callback(err)
+          // console.log(data);
+          callback(null, data)
+        })
+    }
   },
 
   getOneTask: (req, callback) => {
