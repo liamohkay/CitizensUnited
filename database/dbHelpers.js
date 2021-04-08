@@ -110,6 +110,7 @@ const dbHelpers = {
         requestor_id: req.body.requestor_id,
         requestor_name: req.body.requestor_name,
         requestor_photo: req.body.requestor_photo,
+        requestor_thumbsUp: req.body.requestor_thumbsUp,
         task_date: req.body.task_date,
         task_status: req.body.task_status,
         task_body: req.body.task_body,
@@ -130,7 +131,6 @@ const dbHelpers = {
 
   // after this status of task changed in task collection but doesn't update the status in users collection automatically, you will need to do a getUserInfo request again
   acceptTask: (req, callback) => {
-    let thumbsUp = Number(req.body.volunteer_thumbsUp);
     Tasks
       .update({_id: req.body.task_id}, {
         $set: {
@@ -138,7 +138,7 @@ const dbHelpers = {
           volunteer_id: req.body.firebase_id,
           volunteer_photo: req.body.volunteer_photo,
           volunteer_name: req.body.volunteer_name,
-          volutneer_thumbsUp: thumbsUp
+          volunteer_thumbsUp: req.body.volunteer_thumbsUp
         }
       }, (err, data) => {
         if (err) callback(err)

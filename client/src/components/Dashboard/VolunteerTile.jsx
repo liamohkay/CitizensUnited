@@ -27,6 +27,7 @@ const VolunteerTile = ({ mongoUser, ticket, volunteerName, setTasks, setLoaded }
     requestor_id,
     requestor_name,
     requestor_photo,
+    requestor_thumbsUp,
     volunteer_id,
     start_time,
     end_time,
@@ -59,7 +60,6 @@ const VolunteerTile = ({ mongoUser, ticket, volunteerName, setTasks, setLoaded }
     return new Date(newDateStr);
   }
 
-  console.log(ticket)
   return (
       <div className="volunteer-ticket">
         <div className="volunteer-ticket__profile-img">
@@ -68,6 +68,9 @@ const VolunteerTile = ({ mongoUser, ticket, volunteerName, setTasks, setLoaded }
         <div className="volunteer-ticket__body">
           <span style={{ display: 'block' }}>
             <b>Requester</b>: {requestor_name}
+          </span>
+          <span style={{ display: 'block' }}>
+            <b>Requester Rating</b>: { requestor_thumbsUp }
           </span>
           <span style={{ display: 'block' }}>
             <b>Request</b>: {task_body}
@@ -80,9 +83,6 @@ const VolunteerTile = ({ mongoUser, ticket, volunteerName, setTasks, setLoaded }
           </span>
           <span style={{ display: 'block' }}>
             <b>Request Date/Time</b>: {new Date(task_date).toUTCString()}
-          </span>
-          <span style={{ display: 'block' }}>
-            <b>Requester Rating</b>: {}
           </span>
         </div>
 
