@@ -8,6 +8,7 @@
     "task-view-info-title task-view-info-title"
     "task-view-volunteer task-view-requestor"
     "task-view-map task-view-chat";
+  margin-top: 75px;
 }
 
 #task-view-info-title {
