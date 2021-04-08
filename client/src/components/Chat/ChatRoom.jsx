@@ -41,6 +41,7 @@ const ChatRoom = ({ room_id, mongoUser }) => {
   return (
     <div className="chat-container">
       <div className="main">
+      <div className="chat-header">Start chatting below!</div>
         {!msgStream?.messages ? null : (
           msgStream?.messages.map(msg => <ChatMessage msg={msg} key={msg.uid + msg.text} />)
         )}
