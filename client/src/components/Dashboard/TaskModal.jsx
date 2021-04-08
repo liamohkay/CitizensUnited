@@ -1,25 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Modal } from 'react-bootstrap';
 import axios from 'axios';
+import { Form, Button, Modal } from 'react-bootstrap';
+
 import { useAuth } from '../../contexts/AuthContext';
 import Neighborhood from '../Neighborhood.jsx';
+import Calendar from './Calendar';
+import TimeSelector from './TimeSelector';
+
 
 const initialState = {
   task: '',
   neighborhood: '',
-  start_time: '',
   end_time: '',
   duration: 0
 };
 
 const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
   const [show, setShow] = useState(false);
+  const [startDate, setStartDate] = useState(new Date());
+  const [startTime, setStartTime] = useState(new Date());
+  const [endTime, setEndTime] = useState(new Date());
   const [fields, setFields] = useState({
     task: '',
     neighborhood: '',
-    start_time: '',
-    end_time: '',
-    duration: 0
   });
 
   const clearState = () => {
@@ -42,18 +45,17 @@ const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
       requestor_name: currentUser.displayName,
       requestor_photo: currentUser.photoURL,
       requestor_thumbsUp: mongoUser.thumbsUp,
-      task_date: new Date(),
+      task_date: startDate,
       task_status: 'Pending',
       task_body: fields.task,
       task_neighborhood: fields.neighborhood,
-      start_time: fields.start_time,
-      end_time: fields.end_time,
-      duration: fields.duration
+      start_time: startTime,
+      end_time: endTime,
+      duration: Math.round((endTime - startTime) / 60000),
     }
+    console.log('Body', body)
     axios.post('/api/tasks', body)
-      .then(resp => {
-        handleClose();
-      })
+      .then(resp => handleClose())
       .then(() => getRequesterTasks(mongoUser))
       .catch(err => console.log(err));
   }
@@ -81,15 +83,38 @@ const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
               <Form.Label>Task:</Form.Label>
               <Form.Control  name="task" type="text" value={fields.task} onChange={handleChange} required />
             </Form.Group>
-            <label>Neighborhood</label>
-            <Neighborhood fields={fields} setFields={setFields} />
+            <Form.Group id="neighborhood">
+              <Form.Label>Neighborhood:</Form.Label>
+              <Form.Control
+                as={Neighborhood}
+                fields={fields}
+                setFields={setFields}
+              />
+              {/* <Neighborhood fields={fields} setFields={setFields} /> */}
+            </Form.Group>
+            <Form.Group id="start-date">
+              <Form.Label>Task Date:</Form.Label>
+              <Form.Control
+                as={Calendar}
+                startDate={startDate}
+                setStartDate={setStartDate}
+              />
+            </Form.Group>
             <Form.Group id="start-time">
               <Form.Label>Starts At:</Form.Label>
-              <Form.Control name="start_time" type="text" value={fields.start_time} onChange={handleChange} required />
+              <Form.Control
+                as={TimeSelector}
+                time={startTime}
+                setTime={setStartTime}
+              />
             </Form.Group>
             <Form.Group id="end-time">
               <Form.Label>Ends At:</Form.Label>
-              <Form.Control name="end_time" type="text" value={fields.end_time} onChange={handleChange} required />
+              <Form.Control
+                as={TimeSelector}
+                time={endTime}
+                setTime={setEndTime}
+              />
             </Form.Group>
           </Form>
         </Modal.Body>

@@ -100,7 +100,7 @@ Tasks.insertMany([
     requestor_name: 'sharon rollins',
     requestor_photo: "https://www.southernfoodways.org/wp-content/uploads/sharonrollins-2.jpg",
     task_date: "2021-04-06T03:26:27.729Z",
-    task_status: "Accepted",
+    task_status: "Pending",
     task_body: "walk my dog",
     task_neighborhood: "hollywood",
     start_time: "08:00",

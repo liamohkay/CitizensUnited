@@ -33,7 +33,6 @@ const tasksSchema = new Schema({
   requestor_name: String,
   requestor_photo: String,
   requestor_thumbsUp: Number,
-  room_id: String,
   task_date: String,
   task_status: String, // Pending, Accepted, Hidden, Completed
   task_body: String,
@@ -41,8 +40,6 @@ const tasksSchema = new Schema({
   start_time: String,
   end_time: String,
   duration: Number,
-  requestor_photo: String,
-  requestor_name: String,
   room_id: String
 })
 
