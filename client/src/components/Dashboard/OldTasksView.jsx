@@ -2,33 +2,10 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import { Form, Button, Modal } from 'react-bootstrap';
 
 // Components
 import RequestTile from './RequestTile';
-
-const styles = {
-  profile: {
-    width: '50px',
-    height: '50px',
-    borderRadius: '50%',
-    backgroundPosition: 'center center',
-    backgroundSize: 'cover',
-  }
-}
-
-const reformatDate = (dateStr, time) => {
-  const pad = (num) => (
-    num.toString().length < 2
-      ? ('0' + num)
-      : (num)
-  )
-  const date = new Date(dateStr);
-  const year = date.getFullYear();
-  const month = pad(date.getMonth());
-  const day = pad(date.getUTCDate());
-  const newDateStr = `${year}-${month}-${day}T${time}`;
-  return new Date(newDateStr);
-}
 
 const OldTasksView = () => {
   const { currentUser } = useAuth();

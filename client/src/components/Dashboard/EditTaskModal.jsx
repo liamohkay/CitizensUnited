@@ -7,7 +7,6 @@ import Neighborhood from '../Neighborhood.jsx';
 import Calendar from './Calendar';
 import TimeSelector from './TimeSelector';
 
-
 const initialState = {
   task: '',
   neighborhood: '',
@@ -15,7 +14,8 @@ const initialState = {
   duration: 0
 };
 
-const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
+const EditTaskModal = ({ mongoUser }) => {
+  const { currentUser } = useAuth();
   const [show, setShow] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [startTime, setStartTime] = useState(new Date());
@@ -54,6 +54,7 @@ const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
       end_time: endTime,
       duration: Math.round((endTime - startTime) / 60000),
     }
+    console.log('Body', body)
     axios.post('/api/tasks', body)
       .then(resp => handleClose())
       .then(() => getRequesterTasks(mongoUser))
@@ -68,13 +69,17 @@ const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
 
   return (
     <>
-      <Button id="submit-request" variant="primary" onClick={handleShow}>
-        SUBMIT NEW REQUEST
-      </Button>
+      <button
+        id="chat-btn"
+        onClick={handleShow}
+        style={{ width: "79px", backgroundColor: "#aaf8a7", border: "2px solid #aaf8a7", borderRadius: ".25rem" }}
+      >
+        Edit
+      </button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>
-            Create New Task
+            Edit Old Task
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -119,7 +124,7 @@ const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button id="submit-button" className="w-100" onClick={handleClick}>Submit</Button>
+          <Button id="submit-button" className="w-100" onClick={handleClick}>Repost</Button>
           <Button id="cancel-button" className="w-100" onClick={handleClose}>Cancel</Button>
         </Modal.Footer>
       </Modal>
@@ -127,4 +132,4 @@ const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
   )
 }
 
-export default TaskModal;
+export default EditTaskModal;

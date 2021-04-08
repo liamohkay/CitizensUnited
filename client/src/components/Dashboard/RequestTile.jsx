@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
+import EditTaskModal from './EditTaskModal';
 
 const RequestTile = ({ mongoUser, ticket, old }) => {
   const { currentUser } = useAuth();
@@ -76,12 +77,7 @@ const RequestTile = ({ mongoUser, ticket, old }) => {
             { old
               ?
               (
-                <Link
-                  to={{ pathname: `/task/${_id}`, state: { mongoUser, ticket, room_id, isVolunteer: false } }}
-                  style={{textDecoration: 'none', color: 'black'}}
-                >
-                  <button id="chat-btn" style={{ width: "79px", backgroundColor: "#aaf8a7", border: "2px solid #aaf8a7", borderRadius: ".25rem" }}>Edit</button>
-                </Link>
+                <EditTaskModal mongoUser={mongoUser} />
               )
               :
               (
