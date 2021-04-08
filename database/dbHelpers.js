@@ -180,7 +180,6 @@ const dbHelpers = {
   },
 
   thumbsUp: (req, callback) => {
-    console.log(req.body.firebase_id)
     Users
       .findOneAndUpdate(
         { firebase_id: req.body.firebase_id},
@@ -201,7 +200,15 @@ const dbHelpers = {
           callback(null, data)
         }
       )
-  }
+  },
+
+  // Retrieves tasks marked completed from a specific user
+  getOldtasks: (req, callback) => {
+    Tasks.find({
+      firebase_id: req.body.firebase_id,
+      task_status: 'Completed'
+    }, (err, data) => callback(err, data))
+  },
 }
 
 module.exports = dbHelpers;

@@ -12,7 +12,7 @@ const OldTasksBtn = () => {
       to={{ pathname: `/oldtasks/${currentUser.uid}` }}
       style={{textDecoration: 'none', color: 'black'}}
     >
-      <button type="button" class="btn btn-secondary">Old Tasks</button>
+      <button type="button" className="btn btn-secondary">Old Tasks</button>
     </Link>
   );
 }

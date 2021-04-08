@@ -10,7 +10,6 @@ db.once('open', function() {
 
 
 const usersSchema = new Schema({
-  // user_id SERIAL,
   firebase_id: {type: String, required: true, index: true},
   first_name: String,
   last_name: String,

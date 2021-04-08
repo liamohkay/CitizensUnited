@@ -7,6 +7,10 @@ router
   .post(controller.postSignUp)
 
 router
+  .route('/oldtasks')
+  .put(controller.getOldTasks)
+
+router
   .route('/tasks')
   .get(controller.getAllTasks)
   .post(controller.postNewTask)
