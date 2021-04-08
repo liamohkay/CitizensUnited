@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 
-const RequestTile = ({ mongoUser, ticket }) => {
+const RequestTile = ({ mongoUser, ticket, old }) => {
   const { currentUser } = useAuth();
   const {
     _id,
@@ -46,37 +46,56 @@ const RequestTile = ({ mongoUser, ticket }) => {
   return (
     room_id && requestor_id ? (
       <div>
-        <Link
-          to={{ pathname: `/task/${_id}`, state: { mongoUser, ticket, room_id, isVolunteer: false } }}
-          style={{textDecoration: 'none', color: 'black'}}
-        >
-          <div className="requestor-ticket">
-            <div className="requestor-ticket__profile-img">
-              <img src={requestor_photo} style={styles.profile} />
-            </div>
-            <div className="requestor-ticket__body">
-              <span style={{ display: 'block' }}>
-              <b>Requester</b>: {requestor_name}
-              </span>
-              <span style={{ display: 'block' }}>
-                <b>Request</b>: {task_body}
-              </span>
-              <span style={{ display: 'block' }}>
-                <b>Duration</b>: {Math.round((reformatDate(task_date, end_time) - reformatDate(task_date, start_time))) / 60000} minutes
-              </span>
-              <span style={{ display: 'block' }}>
-                <b>Neighborhood</b>: {task_neighborhood}
-              </span>
-              <span style={{ display: 'block' }}>
-                <b>Request Date/Time</b>: {new Date(task_date).toUTCString()}
-              </span>
-            </div>
-            <div className="requestor-ticket__buttons">
-              <span id="requester-status" className="btn btn-sm" style={{ cursor: "default", backgroundColor: "#8DA5ED" }}>{task_status}</span>
-            <button id="chat-btn" style={{ width: "79px", backgroundColor: "#aaf8a7", border: "2px solid #aaf8a7", borderRadius: ".25rem" }}>Chat</button>
-            </div>
+        <div className="requestor-ticket">
+          <div className="requestor-ticket__profile-img">
+            <img src={requestor_photo} style={styles.profile} />
           </div>
-        </Link>
+          <div className="requestor-ticket__body">
+            <span style={{ display: 'block' }}>
+            <b>Requester</b>: {requestor_name}
+            </span>
+            <span style={{ display: 'block' }}>
+              <b>Request</b>: {task_body}
+            </span>
+            <span style={{ display: 'block' }}>
+              <b>Duration</b>: {Math.round((reformatDate(task_date, end_time) - reformatDate(task_date, start_time))) / 60000} minutes
+            </span>
+            <span style={{ display: 'block' }}>
+              <b>Neighborhood</b>: {task_neighborhood}
+            </span>
+            <span style={{ display: 'block' }}>
+              <b>Request Date/Time</b>: {new Date(task_date).toUTCString()}
+            </span>
+          </div>
+          <div className="requestor-ticket__buttons">
+            <span id="requester-status" className="btn btn-sm" style={{ cursor: "default", backgroundColor: "#8DA5ED" }}>
+              {task_status}
+            </span>
+
+            { /* Dynamic button rendering, chat if regular tile, edit if old task */ }
+            { old
+              ?
+              (
+                <Link
+                  to={{ pathname: `/task/${_id}`, state: { mongoUser, ticket, room_id, isVolunteer: false } }}
+                  style={{textDecoration: 'none', color: 'black'}}
+                >
+                  <button id="chat-btn" style={{ width: "79px", backgroundColor: "#aaf8a7", border: "2px solid #aaf8a7", borderRadius: ".25rem" }}>Edit</button>
+                </Link>
+              )
+              :
+              (
+                <Link
+                  to={{ pathname: `/task/${_id}`, state: { mongoUser, ticket, room_id, isVolunteer: false } }}
+                  style={{textDecoration: 'none', color: 'black'}}
+                >
+                  <button id="chat-btn" style={{ width: "79px", backgroundColor: "#aaf8a7", border: "2px solid #aaf8a7", borderRadius: ".25rem" }}>Chat</button>
+                </Link>
+              )
+            }
+
+          </div>
+        </div>
       </div>
     ) : (
       <div className="requestor-ticket">
