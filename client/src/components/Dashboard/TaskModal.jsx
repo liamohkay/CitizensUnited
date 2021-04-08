@@ -105,6 +105,7 @@ const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
                 as={TimeSelector}
                 time={startTime}
                 setTime={setStartTime}
+                startDate={startDate}
               />
             </Form.Group>
             <Form.Group id="end-time">
@@ -113,6 +114,8 @@ const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
                 as={TimeSelector}
                 time={endTime}
                 setTime={setEndTime}
+                startDate={startDate}
+                startTime={startTime}
               />
             </Form.Group>
           </Form>
