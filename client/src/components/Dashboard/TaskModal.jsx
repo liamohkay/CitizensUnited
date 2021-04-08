@@ -35,7 +35,6 @@ const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
   // Store ticket in firebase
   const handleClick = (e) => {
     e.preventDefault();
-    console.log('mongo user thumbs', mongoUser.thumbsUp);
     const body = {
       requestor_id: currentUser.uid,
       requestor_name: currentUser.displayName,

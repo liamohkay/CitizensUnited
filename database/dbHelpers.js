@@ -110,6 +110,7 @@ const dbHelpers = {
         requestor_id: req.body.requestor_id,
         requestor_name: req.body.requestor_name,
         requestor_photo: req.body.requestor_photo,
+        requestor_thumbsUp: req.body.requestor_thumbsUp,
         task_date: req.body.task_date,
         task_status: req.body.task_status,
         task_body: req.body.task_body,
