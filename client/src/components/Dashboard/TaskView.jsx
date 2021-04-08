@@ -29,7 +29,6 @@ const TaskView = (props) => {
     return new Date(newDateStr);
   }
 
-  console.log(ticket);
   return (
     <div id="task-view-container">
       <div id="task-view-header">
