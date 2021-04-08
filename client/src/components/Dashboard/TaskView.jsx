@@ -41,42 +41,43 @@ const TaskView = (props) => {
       <div id="task-view-main-container">
 
         <div id="task-view-info-title">
-          <h3 style={{textAlign: "center"}}>{ isVolunteer ? ticket.task_status : `${ticket.volunteer_name} has accepted your task!` }</h3>
-        </div>
-
-        <div id="task-view-info">
-          <div>
-            <span style={{ display: 'block' }}>
-              <b>Requester:</b> {ticket.requestor_name}
-            </span>
-            <span style={{ display: 'block' }}>
-              <b>Requester Score:</b> {ticket.requestor_thumbsUp}
-            </span>
-            <span style={{ display: 'block' }}>
-              < b>Request:</b> {ticket.task_body}
-            </span>
-            <span style={{ display: 'block' }}>
-              < b>Volunteer:</b> {ticket.volunteer_name}
-            </span>
-            <span style={{ display: 'block' }}>
-              < b>Volunteer Score:</b> {ticket.volunteer_thumbsUp}
-            </span>
-            <span style={{ display: 'block' }}>
-              <b>Duration:</b> {Math.round((reformatDate(ticket.task_date, ticket.end_time) - reformatDate(ticket.task_date, ticket.start_time))) / 60000} minutes
-            </span>
-            <span style={{ display: 'block' }}>
-              <b>Neighborhood:</b> {ticket.task_neighborhood}
-            </span>
-            <span style={{ display: 'block' }}>
-              <b>Task Start:</b> {new Date(ticket.task_date).toUTCString()}
-            </span>
-            <Link to={{ pathname: "/"}}>
+          <h3>{ isVolunteer ? ticket.task_status : `${ticket.volunteer_name} has accepted your task!` }</h3>
+          <Link to={{ pathname: "/"}}>
               <button id="back-homepage-btn" type="button">Go back to Home Page</button>
             </Link>
-            <Link to={{pathname: "/task/rating/:task_id", state: { ticket, isVolunteer }}}>
+          <Link to={{pathname: "/task/rating/:task_id", state: { ticket, isVolunteer }}}>
               <button id="task-complete-btn" type="button">Mark Task Complete</button>
-            </Link>
-          </div>
+          </Link>
+          <span style={{ display: 'block' }}>
+            < b>Request:</b> {ticket.task_body}
+          </span>
+          <span style={{ display: 'block' }}>
+            <b>Duration:</b> {Math.round((reformatDate(ticket.task_date, ticket.end_time) - reformatDate(ticket.task_date, ticket.start_time))) / 60000} minutes
+          </span>
+          <span style={{ display: 'block' }}>
+            <b>Neighborhood:</b> {ticket.task_neighborhood}
+          </span>
+          <span style={{ display: 'block' }}>
+            <b>Task Start:</b> {new Date(ticket.task_date).toUTCString()}
+          </span>
+        </div>
+
+        <div id="task-view-volunteer">
+          <span style={{ display: 'block' }}>
+            <b>Requester:</b> {ticket.requestor_name}
+          </span>
+          <span style={{ display: 'block' }}>
+            <b>Requester Score:</b> {ticket.requestor_thumbsUp}
+          </span>
+        </div>
+
+        <div id="task-view-requestor">
+          <span style={{ display: 'block' }}>
+            < b>Volunteer:</b> {ticket.volunteer_name}
+          </span>
+          <span style={{ display: 'block' }}>
+            < b>Volunteer Score:</b> {ticket.volunteer_thumbsUp}
+          </span>
         </div>
 
         <div id="task-view-map">
