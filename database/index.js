@@ -1,18 +1,11 @@
-const { user, password } = require('./mongoConfig.js')
-const mongoose = require('mongoose');
 const { user, pass } = require('../mongoConfig.js');
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-<<<<<<< HEAD
-mongoose.connect(`mongodb://${user}:${password}@54.193.57.124/citizens`, {useNewUrlParser: true, useUnifiedTopology: true});
-=======
-mongoose.connect(`mongodb://${user}:${pass}@54.193.57.124/citizens`, {useNewUrlParser: true, useUnifiedTopology: true});
->>>>>>> 4d68bdabad9af3a3c1c3eea00ddb560af1e34612
+mongoose.connect(`mongodb+srv://${user}:${pass}@cluster0.6bvqx.mongodb.net/test`, {useNewUrlParser: true, useUnifiedTopology: true});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  console.log('database is running')
-});
+db.once('open', () => console.log('Connected to MongoDB'));
 
 
 const usersSchema = new Schema({
