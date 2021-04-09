@@ -309,6 +309,12 @@ input[type=radio] {
   margin-left: 20px;
 }
 
+.old-tasks {
+  margin: auto;
+  width: 50%;
+  margin-top: 100px;
+}
+
 /* Chat */
 .chat-container {
   width: 80%;

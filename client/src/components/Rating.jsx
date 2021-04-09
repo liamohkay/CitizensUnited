@@ -34,7 +34,7 @@ const Rating = (props) => {
   return (
     <div id="vote-container">
       <div id="vote-title">
-        <h2>Please Rate Your {props.user.isVolunteer ? 'Requester' : 'Volunteer'}</h2>
+        <h2>Please Rate Your {isVolunteer ? 'Requester' : 'Volunteer'}</h2>
       </div>
       <div id="thumbs-up">
         <h4 id="thumbs-up-header" >Thumbs Up!</h4>
