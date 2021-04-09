@@ -1,4 +1,3 @@
-const { user, password } = require('./mongoConfig.js')
 const mongoose = require('mongoose');
 const { user, pass } = require('../mongoConfig.js');
 const Schema = mongoose.Schema;
