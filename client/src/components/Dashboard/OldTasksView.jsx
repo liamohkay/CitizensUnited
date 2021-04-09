@@ -16,8 +16,12 @@ const OldTasksView = () => {
   useEffect(() => {
     let params = { requestor_id: currentUser.uid }
     axios.get('/api/oldtasks', { params })
-      .then(resp => setOldTasks(resp.data))
+      .then(resp => {
+        setOldTasks(resp.data);
+        console.log(resp.data);
+      })
       .catch(err => console.log(err))
+
   }, [renderOld]);
 
   return (
