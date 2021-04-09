@@ -15,7 +15,6 @@ const initialState = {
 };
 
 const EditTaskModal = ({ ticket, setRenderOld }) => {
-  console.log(ticket);
   const { currentUser } = useAuth();
   const [show, setShow] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
