@@ -170,7 +170,7 @@ const Dashboard = ({ user }) => {
                     ticket={ticket}
                     key={ticket._id}
                     volunteerName={currentUser.displayName}
-                    setTasks={setTasks}
+                    setTasks={setTemp}
                     setLoaded={setLoaded}
                   /> ))
               : tasks.map(ticket => (

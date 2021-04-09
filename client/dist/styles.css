@@ -69,11 +69,15 @@ table {
   justify-content: space-between;
 }
 
-#volunteer-button, #requester-button, #signup-button, #login-button {
+#volunteer-button, #requester-button, #signup-button, #login-button, #login-button-back, #signup-button-back {
   background-color: #8DA5ED;
   margin: 5px;
   margin-top: 25px;
   color: white;
+}
+
+#signup-button-back, #login-button-back {
+  margin-top: 0;
 }
 
 #login-button {
@@ -170,14 +174,13 @@ input[type=radio] {
 }
 
 #login-container {
-  margin: 50px;
-  margin: auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
   width: 35vw;
-  position: absolute;
-  top: 25%;
-  left: 450px;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
   box-shadow: 5px 5px 4px #e6e6e6;
-  border: none;
 }
 
 #login {

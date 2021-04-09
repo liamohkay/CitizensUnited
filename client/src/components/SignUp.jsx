@@ -200,6 +200,11 @@ const SignUp = ({ isVolunteer }) => {
               onClick={submitForm}
             > Sign Up
             </Button>
+            <Link
+              to={{pathname: `/home`}}
+             >
+              <Button id="signup-button-back" className="w-100">Back</Button>
+            </Link>
             <img src=""></img>
           </Form>
         </Card.Body>
