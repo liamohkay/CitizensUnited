@@ -14,6 +14,9 @@
 #task-view-info-title {
   grid-area: task-view-info-title;
   text-align: center;
+  border-top: 2px solid #e2e2e2;
+  margin-top: 12px;
+  padding-top: 20px;
 }
 
 #task-view-volunteer {
