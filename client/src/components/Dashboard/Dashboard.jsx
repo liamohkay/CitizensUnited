@@ -134,6 +134,7 @@ const Dashboard = ({ user }) => {
                   <Neighborhood
                     fields={neighborhood}
                     setFields={setNeighborhood}
+                    showAll={true}
                   />
                   <DurationFilter
                     selectedDuration={selectedDuration}

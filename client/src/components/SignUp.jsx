@@ -188,7 +188,7 @@ const SignUp = ({ isVolunteer }) => {
               />
             </Form.Group>
               <label>Neighborhood</label>
-              <Neighborhood setFields={setFields} fields={fields}/>
+              <Neighborhood setFields={setFields} fields={fields} showAll={false} />
               <br />
             <label className="form-label" htmlFor="customFile">Upload Profile Picture</label>
             <progress value={progress} max="100" id="uploader"></progress>
