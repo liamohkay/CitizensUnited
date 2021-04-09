@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap'
 import { useAuth } from '../../contexts/AuthContext';
-
+import _, { sortBy } from 'underscore';
 // Components
 import RequestTile from './RequestTile';
 import VolunteerTile from './VolunteerTile';
@@ -56,12 +56,18 @@ const Dashboard = ({ user }) => {
     }
     axios.get('/api/tasks/volunteer', { params })
       .then(resp => {
-        setTasks(resp.data[0].tasks)
-        setTemp(resp.data[0].tasks)
+        setTasks(_.sortBy(resp.data[0].tasks, function(obj){
+          return new Date (obj.task_date)
+        }))
+        setTemp(_.sortBy(resp.data[0].tasks, function(obj){
+          return new Date (obj.task_date)
+        }))
       })
       .catch(err => console.log(err))
-  }
+    }
 
+    // console.log(temp[0].task_date.substring(0,9))
+    // console.log(tasks[0]["task_date"])
   // Get requester user tasks & saves them to state
   const getRequesterTasks = (mongoUsr) => {
     let options = { params: {firebase_id: mongoUsr.firebase_id} };
@@ -102,10 +108,13 @@ const Dashboard = ({ user }) => {
         object.duration <= selectedDuration
         )
       })
-    )
+      )
+      // clearState()
   }
 
-  console.log(temp)
+  const clearState = () => {
+    setSelectedDuration(1000)
+  }
 
   return (
     <>
@@ -118,7 +127,7 @@ const Dashboard = ({ user }) => {
                 src={mongoUser.photo}
                 style={{ width: '50px', height: '50px', borderRadius: '100%'}}
               />
-              <span id="welcome">Welcome {currentUser.displayName}</span>
+              <span id="welcome">Welcome, {currentUser.displayName}</span>
               <button id="logout" className="btn btn-secondary" onClick={() => logout()}>
                 Log Out
               </button>
@@ -129,6 +138,7 @@ const Dashboard = ({ user }) => {
             !mongoUser.isVolunteer
               ? null
               : (
+                <>
                 <div id="volunteer-neighborhood">
                   <Neighborhood
                     fields={neighborhood}
@@ -140,8 +150,9 @@ const Dashboard = ({ user }) => {
                     setSelectedDuration={setSelectedDuration}
                     durationFilter={durationFilter}
                   />
-                  <span id="current-neighborhood">Currently Selected: {neighborhood.neighborhood}</span>
                 </div>
+                <div id="current-neighborhood">Currently Selected: {neighborhood.neighborhood}</div>
+                </>
               )
           }
 

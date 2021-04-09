@@ -51,7 +51,7 @@ const LogIn = ({ setUser }) => {
               <Form.Label>Password</Form.Label>
               <Form.Control name="password" type="password" value={fields.password} onChange={handleChange} required />
             </Form.Group>
-            <Button id="login-button" className="w-100" onClick={handleClick}>Log In</Button>
+            <Button id="login-page-button" className="w-100" onClick={handleClick}>Log In</Button>
             <Link to={{ pathname: '/home'}}>
               <Button id="login-button-back" className="w-100"> Back </Button>
             </Link>

@@ -9,3 +9,8 @@ package-lock.json
 .env.local
 *.pem
 login.sh
+<<<<<<< HEAD
+=======
+*.pem
+mongoConfig.js
+>>>>>>> 4d68bdabad9af3a3c1c3eea00ddb560af1e34612
