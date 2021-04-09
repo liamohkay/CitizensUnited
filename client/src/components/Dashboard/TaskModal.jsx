@@ -56,7 +56,7 @@ const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
       task_status: 'Pending',
       task_body: fields.task,
       task_neighborhood: fields.neighborhood,
-      start_time: startTime,
+      start_time: new Date(startDate.toISOString().substring(0, 11) + startTime.toISOString().substring(11, 24)),
       end_time: endTime,
       duration: Math.round((endTime - startTime) / 60000),
     }
