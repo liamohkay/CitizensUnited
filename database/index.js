@@ -1,6 +1,7 @@
+const { user, password } = require('./mongoConfig.js')
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-mongoose.connect('mongodb://13.56.238.64/citizens', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(`mongodb://${user}:${password}@54.193.57.124/citizens`, {useNewUrlParser: true, useUnifiedTopology: true});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
