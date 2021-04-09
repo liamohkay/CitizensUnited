@@ -4,5 +4,8 @@
 /coverage
 /client/src/firebaseConfig.js
 /database/dbConfig.js
+package-lock.json
+.env.local
 *.pem
+login.sh
 mongoConfig.js
