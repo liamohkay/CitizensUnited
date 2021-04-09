@@ -7,26 +7,24 @@ const router = require('./router.js');
 const bodyparser = require('body-parser');
 const port = 3000;
 
-// Apply Middleware
-const server = express()
-  .use(morgan('dev'))
-  .use(express.json())
-  .use(cors())
-  .use(bodyparser.json())
-  .use(bodyparser.urlencoded({ extended: true }))
-  .use('/api', router)
-
-// Set up web sockets
+// Initialize express server + apply socket io config
+const server = express();
 const ioServer = require('http').createServer(server);
-const io = require('socket.io')(ioServer);
-io.of('/api/socket')
-  .on('connection', (socket) => {
-    console.log('Socket.io: User connected: ', socket.id);
-    socket.on('disconnect', () => console.log('Socket.io: User disconnected: ', socket.id))
-  })
+const io = require('socket.io')(ioServer)
+  .of('/api/socket')
+  .on('connection', socket => console.log('Socket.io: User connected'));
+
+// Apply middleware to express server
+server.use(morgan('dev'));
+server.use(express.json());
+server.use(cors());
+server.use(bodyparser.json());
+server.use(bodyparser.urlencoded({ extended: true }));
 
 // Serve up static files
 server.use(express.static(path.join(__dirname, '../client/dist/')));
 
 // Connect to router
-server.listen(port, () => console.log(`Listening on port: ${port}`));
+server.use('/api', router);
+
+ioServer.listen(port, () => console.log(`Listening on port: ${port}`));
