@@ -22,7 +22,6 @@ const EditTaskModal = ({ ticket, setRenderOld }) => {
   const [endTime, setEndTime] = useState(new Date(ticket.end_time));
   const [fields, setFields] = useState(ticket);
 
-  // console.log(endTime);
   // Tracks user input on form fields
   const handleChange = (e) => {
     setFields({
