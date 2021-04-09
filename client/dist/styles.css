@@ -69,7 +69,15 @@ table {
   justify-content: space-between;
 }
 
-#volunteer-button, #requester-button, #signup-button, #login-button, #login-button-back, #signup-button-back {
+#login-page-button, #signup-page-button {
+  background-color: #FFAF7A;
+  color: white;
+  margin: 5px;
+  margin-top: 25px;
+  border: #FFAF7A;
+}
+
+#volunteer-button, #requester-button, #login-button, #login-button-back, #signup-button-back {
   background-color: #8DA5ED;
   margin: 5px;
   margin-top: 25px;
@@ -78,6 +86,7 @@ table {
 
 #signup-button-back, #login-button-back {
   margin-top: 0;
+  border: none;
 }
 
 #login-button {
@@ -89,7 +98,13 @@ table {
 }
 
 #submit-button {
-  background-color: #f7a36c;
+  background-color: #FFAF7A;
+  border: #FFAF7A;
+}
+
+#cancel-button {
+  border: none;
+  background-color: #8DA5ED;
 }
 
 #banner {
