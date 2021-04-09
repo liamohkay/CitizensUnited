@@ -49,18 +49,6 @@ table {
 }
 
 /* App Styles */
-#app {
-  /* margin: auto; */
-  /* width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 0px 0px;
-  grid-template-areas:
-    "app-container app-container app-container";
-  align-items: center;
-  justify-content: space-between; */
-}
-
 #app-container {
   margin: auto;
   display: flex;
@@ -92,6 +80,7 @@ table {
 #login-button {
   background-color: #8DA5ED;
   margin-top: 5px;
+  margin-right: 100px;
   width: 82px;
   height: 36px;
   font-size: 1em;
@@ -114,6 +103,11 @@ table {
   align-items: center;
   border: none;
   position: relative;
+  margin-top: 70px;
+}
+
+#sign-up-bar {
+  padding: 40px;
 }
 
 #card-img {
@@ -124,7 +118,7 @@ table {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 100px;
+  margin-top: 50px;
   margin-left: 40px;
   margin-right: 40px;
   margin-bottom: 90px;
@@ -149,6 +143,7 @@ table {
 #end-links {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  box-shadow: 1px 1px 2px #cac8c8;
 }
 
 #logo-container {
@@ -177,8 +172,7 @@ table {
 }
 
 #Home-Page {
-  /* display: grid;
-  grid-template-columns: 1fr 1fr; */
+  box-shadow: 5px 5px 4px #e6e6e6;
 }
 
 #mission-statement {
@@ -261,6 +255,8 @@ input[type=radio] {
   display: grid;
   grid-template-columns: 50%;
   grid-template-areas: "logo . welcome";
+  box-shadow: 1px 1px 2px #cac8c8;
+  padding-bottom: 23px;
 }
 
 .dash-header-container #logo-container {
@@ -311,7 +307,6 @@ input[type=radio] {
 }
 
 #volunteer-neighborhood, .current-neighborhood {
-  /* display: block; */
   text-align: center;
 }
 
