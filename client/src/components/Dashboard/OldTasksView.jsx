@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { Form, Button, Modal } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 // Components
 import RequestTile from './RequestTile';
@@ -22,9 +23,11 @@ const OldTasksView = () => {
 
   return (
     <div>
+      <div id="old-tasks-container">
       { !oldTasks ? null : (
         oldTasks.map(ticket => <RequestTile ticket={ticket} old={true} setRenderOld={setRenderOld} />)
       )}
+      </div>
     </div>
   );
 };
