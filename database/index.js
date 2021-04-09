@@ -4,8 +4,16 @@ const Schema = mongoose.Schema;
 mongoose.connect(`mongodb+srv://${user}:${pass}@cluster0.6bvqx.mongodb.net/test`, {useNewUrlParser: true, useUnifiedTopology: true});
 
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => console.log('Connected to MongoDB'));
+db.on('error', () => console.log('Failed to connect to MongoDB cluster'));
+db.once('open', () => {
+  console.log('Connected to MongoDB cluster');
+
+  // Set up watch stream on tasks collections
+  const taskStream = db.collection('tasks').watch();
+  taskStream.on('change', change => {
+    console.log('i changed');
+  })
+});
 
 
 const usersSchema = new Schema({

@@ -74,8 +74,6 @@ const Dashboard = ({ user }) => {
       .catch(err => console.log(err))
     }
 
-    // console.log(temp[0].task_date.substring(0,9))
-    // console.log(tasks[0]["task_date"])
   // Get requester user tasks & saves them to state
   const getRequesterTasks = (mongoUsr) => {
     let options = { params: {firebase_id: mongoUsr.firebase_id} };
