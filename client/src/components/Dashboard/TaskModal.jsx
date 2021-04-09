@@ -46,6 +46,7 @@ const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
   // Store ticket in firebase
   const handleClick = (e) => {
     e.preventDefault();
+    let validFields = false;
     const body = {
       requestor_id: currentUser.uid,
       requestor_name: currentUser.displayName,
@@ -60,10 +61,25 @@ const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
       end_time: endTime,
       duration: Math.round((endTime - startTime) / 60000),
     }
-    axios.post('/api/tasks', body)
-      .then(resp => handleClose())
-      .then(() => getRequesterTasks(mongoUser))
-      .catch(err => console.log(err));
+
+    // Validates fields & throws error
+    if (fields.task === "") {
+      validFields = false;
+      alert('Task cannot be blank');
+      return
+    } else if (fields.neighborhood === "") {
+      validFields = false;
+      alert('Neighborhood cannot be blank');
+      return;
+    } else {
+      validFields = true;
+    }
+    if (validFields) {
+      axios.post('/api/tasks', body)
+        .then(resp => handleClose())
+        .then(() => getRequesterTasks(mongoUser))
+        .catch(err => console.log(err));
+    }
   }
 
   const handleShow = () => setShow(true);
