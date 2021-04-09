@@ -118,7 +118,7 @@ const Dashboard = ({ user }) => {
                 src={mongoUser.photo}
                 style={{ width: '50px', height: '50px', borderRadius: '100%'}}
               />
-              <span id="welcome">Welcome {currentUser.displayName}</span>
+              <span id="welcome">Welcome, {currentUser.displayName}</span>
               <button id="logout" className="btn btn-secondary" onClick={() => logout()}>
                 Log Out
               </button>
@@ -129,6 +129,7 @@ const Dashboard = ({ user }) => {
             !mongoUser.isVolunteer
               ? null
               : (
+                <>
                 <div id="volunteer-neighborhood">
                   <Neighborhood
                     fields={neighborhood}
@@ -139,8 +140,9 @@ const Dashboard = ({ user }) => {
                     setSelectedDuration={setSelectedDuration}
                     durationFilter={durationFilter}
                   />
-                  <span id="current-neighborhood">Currently Selected: {neighborhood.neighborhood}</span>
                 </div>
+                <div id="current-neighborhood">Currently Selected: {neighborhood.neighborhood}</div>
+                </>
               )
           }
 

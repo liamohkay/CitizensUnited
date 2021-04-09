@@ -251,11 +251,20 @@ input[type=radio] {
 #volunteer-neighborhood {
   margin: auto;
   margin-top: 50px;
-  width: 50%;
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
 }
 
 #current-neighborhood {
   margin-top: 15px;
+  display: inline-flex;
+  justify-content: center;
+  width: 100%;
+}
+
+#duration-dropdown {
+  margin-left: 10px;
 }
 
 #volunteer-neighborhood + .neighborhood-dropdown {
@@ -263,14 +272,14 @@ input[type=radio] {
 }
 
 #volunteer-neighborhood, .current-neighborhood {
-  display: block;
+  /* display: block; */
   text-align: center;
 }
 
 .volunteer-ticket, .requestor-ticket {
   display: grid;
   grid-template-columns: 15% 70% 15%;
-  border: 1px solid;
+  border: 1.5px solid;
   width: 50vw;
   margin-bottom: 10px;
   box-shadow: 5px 5px 4px #e6e6e6;
@@ -349,7 +358,7 @@ input[type=radio] {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
+  border: 1.5px solid black;
   border-radius: 10px;
   box-shadow: 5px 5px 4px #e6e6e6;
 }
@@ -477,6 +486,7 @@ input[type=radio] {
 
 #vote-container {
   display: grid;
+  margin-top: 10vh;
   width: 100vw;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 0.2fr 0.8fr;
