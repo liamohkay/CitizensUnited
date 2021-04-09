@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Form, Button, Modal } from 'react-bootstrap';
-import moment from 'moment'
 
 import { useAuth } from '../../contexts/AuthContext';
 import Neighborhood from '../Neighborhood.jsx';
@@ -61,7 +60,6 @@ const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
       end_time: endTime,
       duration: Math.round((endTime - startTime) / 60000),
     }
-    console.log(body);
     axios.post('/api/tasks', body)
       .then(resp => handleClose())
       .then(() => getRequesterTasks(mongoUser))
