@@ -108,7 +108,31 @@ table {
 }
 
 #banner {
-  background-color: #ffff93
+  background-color: #ffff93;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  position: relative;
+}
+
+#card-img {
+  width: 80%;
+}
+
+.imgs-banner {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 100px;
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-bottom: 90px;
+}
+
+.home-img {
+  width: auto;
+  max-height: 300px;
 }
 
 #Help, #About-Us, #Log-In-Button {
