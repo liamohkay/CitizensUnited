@@ -11,8 +11,9 @@ const OldTasksBtn = () => {
     <Link
       to={{ pathname: `/oldtasks/${currentUser.uid}` }}
       style={{textDecoration: 'none', color: 'black'}}
+      id="old-tasks-btn-container"
     >
-      <button type="button" className="btn btn-secondary">Old Tasks</button>
+      <button id="old-tasks-btn" type="button" className="btn btn-secondary">VIEW OLD TASKS</button>
     </Link>
   );
 }
