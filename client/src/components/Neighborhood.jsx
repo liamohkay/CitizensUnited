@@ -25,8 +25,8 @@ const Neighborhood = ({ fields, setFields, showAll }) => {
         onSelect={handleSelect}>
           { !showAll ? null : <Dropdown.Item eventKey="All Neighborhoods">All Neighborhoods</Dropdown.Item> }
           <Dropdown.Item eventKey="Arlington Heights">Arlington Heights</Dropdown.Item>
-          <Dropdown.Item eventKey="Carthay">Carthay</Dropdown.Item>
           <Dropdown.Item eventKey="Beverly Grove">Beverly Grove</Dropdown.Item>
+          <Dropdown.Item eventKey="Carthay">Carthay</Dropdown.Item>
           <Dropdown.Item eventKey="Chinatown">Chinatown</Dropdown.Item>
           <Dropdown.Item eventKey="Downtown">Downtown</Dropdown.Item>
           <Dropdown.Item eventKey="East Hollywood">East Hollywood</Dropdown.Item>
@@ -41,7 +41,6 @@ const Neighborhood = ({ fields, setFields, showAll }) => {
           <Dropdown.Item eventKey="Hollywood Hills">Hollywood Hills</Dropdown.Item>
           <Dropdown.Item eventKey="Hollywood Hills West">Hollywood Hills West</Dropdown.Item>
           <Dropdown.Item eventKey="Koreatown">Koreatown</Dropdown.Item>
-          <Dropdown.Item eventKey="Larchmont">Larchmont</Dropdown.Item>
           <Dropdown.Item eventKey="Los Feliz">Los Feliz</Dropdown.Item>
           <Dropdown.Item eventKey="Mid-City">Mid-City</Dropdown.Item>
           <Dropdown.Item eventKey="Mid-Wilshire">Mid-Wilshire</Dropdown.Item>
@@ -49,7 +48,6 @@ const Neighborhood = ({ fields, setFields, showAll }) => {
           <Dropdown.Item eventKey="Silver Lake">Silver Lake</Dropdown.Item>
           <Dropdown.Item eventKey="West Hollywood">West Hollywood</Dropdown.Item>
           <Dropdown.Item eventKey="Westlake">Westlake</Dropdown.Item>
-          <Dropdown.Item eventKey="Windsor Square">Windsor Square</Dropdown.Item>
       </DropdownButton>
     </div>
   )
