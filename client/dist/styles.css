@@ -69,14 +69,14 @@ table {
   justify-content: space-between;
 }
 
-#volunteer-button, #requester-button, #signup-button, #login-button {
+#volunteer-button, #requester-button, #signup-button, #login-button, #login-button-back{
   background-color: #8DA5ED;
   margin: 5px;
   margin-top: 25px;
   color: white;
 }
 
-#login-button {
+#login-button, #login-button-back {
   background-color: #8DA5ED;
   margin-top: 5px;
   width: 82px;

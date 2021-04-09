@@ -3,7 +3,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import { Form, Button, Card } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext.js';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import Logo from './Home/Logo.jsx';
 
 const LogIn = ({ setUser }) => {
@@ -52,6 +52,9 @@ const LogIn = ({ setUser }) => {
               <Form.Control name="password" type="password" value={fields.password} onChange={handleChange} required />
             </Form.Group>
             <Button id="login-button" className="w-100" onClick={handleClick}>Log In</Button>
+            <Link to={{ pathname: '/home'}}>
+              <Button id="login-button-back" className="w-100"> Back </Button>
+            </Link>
           </Form>
         </Card.Body>
       </Card>
