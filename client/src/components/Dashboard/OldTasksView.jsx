@@ -22,11 +22,23 @@ const OldTasksView = () => {
   }, [renderOld]);
 
   return (
-    <div>
-      <div id="old-tasks-container">
-      { !oldTasks ? null : (
-        oldTasks.map(ticket => <RequestTile ticket={ticket} old={true} setRenderOld={setRenderOld} />)
-      )}
+    <div id="dashboard-container">
+      <div className="dash-header-container">
+        <div id="user-welcome">
+          <img
+            src={currentUser.photoURL}
+            style={{ width: '50px', height: '50px', borderRadius: '100%'}}
+          />
+          <span id="welcome">Welcome {currentUser.displayName}</span>
+          <Link to={{ pathname: "/"}}>
+          <button id="logout" className="btn btn-secondary">Go Back To Home</button>
+          </Link>
+          </div>
+        </div>
+        <div className="old-tasks">
+        { !oldTasks ? null : (
+          oldTasks.map(ticket => <RequestTile ticket={ticket} old={true} setRenderOld={setRenderOld} />)
+        )}
       </div>
     </div>
   );
