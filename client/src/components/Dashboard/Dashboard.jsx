@@ -22,9 +22,7 @@ const Dashboard = ({ user }) => {
   const [tasks, setTasks] = useState([]);
   const [mongoUser, setMongoUser] = useState();
   const [loaded, setLoaded] = useState(true);
-  const [neighborhood, setNeighborhood] = useState({
-    neighborhood: '',
-  });
+  const [neighborhood, setNeighborhood] = useState({ neighborhood: '' });
   const [selectedDuration, setSelectedDuration] = useState();
   const [filtered, setFiltered] = useState(false);
   const [temp, setTemp] = useState([]);
@@ -44,7 +42,7 @@ const Dashboard = ({ user }) => {
       setSelectedDuration(1000);
     }
   }, [neighborhood]);
-  useEffect(()=> {
+  useEffect(() => {
     if (mongoUser && mongoUser.isVolunteer) {
       durationFilter();
     }
@@ -73,8 +71,6 @@ const Dashboard = ({ user }) => {
         }))
       })
       .catch(err => console.log(err))
-      // console.log(temp[0].task_date.substring(0,9))
-      // console.log(tasks[0]["task_date"])
   }
 
   // Get requester user tasks & saves them to state
