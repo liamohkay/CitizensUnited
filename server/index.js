@@ -12,33 +12,9 @@ const server = express()
   .use(morgan('dev'))
   .use(express.json())
   .use(cors())
-  .use(bodyparser.json())
   .use(bodyparser.urlencoded({ extended: true }))
   .use('/api', router)
+  .use(express.static(path.join(__dirname, '../client/dist/')))
 
-// Set up websockets connection on server
-const ioServer = require('http').createServer(server);
-const io = require('socket.io')(ioServer).of('/api/socket');
-  // .on('connection', socket => console.log('Socket.io: User connected'));
-io.on('connection', socket => {
-  socket.on('change', () => {
-    io.emit('newTask');
-  })
-});
-
-
-// Serve up static files
-server.use(express.static(path.join(__dirname, '../client/dist/')));
-
-// server.get('/*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../client/dist/index.html'), function(err) {
-//     if (err) {
-//       res.status(500).send(err)
-//     }
-//   })
-// });
-
-
-module.exports = ioServer;
 // Connect to router
-ioServer.listen(port, () => console.log(`Listening on port: ${port}`));
+server.listen(port, () => console.log(`Listening on port: ${port}`));
