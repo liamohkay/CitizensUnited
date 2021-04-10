@@ -75,7 +75,9 @@ const Dashboard = ({ user }) => {
     let options = { params: {firebase_id: mongoUsr.firebase_id} };
     axios.get('/api/tasks/requester', options)
       .then(resp => {
-        let tasksArr = resp.data[0].tasks;
+        let tasksArr = _.sortBy(resp.data[0].tasks, function(obj){
+          return new Date (obj.task_date)
+        });
 
         // Filter expired tasks and mark as expired in DB
         const currentDate = new Date().getTime();
@@ -95,7 +97,7 @@ const Dashboard = ({ user }) => {
   const getMongoUser = () => {
     let params = { firebase_id: currentUser.uid }
     axios.get('/api/users', { params })
-      .then(resp => {
+    .then(resp => {
         let mongoUsr = resp.data[0];
         setMongoUser(mongoUsr);
         if (mongoUsr) {
