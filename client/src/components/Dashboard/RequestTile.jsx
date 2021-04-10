@@ -69,7 +69,7 @@ const RequestTile = ({ mongoUser, ticket, old, setRenderOld, handleDeleteTask })
             <span
               id="requester-status"
               className="btn btn-sm"
-              style={{ cursor: "default", backgroundColor: "#8DA5ED" }}
+              style={{  cursor: "default", width: "79px", backgroundColor: "#8DA5ED" }}
             >
               {task_status}
             </span>
@@ -116,11 +116,11 @@ const RequestTile = ({ mongoUser, ticket, old, setRenderOld, handleDeleteTask })
           </span>
         </div>
         <div className="requestor-ticket__buttons">
-          <span id="requester-status" className="btn btn-sm" style={{ cursor: "default", backgroundColor: "#FFAF7A" }}>{task_status}</span>
+          <span id="requester-status" className="btn btn-sm" style={{ cursor: "default", width: "79px", backgroundColor: "#FFAF7A" }}>{task_status}</span>
           <span
               id="requester-taskdelete"
               className="btn btn-sm"
-              style={{ cursor: "default", backgroundColor: "#FFCCCB" }}
+              style={{ width: "79px", height: "31px", backgroundColor: "#FFCCCB" }}
               onClick={() => handleDeleteTask(_id)}
             >
               Delete
