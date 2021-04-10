@@ -73,14 +73,27 @@ const Dashboard = ({ user }) => {
         }))
       })
       .catch(err => console.log(err))
-    }
+      // console.log(temp[0].task_date.substring(0,9))
+      // console.log(tasks[0]["task_date"])
+  }
 
   // Get requester user tasks & saves them to state
   const getRequesterTasks = (mongoUsr) => {
     let options = { params: {firebase_id: mongoUsr.firebase_id} };
     axios.get('/api/tasks/requester', options)
       .then(resp => {
-        setTasks(resp.data[0].tasks)
+        let tasksArr = resp.data[0].tasks;
+
+        // Filter expired tasks and mark as expired in DB
+        const currentDate = new Date().getTime();
+        for (let i = 0; i < tasksArr.length; i++) {
+          const endDate = new Date(tasksArr[i].end_time).getTime();
+          if (endDate < currentDate) {
+            handleExpireTask(tasksArr[i]);
+            tasksArr.splice(i, 1);
+          }
+        }
+        setTasks(tasksArr)
       })
       .catch(err => console.log(err))
   }
@@ -95,7 +108,6 @@ const Dashboard = ({ user }) => {
         if (mongoUsr) {
           setNeighborhood({ neighborhood: mongoUsr.neighborhood });
         }
-
         // Get tasks based on user type
         if (mongoUsr) {
           if (mongoUsr.isVolunteer) {
@@ -121,6 +133,23 @@ const Dashboard = ({ user }) => {
 
   const clearState = () => {
     setSelectedDuration(1000)
+  }
+
+  const handleExpireTask = (task) => {
+    let params = { task_id: task._id }
+    axios.put('/api/tasks/expired', params)
+      .then(() => console.log('Task marked expired'))
+      .catch(err => console.log(err))
+  }
+
+  const handleDeleteTask = (ticket_id) => {
+    console.log(ticket_id);
+    axios.delete('/api/tasks', { data: { _id: ticket_id }})
+    .then(() => {
+      console.log('Task deleted');
+      getRequesterTasks();
+    })
+    .catch((err) => console.error(err))
   }
 
   return (
@@ -207,6 +236,7 @@ const Dashboard = ({ user }) => {
                       ticket={ticket}
                       key={ticket._id}
                       setLoaded={setLoaded}
+                      handleDeleteTask={handleDeleteTask}
                     />
               ))
             }
