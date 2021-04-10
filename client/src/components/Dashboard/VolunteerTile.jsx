@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import _, { sortBy } from 'underscore';
 // Components
 import AcceptBtn from './AcceptBtn'
 
@@ -51,7 +52,9 @@ const VolunteerTile = ({ mongoUser, ticket, volunteerName, setTasks, setLoaded }
     };
     axios.put('/api/tasks/hidden', body)
     .then((res) => {
-      setTasks(res.data[0].tasks)
+      setTasks(_.sortBy(res.data[0].tasks, function(obj){
+        return new Date (obj.task_date)
+      }))
     })
     .catch((err) => console.error(err))
   }
