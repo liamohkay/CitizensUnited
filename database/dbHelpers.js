@@ -138,8 +138,8 @@ const dbHelpers = {
   deleteTask: (req, callback) =>  {
     Tasks
       .find({ _id: req.body._id }).remove()
-      .then(() => console.log('Deleted old post'))
-      .catch(err => console.log(err))
+      .then((data) => callback(null, data))
+      .catch(err => callback(err))
   },
 
   // after this status of task changed in task collection but doesn't update the status in users collection automatically, you will need to do a getUserInfo request again
