@@ -137,7 +137,7 @@ const dbHelpers = {
 
   deleteTask: (req, callback) =>  {
     Tasks
-      .find({ _id: req.data._id }).remove()
+      .find({ _id: req.body._id }).remove()
       .then(() => console.log('Deleted old post'))
       .catch(err => console.log(err))
   },

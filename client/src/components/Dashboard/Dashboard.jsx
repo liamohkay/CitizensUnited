@@ -87,8 +87,8 @@ const Dashboard = ({ user }) => {
         // Filter expired tasks and mark as expired in DB
         const currentDate = new Date().getTime();
         for (let i = 0; i < tasksArr.length; i++) {
-          const startDate = new Date(tasksArr[i].start_time).getTime();
-          if (startDate > currentDate) {
+          const endDate = new Date(tasksArr[i].end_time).getTime();
+          if (endDate < currentDate) {
             handleExpireTask(tasksArr[i]);
             tasksArr.splice(i, 1);
           }
@@ -143,12 +143,13 @@ const Dashboard = ({ user }) => {
   }
 
   const handleDeleteTask = (ticket_id) => {
+    console.log(ticket_id);
     axios.delete('/api/tasks', { data: { _id: ticket_id }})
     .then(() => {
       console.log('Task deleted');
       getRequesterTasks();
     })
-    .catch(() => console.error(err))
+    .catch((err) => console.error(err))
   }
 
   return (

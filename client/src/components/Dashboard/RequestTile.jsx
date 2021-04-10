@@ -73,15 +73,6 @@ const RequestTile = ({ mongoUser, ticket, old, setRenderOld, handleDeleteTask })
             >
               {task_status}
             </span>
-            <span
-              id="requester-taskdelete"
-              className="btn btn-sm"
-              style={{ cursor: "default", backgroundColor: "#FFCCCB" }}
-              onClick={() => handleDeleteTask(_id)}
-            >
-              Delete
-            </span>
-
             { /* Dynamic button rendering, chat if regular tile, edit if old task */ }
             { old
               ?
@@ -126,6 +117,17 @@ const RequestTile = ({ mongoUser, ticket, old, setRenderOld, handleDeleteTask })
         </div>
         <div className="requestor-ticket__buttons">
           <span id="requester-status" className="btn btn-sm" style={{ cursor: "default", backgroundColor: "#FFAF7A" }}>{task_status}</span>
+          <span
+              id="requester-taskdelete"
+              className="btn btn-sm"
+              style={{ cursor: "default", backgroundColor: "#FFCCCB" }}
+              onClick={() => handleDeleteTask(_id)}
+            >
+              Delete
+          </span>
+          { old &&
+            <EditTaskModal ticket={ticket} setRenderOld={setRenderOld} />
+          }
         </div>
       </div>
     )

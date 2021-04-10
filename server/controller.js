@@ -112,7 +112,6 @@ const controller = {
   },
 
   expireTask: (req, res) => {
-    console.log('Expire Task req.body: ', req.body);
     dbHelpers.expireTask(req, (err, data) => {
       if (err) {
         res.status(400).send(err);
@@ -123,8 +122,7 @@ const controller = {
   },
 
   deleteTask: (req, res) => {
-    console.log('Delete Task req.data: ', req.data);
-    dbHelpers.expireTask(req, (err, data) => {
+    dbHelpers.deleteTask(req, (err, data) => {
       if (err) {
         res.status(400).send(err);
       } else {

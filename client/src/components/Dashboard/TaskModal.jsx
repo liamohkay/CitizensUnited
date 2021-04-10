@@ -58,7 +58,7 @@ const TaskModal = ({ mongoUser, currentUser, getRequesterTasks }) => {
       task_body: fields.task,
       task_neighborhood: fields.neighborhood,
       start_time: new Date(startDate.toISOString().substring(0, 11) + startTime.toISOString().substring(11, 24)),
-      end_time: endTime,
+      end_time: new Date(startDate.toISOString().substring(0, 11) + endTime.toISOString().substring(11, 24)),
       duration: Math.round((endTime - startTime) / 60000),
     }
 
