@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 // Components
 import Map from '../Map/Map'
 import ChatRoom from '../Chat/ChatRoom'
-import Logo from '../Home/Logo'
+import Logo from '../Home/Logo';
+import axios from 'axios';
 
 const TaskView = (props) => {
   const { mongoUser, ticket, room_id, isVolunteer, volunteerName } = props.location.state;
@@ -14,6 +15,12 @@ const TaskView = (props) => {
       ? ticket.volunteer_id
       : ticket.requestor_id
   );
+  const [requester, setRequester] = useState();
+  const [volunteer, setVolunteer] = useState();
+  useEffect(() => {
+    getUser();
+    console.log('hi')
+  }, [])
 
   const dateOptions = {
     year: '2-digit',
@@ -23,7 +30,25 @@ const TaskView = (props) => {
     minute: '2-digit',
   }
 
+  const getUser = () => {
+    console.log('TEST', ticket._id)
+    axios.get('/api/oneTask', { params: { task_id: ticket._id }})
+      .then((task) => {
+        console.log(task)
+        axios.get('/api/users', {params: {firebase_id: task.data[0].volunteer_id}})
+          .then((resp) => {
+            setVolunteer(resp.data[0])
+            axios.get('/api/users', {params: {firebase_id: task.data[0].requestor_id}})
+              .then((res) => {
+                setRequester(res.data[0])
+              })
+          })
+      })
+  }
+
   return (
+    <div>
+    {!requester || !volunteer ? null : (
     <div id="task-view-container">
       <div id="task-view-header">
         <Logo />
@@ -33,9 +58,9 @@ const TaskView = (props) => {
       </div>
 
       <div id="task-view-main-container">
-
+        <hr style={{color: "grey", height: 4}}/>
         <div id="task-view-info-title">
-          <h3>{ isVolunteer ? ticket.task_status : `${ticket.volunteer_name} has accepted your task!` }</h3>
+          <h3>{ isVolunteer ? "Accepted" : `${volunteer.first_name} ${volunteer.last_name} has accepted your task!` }</h3>
           <Link to={{ pathname: "/"}}>
               <button id="back-homepage-btn" type="button">Go back to Home Page</button>
             </Link>
@@ -58,27 +83,27 @@ const TaskView = (props) => {
 
         <div id="task-view-volunteer">
           <span style={{ display: 'block' }}>
-            <b>Requester:</b> {ticket.requestor_name}
+            <b>Volunteer:</b> {`${volunteer.first_name} ${volunteer.last_name}`}
           </span>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <b>Requester Score:</b> &nbsp;
+            <b>Volunteer Score:</b> &nbsp;
             <i className="far fa-thumbs-up fa-1x"></i> &nbsp;
-            <span>{ ticket.volunteer_thumbsUp } </span> &nbsp;&nbsp;&nbsp;
+            <span>{ volunteer.thumbsUp } </span> &nbsp;&nbsp;&nbsp;
             <i className="far fa-thumbs-down fa-1x"></i> &nbsp;
-            <span> { ticket.volunteer_thumbsDown } </span>
+            <span> { volunteer.thumbsDown } </span>
           </div>
         </div>
 
         <div id="task-view-requestor">
           <span style={{ display: 'block' }}>
-            < b>Volunteer:</b> {ticket.volunteer_name}
+            < b>Requester:</b> {ticket.requestor_name}
           </span>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            < b>Volunteer Score:</b> &nbsp;
+            < b>Requester Score:</b> &nbsp;
             <i className="far fa-thumbs-up fa-1x"></i> &nbsp;
-            <span> { ticket.requestor_thumbsUp } </span> &nbsp;&nbsp;&nbsp;
+            <span> { requester.thumbsUp } </span> &nbsp;&nbsp;&nbsp;
             <i className="far fa-thumbs-down fa-1x"></i> &nbsp;
-            <span> { ticket.requestor_thumbsDown } </span>
+            <span> { requester.thumbsDown } </span>
           </div>
         </div>
 
@@ -91,6 +116,8 @@ const TaskView = (props) => {
         </div>
 
       </div>
+    </div>
+    )}
     </div>
   );
 }

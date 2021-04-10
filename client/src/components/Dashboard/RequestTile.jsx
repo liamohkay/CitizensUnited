@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+import { useAuth } from '../../contexts/AuthContext';
 import EditTaskModal from './EditTaskModal';
 
-const RequestTile = ({ mongoUser, ticket, old, setRenderOld }) => {
+const RequestTile = ({ mongoUser, ticket, old, setRenderOld, handleDeleteTask }) => {
   const { currentUser } = useAuth();
   const {
     _id,
@@ -64,10 +66,13 @@ const RequestTile = ({ mongoUser, ticket, old, setRenderOld }) => {
             </span>
           </div>
           <div className="requestor-ticket__buttons">
-            <span id="requester-status" className="btn btn-sm" style={{ cursor: "default", backgroundColor: "#8DA5ED" }}>
+            <span
+              id="requester-status"
+              className="btn btn-sm"
+              style={{  cursor: "default", width: "85px", backgroundColor: "#8DA5ED" }}
+            >
               {task_status}
             </span>
-
             { /* Dynamic button rendering, chat if regular tile, edit if old task */ }
             { old
               ?
@@ -77,10 +82,11 @@ const RequestTile = ({ mongoUser, ticket, old, setRenderOld }) => {
               :
               (
                 <Link
+                  key={Math.random()}
                   to={{ pathname: `/task/${_id}`, state: { mongoUser, ticket, room_id, isVolunteer: false } }}
                   style={{textDecoration: 'none', color: 'black'}}
                 >
-                  <button id="chat-btn" style={{ width: "79px", backgroundColor: "#aaf8a7", border: "2px solid #aaf8a7", borderRadius: ".25rem" }}>Chat</button>
+                  <button id="chat-btn" style={{ width: "85px", backgroundColor: "#aaf8a7", border: "2px solid #aaf8a7", borderRadius: ".25rem" }}>Chat</button>
                 </Link>
               )
             }
@@ -111,7 +117,18 @@ const RequestTile = ({ mongoUser, ticket, old, setRenderOld }) => {
           </span>
         </div>
         <div className="requestor-ticket__buttons">
-          <span id="requester-status" className="btn btn-sm" style={{ cursor: "default", backgroundColor: "#FFAF7A" }}>{task_status}</span>
+          <span id="requester-status" className="btn btn-sm" style={{ cursor: "default", width: "85px", backgroundColor: "#FFAF7A"}}>{task_status}</span>
+          <span
+              id="requester-taskdelete"
+              className="btn btn-sm"
+              style={{ width: "85px", height: "31px", backgroundColor: "#FFCCCB" }}
+              onClick={() => handleDeleteTask(_id)}
+            >
+              Delete
+          </span>
+          { old &&
+            <EditTaskModal ticket={ticket} setRenderOld={setRenderOld} />
+          }
         </div>
       </div>
     )

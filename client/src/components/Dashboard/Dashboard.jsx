@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap'
 import { useAuth } from '../../contexts/AuthContext';
+import _, { sortBy } from 'underscore';
 
 // Components
 import RequestTile from './RequestTile';
@@ -29,6 +30,7 @@ const Dashboard = ({ user }) => {
 
   // Grabs mongo user on load and re-render & sets state for user & feed
   useEffect(() => getMongoUser(), [loaded]);
+
   useEffect(() => {
     if (mongoUser && mongoUser.isVolunteer) {
       getVolunteerTasks();
@@ -56,10 +58,16 @@ const Dashboard = ({ user }) => {
     }
     axios.get('/api/tasks/volunteer', { params })
       .then(resp => {
-        setTasks(resp.data[0].tasks)
-        setTemp(resp.data[0].tasks)
+        setTasks(_.sortBy(resp.data[0].tasks, function(obj){
+          return new Date (obj.task_date)
+        }))
+        setTemp(_.sortBy(resp.data[0].tasks, function(obj){
+          return new Date (obj.task_date)
+        }))
       })
       .catch(err => console.log(err))
+      // console.log(temp[0].task_date.substring(0,9))
+      // console.log(tasks[0]["task_date"])
   }
 
   // Get requester user tasks & saves them to state
@@ -67,7 +75,18 @@ const Dashboard = ({ user }) => {
     let options = { params: {firebase_id: mongoUsr.firebase_id} };
     axios.get('/api/tasks/requester', options)
       .then(resp => {
-        setTasks(resp.data[0].tasks)
+        let tasksArr = resp.data[0].tasks;
+
+        // Filter expired tasks and mark as expired in DB
+        const currentDate = new Date().getTime();
+        for (let i = 0; i < tasksArr.length; i++) {
+          const endDate = new Date(tasksArr[i].end_time).getTime();
+          if (endDate < currentDate) {
+            handleExpireTask(tasksArr[i]);
+            tasksArr.splice(i, 1);
+          }
+        }
+        setTasks(tasksArr)
       })
       .catch(err => console.log(err))
   }
@@ -82,7 +101,6 @@ const Dashboard = ({ user }) => {
         if (mongoUsr) {
           setNeighborhood({ neighborhood: mongoUsr.neighborhood });
         }
-
         // Get tasks based on user type
         if (mongoUsr) {
           if (mongoUsr.isVolunteer) {
@@ -102,10 +120,30 @@ const Dashboard = ({ user }) => {
         object.duration <= selectedDuration
         )
       })
-    )
+      )
+      // clearState()
   }
 
-  console.log(temp)
+  const clearState = () => {
+    setSelectedDuration(1000)
+  }
+
+  const handleExpireTask = (task) => {
+    let params = { task_id: task._id }
+    axios.put('/api/tasksexpired', params)
+      .then(() => console.log('Task marked expired'))
+      .catch(err => console.log(err))
+  }
+
+  const handleDeleteTask = (ticket_id) => {
+    console.log(ticket_id);
+    axios.delete('/api/tasks', { data: { _id: ticket_id }})
+    .then(() => {
+      console.log('Task deleted');
+      setLoaded(prev => !prev)
+    })
+    .catch((err) => console.error(err))
+  }
 
   return (
     <>
@@ -131,6 +169,7 @@ const Dashboard = ({ user }) => {
               : (
                 <>
                 <div id="volunteer-neighborhood">
+                <i className="fas fa-sync-alt fa-2x refresh-btn-vol" onClick={() => window.location.reload(false)}></i>
                   <Neighborhood
                     fields={neighborhood}
                     setFields={setNeighborhood}
@@ -159,6 +198,7 @@ const Dashboard = ({ user }) => {
                     mongoUser={mongoUser}
                   />
                   <OldTasksBtn />
+                  <i className="fas fa-sync-alt fa-2x refresh-btn" onClick={() => window.location.reload(false)}></i>
                 </div>
               )
         }
@@ -191,6 +231,7 @@ const Dashboard = ({ user }) => {
                       ticket={ticket}
                       key={ticket._id}
                       setLoaded={setLoaded}
+                      handleDeleteTask={handleDeleteTask}
                     />
               ))
             }

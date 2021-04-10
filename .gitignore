@@ -1,14 +1,12 @@
+/database/mongoConfig.js
 /client/dist/bundle.js
 /node_modules
 /package-lock.json
 /coverage
 /client/src/firebaseConfig.js
 /database/dbConfig.js
-<<<<<<< HEAD
 package-lock.json
 .env.local
 *.pem
 login.sh
-=======
-*.pem
->>>>>>> cce35456a61acded3312be552aad631eecbec3bf
+mongoConfig.js

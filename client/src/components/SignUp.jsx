@@ -194,7 +194,7 @@ const SignUp = ({ isVolunteer }) => {
             <progress value={progress} max="100" id="uploader"></progress>
             <input type="file" className="form-control" id="customFile" accept="image/*" onChange={handlePhoto} />
               <Button
-              id="signup-button"
+              id="signup-page-button"
               className="w-100"
               type="submit"
               onClick={submitForm}

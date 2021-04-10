@@ -49,18 +49,6 @@ table {
 }
 
 /* App Styles */
-#app {
-  /* margin: auto; */
-  /* width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 0px 0px;
-  grid-template-areas:
-    "app-container app-container app-container";
-  align-items: center;
-  justify-content: space-between; */
-}
-
 #app-container {
   margin: auto;
   display: flex;
@@ -69,7 +57,15 @@ table {
   justify-content: space-between;
 }
 
-#volunteer-button, #requester-button, #signup-button, #login-button, #login-button-back, #signup-button-back {
+#login-page-button, #signup-page-button {
+  background-color: #FFAF7A;
+  color: white;
+  margin: 5px;
+  margin-top: 25px;
+  border: #FFAF7A;
+}
+
+#volunteer-button, #requester-button, #login-button, #login-button-back, #signup-button-back {
   background-color: #8DA5ED;
   margin: 5px;
   margin-top: 25px;
@@ -78,22 +74,59 @@ table {
 
 #signup-button-back, #login-button-back {
   margin-top: 0;
+  border: none;
 }
 
 #login-button {
   background-color: #8DA5ED;
   margin-top: 5px;
+  margin-right: 100px;
   width: 82px;
   height: 36px;
   font-size: 1em;
 }
 
 #submit-button {
-  background-color: #f7a36c;
+  background-color: #FFAF7A;
+  border: #FFAF7A;
+}
+
+#cancel-button {
+  border: none;
+  background-color: #8DA5ED;
 }
 
 #banner {
-  background-color: #ffff93
+  background-color: #ffff93;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  position: relative;
+  margin-top: 8px;
+}
+
+#sign-up-bar {
+  padding: 40px;
+}
+
+#card-img {
+  width: 80%;
+}
+
+.imgs-banner {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 50px;
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-bottom: 90px;
+}
+
+.home-img {
+  width: auto;
+  max-height: 300px;
 }
 
 #Help, #About-Us, #Log-In-Button {
@@ -110,6 +143,7 @@ table {
 #end-links {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  box-shadow: 1px 1px 2px #cac8c8;
 }
 
 #logo-container {
@@ -138,8 +172,7 @@ table {
 }
 
 #Home-Page {
-  /* display: grid;
-  grid-template-columns: 1fr 1fr; */
+  box-shadow: 5px 5px 4px #e6e6e6;
 }
 
 #mission-statement {
@@ -200,6 +233,20 @@ input[type=radio] {
   grid-template-areas: ". submit-request old-tasks-btn-container ."
 }
 
+.refresh-btn {
+  grid-area: old-tasks-btn-container;
+  align-self: end;
+  justify-self: end;
+  margin-right: 11%;
+  cursor: pointer;
+}
+
+.refresh-btn-vol {
+  margin-right: 1%;
+  margin-top: .3%;
+  cursor: pointer;
+}
+
 #old-tasks-btn-container {
   grid-area: old-tasks-btn-container;
   margin-left: 35px;
@@ -222,6 +269,8 @@ input[type=radio] {
   display: grid;
   grid-template-columns: 50%;
   grid-template-areas: "logo . welcome";
+  box-shadow: 1px 1px 2px #cac8c8;
+  padding-bottom: 23px;
 }
 
 .dash-header-container #logo-container {
@@ -272,7 +321,6 @@ input[type=radio] {
 }
 
 #volunteer-neighborhood, .current-neighborhood {
-  /* display: block; */
   text-align: center;
 }
 
@@ -292,9 +340,11 @@ input[type=radio] {
 }
 
 .volunteer-ticket__buttons, .requestor-ticket__buttons {
-  display: grid;
+  margin-right: 1%;
+  flex-direction: column;
+  display: flex;
   grid-template-rows: 1fr 1fr;
-  justify-items: center;
+  justify-content: space-evenly;
   align-items: center;
 }
 
@@ -408,6 +458,7 @@ input[type=radio] {
   outline: none;
   border: 1px solid black;
   border-radius: 20px;
+  box-shadow: 5px 5px 4px #e6e6e6;
 }
 
 .chatBtn {
@@ -421,6 +472,7 @@ input[type=radio] {
   cursor: pointer;
   font-size: 1.25rem;
   margin-left: 5px;
+  box-shadow: 5px 5px 4px #e6e6e6;
 }
 
 .input ,

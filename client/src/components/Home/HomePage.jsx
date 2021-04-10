@@ -20,10 +20,10 @@ export default function HomePage ({ setIsVolunteer }) {
         </div>
       </div>
         <Card className="banner" id="banner" >
-          <Card.Img src='story.png' />
+          <img src='story.png' />
         </Card>
         <div>
-          <div className="d-flex justify-content-around">
+          <div id="sign-up-bar" className="d-flex justify-content-around">
             <Link to="/signup">
               <button type="submit" id="volunteer-button" className="btn btn-lg" name="volunteer" onClick={() => setIsVolunteer(true)} >
               Sign up to be a volunteer</button>
@@ -32,6 +32,12 @@ export default function HomePage ({ setIsVolunteer }) {
               <button type="submit" id="requester-button" className="btn btn-lg" name="requester" onClick={() => setIsVolunteer(false)}> Sign up to make requests</button>
             </Link>
           </div>
+        </div>
+        <div className="imgs-banner">
+          <img className="home-img" src="pic1.png" />
+          <img className="home-img" src="https://image.freepik.com/free-vector/volunteers-helping-elderly-people_23-2148583914.jpg" />
+          <img className="home-img" src="https://image.freepik.com/free-vector/volunteers-helping-elderly-people_52683-39216.jpg" />
+          <img className="home-img" src="https://image.freepik.com/free-vector/volunteers-helping-older-people_23-2148568868.jpg" />
         </div>
     </div>
   )

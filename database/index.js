@@ -1,13 +1,11 @@
+const { user, pass } = require('../mongoConfig.js');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-mongoose.connect('mongodb://13.56.238.64/citizens', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(`mongodb+srv://${user}:${pass}@cluster0.6bvqx.mongodb.net/test`, {useNewUrlParser: true, useUnifiedTopology: true});
 
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  console.log('database is running')
-});
-
+db.on('error', () => console.log('Failed to connect to MongoDB cluster'));
+db.once('open', () => console.log('Connected to MongoDB cluster'));
 
 const usersSchema = new Schema({
   firebase_id: {type: String, required: true, index: true},
