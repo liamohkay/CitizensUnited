@@ -84,8 +84,8 @@ const AcceptBtn = ({ mongoUser, ticket, task_id, setLoaded }) => {
     > */}
       <button style={{ background: "none", border: "none" }}>
         { ticket.task_status.toLowerCase() === 'accepted'
-          ? <button  onClick={handleClick} id="chat-btn" style={{ width: "67px", backgroundColor: "#aaf8a7", border: "2px solid #aaf8a7", borderRadius: ".25rem" }}>Chat</button>
-          : <button  onClick={handleClick} id="acceptBTN" style={{ width: "67px", backgroundColor: "#FFAF7A", border: "2px solid #FFAF7A", borderRadius: ".25rem" }}>Accept</button> }
+          ? <button  onClick={handleClick} id="chat-btn" style={{ width: "79px", backgroundColor: "#aaf8a7", border: "2px solid #aaf8a7", borderRadius: ".25rem" }}>Chat</button>
+          : <button  onClick={handleClick} id="acceptBTN" style={{ width: "79px", backgroundColor: "#FFAF7A", border: "2px solid #FFAF7A", borderRadius: ".25rem" }}>Accept</button> }
       </button>
     {/* <button
       onClick={handleClick}
