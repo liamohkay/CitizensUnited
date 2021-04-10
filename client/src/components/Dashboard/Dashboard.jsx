@@ -35,6 +35,7 @@ const Dashboard = ({ user }) => {
   // Sets up socket connection to database upon user connection to dashboard
   useEffect(() => {
     const socket = io('/api/socket');
+    socket.on('newTask', () => console.log('i detected a change'));
   }, []);
 
   useEffect(() => {

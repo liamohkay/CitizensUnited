@@ -18,12 +18,18 @@ const server = express()
 
 // Set up websockets connection on server
 const ioServer = require('http').createServer(server);
-const io = require('socket.io')(ioServer)
-  .of('/api/socket')
-  .on('connection', socket => console.log('Socket.io: User connected'));
+const io = require('socket.io')(ioServer).of('/api/socket');
+  // .on('connection', socket => console.log('Socket.io: User connected'));
+io.on('connection', socket => {
+  socket.on('change', () => {
+    io.emit('newTask');
+  })
+});
+
 
 // Serve up static files
 server.use(express.static(path.join(__dirname, '../client/dist/')));
 
+module.exports = ioServer;
 // Connect to router
 ioServer.listen(port, () => console.log(`Listening on port: ${port}`));

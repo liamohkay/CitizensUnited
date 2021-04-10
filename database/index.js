@@ -1,3 +1,4 @@
+const ioServer = require('../server/index.js');
 const { user, pass } = require('../mongoConfig.js');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
@@ -8,11 +9,23 @@ db.on('error', () => console.log('Failed to connect to MongoDB cluster'));
 db.once('open', () => {
   console.log('Connected to MongoDB cluster');
 
-  // Set up watch stream on tasks collections
-  const taskStream = db.collection('tasks').watch();
-  taskStream.on('change', change => {
-    console.log('i changed');
-  })
+//   // Set up watch stream on tasks collections
+//   const taskStream = db
+//     .collection('tasks')
+//     .watch([], { fullDocument: 'updateLookup' });
+
+//   taskStream.on('change', change => {
+//     let cobj;
+//     if (change.operationType === 'update') {
+//       console.log('i emitted partial');
+//       cobj = change.updateDescription.updatedFields;
+//     } else {
+//       console.log('i emmited full');
+//       cobj = change.fullDocument;
+//     }
+//     ioServer.emit('newTask');
+//   });
+// });
 });
 
 
