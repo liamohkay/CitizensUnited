@@ -68,7 +68,7 @@ const EditTaskModal = ({ ticket, setRenderOld }) => {
       <button
         id="chat-btn"
         onClick={handleShow}
-        style={{ width: "79px", backgroundColor: "#aaf8a7", border: "2px solid #aaf8a7", borderRadius: ".25rem" }}
+        style={{ width: "85px", backgroundColor: "#aaf8a7", border: "2px solid #aaf8a7", borderRadius: ".25rem" }}
       >
         Edit
       </button>
