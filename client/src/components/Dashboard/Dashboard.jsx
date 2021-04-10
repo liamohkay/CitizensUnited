@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap'
 import { useAuth } from '../../contexts/AuthContext';
 import _, { sortBy } from 'underscore';
+import io from 'socket.io-client';
+
 // Components
 import RequestTile from './RequestTile';
 import VolunteerTile from './VolunteerTile';
@@ -29,6 +31,13 @@ const Dashboard = ({ user }) => {
 
   // Grabs mongo user on load and re-render & sets state for user & feed
   useEffect(() => getMongoUser(), [loaded]);
+
+  // Sets up socket connection to database upon user connection to dashboard
+  useEffect(() => {
+    const socket = io('/api/socket');
+    socket.on('newTask', () => console.log('i detected a change'));
+  }, []);
+
   useEffect(() => {
     if (mongoUser && mongoUser.isVolunteer) {
       getVolunteerTasks();
@@ -66,8 +75,6 @@ const Dashboard = ({ user }) => {
       .catch(err => console.log(err))
     }
 
-    // console.log(temp[0].task_date.substring(0,9))
-    // console.log(tasks[0]["task_date"])
   // Get requester user tasks & saves them to state
   const getRequesterTasks = (mongoUsr) => {
     let options = { params: {firebase_id: mongoUsr.firebase_id} };
