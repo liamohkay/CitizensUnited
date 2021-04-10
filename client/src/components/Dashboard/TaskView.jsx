@@ -35,7 +35,7 @@ const TaskView = (props) => {
       <div id="task-view-main-container">
         <hr style={{color: "grey", height: 4}}/>
         <div id="task-view-info-title">
-          <h3>{ isVolunteer ? ticket.task_status : `${ticket.volunteer_name} has accepted your task!` }</h3>
+          <h3>{ isVolunteer ? "Accepted" : `${ticket.volunteer_name} has accepted your task!` }</h3>
           <Link to={{ pathname: "/"}}>
               <button id="back-homepage-btn" type="button">Go back to Home Page</button>
             </Link>
