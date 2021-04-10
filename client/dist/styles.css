@@ -326,9 +326,11 @@ input[type=radio] {
 }
 
 .volunteer-ticket__buttons, .requestor-ticket__buttons {
-  display: grid;
+  margin-right: 1%;
+  flex-direction: column;
+  display: flex;
   grid-template-rows: 1fr 1fr;
-  justify-items: center;
+  justify-content: space-evenly;
   align-items: center;
 }
 
