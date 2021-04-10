@@ -6,6 +6,7 @@ mongoose.connect(`mongodb+srv://${user}:${pass}@cluster0.6bvqx.mongodb.net/test`
 
 const db = mongoose.connection;
 db.on('error', () => console.log('Failed to connect to MongoDB cluster'));
+db.once('open', () => console.log('Connected to MongoDB cluster'));
 
 const usersSchema = new Schema({
   firebase_id: {type: String, required: true, index: true},

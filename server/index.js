@@ -18,27 +18,23 @@ const server = express()
   .use(bodyparser.urlencoded({ extended: true }))
   .use('/api', router)
 
-
-
 // Set up websockets connection on server
 const ioServer = require('http').createServer(server);
 const io = require('socket.io')(ioServer)
   .of('/api/socket')
-  .on('connection', socket => console.log('Socket.io: User connected'))
+  .on('connection', socket => {
+    console.log('Socket.io: User connected');
+
+    const taskStream = Tasks
+      .watch([], { fullDocument : "updateLookup" })
+      .on('change', change => {
+        Tasks.find({})
+          .catch(err => console.log(err))
+          .then(data => socket.emit('tasks', data))
+      });
+  })
 
 // Set up watch stream on tasks collections
-db.once('open', () => {
-  console.log('Connected to MongoDB cluster');
-
-  // Set up watch stream on tasks collections and emit
-  const taskStream = Tasks
-    .watch([], { fullDocument : "updateLookup" })
-    .on('change', change => {
-      console.log('i emitted');
-      io.to(change.fullDocument._id).emit('newTask', change.fullDocument);
-    });
-});
-
 
 // Serve up static files
 server.use(express.static(path.join(__dirname, '../client/dist/')));
