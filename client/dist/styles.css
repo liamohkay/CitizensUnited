@@ -233,6 +233,20 @@ input[type=radio] {
   grid-template-areas: ". submit-request old-tasks-btn-container ."
 }
 
+.refresh-btn {
+  grid-area: old-tasks-btn-container;
+  align-self: end;
+  justify-self: end;
+  margin-right: 11%;
+  cursor: pointer;
+}
+
+.refresh-btn-vol {
+  margin-right: 1%;
+  margin-top: .3%;
+  cursor: pointer;
+}
+
 #old-tasks-btn-container {
   grid-area: old-tasks-btn-container;
   margin-left: 35px;
