@@ -39,6 +39,8 @@ const EditTaskModal = ({ ticket, setRenderOld }) => {
   // Store ticket in firebase
   const handleClick = (e) => {
     e.preventDefault();
+    console.log('thumbsUp', ticket);
+    console.log('thumbsDown', ticket);
     const body = {
       _id: fields._id,
       requestor_id: currentUser.uid,
