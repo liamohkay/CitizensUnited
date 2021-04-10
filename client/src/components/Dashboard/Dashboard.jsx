@@ -169,6 +169,7 @@ const Dashboard = ({ user }) => {
               : (
                 <>
                 <div id="volunteer-neighborhood">
+                <i className="fas fa-sync-alt fa-2x refresh-btn-vol" onClick={() => window.location.reload(false)}></i>
                   <Neighborhood
                     fields={neighborhood}
                     setFields={setNeighborhood}
@@ -197,6 +198,7 @@ const Dashboard = ({ user }) => {
                     mongoUser={mongoUser}
                   />
                   <OldTasksBtn />
+                  <i className="fas fa-sync-alt fa-2x refresh-btn" onClick={() => window.location.reload(false)}></i>
                 </div>
               )
         }
