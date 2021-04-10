@@ -111,6 +111,28 @@ const controller = {
     })
   },
 
+  expireTask: (req, res) => {
+    console.log('Expire Task req.body: ', req.body);
+    dbHelpers.expireTask(req, (err, data) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    })
+  },
+
+  deleteTask: (req, res) => {
+    console.log('Delete Task req.data: ', req.data);
+    dbHelpers.expireTask(req, (err, data) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    })
+  },
+
   thumbsUp: (req, res) => {
     dbHelpers.thumbsUp(req, (err, data) => {
       if (err) {

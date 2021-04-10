@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+import { useAuth } from '../../contexts/AuthContext';
 import EditTaskModal from './EditTaskModal';
 
-const RequestTile = ({ mongoUser, ticket, old, setRenderOld }) => {
+const RequestTile = ({ mongoUser, ticket, old, setRenderOld, handleDeleteTask }) => {
   const { currentUser } = useAuth();
   const {
     _id,
@@ -64,8 +66,20 @@ const RequestTile = ({ mongoUser, ticket, old, setRenderOld }) => {
             </span>
           </div>
           <div className="requestor-ticket__buttons">
-            <span id="requester-status" className="btn btn-sm" style={{ cursor: "default", backgroundColor: "#8DA5ED" }}>
+            <span
+              id="requester-status"
+              className="btn btn-sm"
+              style={{ cursor: "default", backgroundColor: "#8DA5ED" }}
+            >
               {task_status}
+            </span>
+            <span
+              id="requester-taskdelete"
+              className="btn btn-sm"
+              style={{ cursor: "default", backgroundColor: "#FFCCCB" }}
+              onClick={() => handleDeleteTask(_id)}
+            >
+              Delete
             </span>
 
             { /* Dynamic button rendering, chat if regular tile, edit if old task */ }
