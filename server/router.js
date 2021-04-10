@@ -44,7 +44,7 @@ router
   .put(controller.completeTask)
 
 router
-  .route('/tasks/expired')
+  .route('/tasksexpired')
   .put(controller.expireTask)
 
 router
