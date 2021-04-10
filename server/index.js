@@ -30,6 +30,15 @@ io.on('connection', socket => {
 // Serve up static files
 server.use(express.static(path.join(__dirname, '../client/dist/')));
 
+// server.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../client/dist/index.html'), function(err) {
+//     if (err) {
+//       res.status(500).send(err)
+//     }
+//   })
+// });
+
+
 module.exports = ioServer;
 // Connect to router
 ioServer.listen(port, () => console.log(`Listening on port: ${port}`));
