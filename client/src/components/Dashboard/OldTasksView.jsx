@@ -25,6 +25,15 @@ const OldTasksView = () => {
 
   }, [renderOld]);
 
+  const handleDeleteTask = (ticket_id) => {
+    axios.delete('/api/tasks', { data: { _id: ticket_id }})
+    .then(() => {
+      console.log('Task deleted');
+      getRequesterTasks();
+    })
+    .catch((err) => console.error(err))
+  }
+
   return (
     <div id="dashboard-container">
       <div className="dash-header-container">
@@ -41,7 +50,7 @@ const OldTasksView = () => {
         </div>
         <div className="old-tasks">
         { !oldTasks ? null : (
-          oldTasks.map(ticket => <RequestTile ticket={ticket} old={true} setRenderOld={setRenderOld} />)
+          oldTasks.map(ticket => <RequestTile ticket={ticket} old={true} setRenderOld={setRenderOld} handleDeleteTask={handleDeleteTask} />)
         )}
       </div>
     </div>

@@ -13,9 +13,9 @@ const dbHelpers = {
     let query;
     req.query.task_neighborhood ? query = {
       task_neighborhood: req.query.task_neighborhood,
-      task_status: { $ne: 'Completed' }
+      task_status: { $nin: ['Completed', 'Expired'] }
     } : query = {
-      task_status: { $ne: 'Completed' }
+      task_status: { $nin: ['Completed', 'Expired'] }
     }
     Tasks
       .find(query, (err, data) => {
@@ -38,7 +38,7 @@ const dbHelpers = {
     Tasks
       .find({
         requestor_id: req.query.firebase_id,
-        task_status: { $ne: 'Completed' }
+        task_status: { $nin: ['Completed', 'Expired'] }
       }, (err, data) => {
         if (err) callback(err)
         Users
@@ -80,7 +80,7 @@ const dbHelpers = {
   getOldTasks: (req, callback) => {
     Tasks.find({
       requestor_id: req.query.requestor_id,
-      task_status: 'Completed'
+      task_status: { $in: ['Completed', 'Expired'] }
     }, (err, data) => callback(err, data))
   },
 
@@ -135,6 +135,13 @@ const dbHelpers = {
       })
   },
 
+  deleteTask: (req, callback) =>  {
+    Tasks
+      .find({ _id: req.body._id }).remove()
+      .then(() => console.log('Deleted old post'))
+      .catch(err => console.log(err))
+  },
+
   // after this status of task changed in task collection but doesn't update the status in users collection automatically, you will need to do a getUserInfo request again
   acceptTask: (req, callback) => {
     Tasks
@@ -180,6 +187,16 @@ const dbHelpers = {
     Tasks
     .update({_id: req.body.task_id}, {
       $set: {task_status: 'Completed'}
+    }, (err, data) => {
+      if (err) callback(err)
+      callback(null, data)
+    })
+  },
+
+  expireTask: (req, callback) => {
+    Tasks
+    .update({_id: req.body.task_id}, {
+      $set: {task_status: 'Expired'}
     }, (err, data) => {
       if (err) callback(err)
       callback(null, data)

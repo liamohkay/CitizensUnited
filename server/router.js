@@ -9,6 +9,7 @@ router
 router
   .route('/tasks')
   .post(controller.postNewTask)
+  .delete(controller.deleteTask)
 
 router
   .route('/oldtasks')
@@ -41,6 +42,10 @@ router
 router
   .route('/tasks/completed')
   .put(controller.completeTask)
+
+router
+  .route('/tasks/expired')
+  .put(controller.expireTask)
 
 router
   .route('/ratings/thumbsUp')

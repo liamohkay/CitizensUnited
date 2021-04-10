@@ -30,6 +30,12 @@ const EditTaskModal = ({ ticket, setRenderOld }) => {
     });
   };
 
+  useEffect(() => {
+    if (endTime <= startTime) {
+      setEndTime(new Date(new Date().setHours(startTime.getHours(), startTime.getMinutes() + 5)))
+    }
+  }, [startTime])
+
   // Store ticket in firebase
   const handleClick = (e) => {
     e.preventDefault();
@@ -44,8 +50,8 @@ const EditTaskModal = ({ ticket, setRenderOld }) => {
       task_status: 'Pending',
       task_body: fields.task_body,
       task_neighborhood: fields.task_neighborhood,
-      start_time: startTime,
-      end_time: endTime,
+      start_time: new Date(startDate.toISOString().substring(0, 11) + startTime.toISOString().substring(11, 24)),
+      end_time: new Date(startDate.toISOString().substring(0, 11) + endTime.toISOString().substring(11, 24)),
       duration: Math.round((endTime - startTime) / 60000),
     }
     axios.post('/api/tasks', body)
@@ -117,6 +123,7 @@ const EditTaskModal = ({ ticket, setRenderOld }) => {
                 time={endTime}
                 startDate={startDate}
                 setTime={setEndTime}
+                startTime={startTime}
               />
             </Form.Group>
           </Form>
