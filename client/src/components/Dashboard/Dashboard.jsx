@@ -137,7 +137,7 @@ const Dashboard = ({ user }) => {
 
   const handleExpireTask = (task) => {
     let params = { task_id: task._id }
-    axios.put('/api/tasks/expired', params)
+    axios.put('/api/tasksexpired', params)
       .then(() => console.log('Task marked expired'))
       .catch(err => console.log(err))
   }
@@ -147,7 +147,7 @@ const Dashboard = ({ user }) => {
     axios.delete('/api/tasks', { data: { _id: ticket_id }})
     .then(() => {
       console.log('Task deleted');
-      getRequesterTasks();
+      setLoaded(prev => !prev)
     })
     .catch((err) => console.error(err))
   }
