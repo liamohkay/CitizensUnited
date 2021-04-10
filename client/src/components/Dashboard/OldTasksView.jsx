@@ -29,7 +29,7 @@ const OldTasksView = () => {
     axios.delete('/api/tasks', { data: { _id: ticket_id }})
     .then(() => {
       console.log('Task deleted');
-      getRequesterTasks();
+      setRenderOld(prev => !prev)
     })
     .catch((err) => console.error(err))
   }

@@ -10,7 +10,7 @@ const AcceptBtn = ({ mongoUser, ticket, task_id, setLoaded }) => {
   const { currentUser } = useAuth();
   const history = useHistory();
   const chatRoomRef = chat.collection('chatRooms');
-  const [roomID, setRoomID] = useState();
+  const [roomID, setRoomID] = useState(ticket.room_id);
 
   // Creates a new chatroom in firebase & returns the roomID
   const createChatRoom = () => {
@@ -37,7 +37,6 @@ const AcceptBtn = ({ mongoUser, ticket, task_id, setLoaded }) => {
   // Get's task by task id that volunteer was just added to
   const putChatUsers = () => {
     axios.get('/api/oneTask', { params: { task_id }})
-      .catch(err => console.log(err))
       .then(resp => {
         const { requestor_id, volunteer_id, room_id } = resp.data[0];
         // Insert both ids into chatroom by id
@@ -46,19 +45,28 @@ const AcceptBtn = ({ mongoUser, ticket, task_id, setLoaded }) => {
             users: [requestor_id, volunteer_id],
             messages: []
           })
-            .catch(err => console.log(err))
-            .then(resp => {
-              axios.put('/api/rooms', { task_id, room_id: resp._delegate._key.path.segments[1] })
+            // .catch(err => console.log(err))
+            .then(res => {
+              setRoomID(res._delegate._key.path.segments[1])
+              axios.put('/api/rooms', { task_id, room_id: res._delegate._key.path.segments[1] })
                 // Force dashboard to rerender on click to update info on return
-                .then(() => setLoaded(prev => !prev))
-                .then(() => history.push(
-                  { pathname: `/task/${task_id}`,
-                    state: { mongoUser, ticket, room_id: resp._delegate._key.path.segments[1], isVolunteer: true }
-                  }
-                ))
+                .then(() => {
+                  setLoaded(prev => !prev);
+                  history.push(
+                    { pathname: `/task/${task_id}`,
+                      state: { mongoUser, ticket, room_id: res._delegate._key.path.segments[1], isVolunteer: true }
+                    }
+                  )
+                })
+            })
+        } else {
+          history.push(
+            { pathname: `/task/${task_id}`,
+              state: { mongoUser, ticket, room_id: roomID, isVolunteer: true }
             })
         }
       })
+      .catch(err => console.log(err))
     }
 
   const handleClick = (e) => {
