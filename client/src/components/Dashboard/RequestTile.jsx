@@ -82,6 +82,7 @@ const RequestTile = ({ mongoUser, ticket, old, setRenderOld, handleDeleteTask })
               :
               (
                 <Link
+                  key={Math.random()}
                   to={{ pathname: `/task/${_id}`, state: { mongoUser, ticket, room_id, isVolunteer: false } }}
                   style={{textDecoration: 'none', color: 'black'}}
                 >
