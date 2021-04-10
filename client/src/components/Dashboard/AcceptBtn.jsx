@@ -4,11 +4,13 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext.js';
 import { chat } from '../../firebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import { Link } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 const AcceptBtn = ({ mongoUser, ticket, task_id, setLoaded }) => {
   const { currentUser } = useAuth();
+  const history = useHistory();
   const chatRoomRef = chat.collection('chatRooms');
+  const [roomID, setRoomID] = useState();
 
   // Creates a new chatroom in firebase & returns the roomID
   const createChatRoom = () => {
@@ -49,10 +51,15 @@ const AcceptBtn = ({ mongoUser, ticket, task_id, setLoaded }) => {
               axios.put('/api/rooms', { task_id, room_id: resp._delegate._key.path.segments[1] })
                 // Force dashboard to rerender on click to update info on return
                 .then(() => setLoaded(prev => !prev))
+                .then(() => history.push(
+                  { pathname: `/task/${task_id}`,
+                    state: { mongoUser, ticket, room_id: resp._delegate._key.path.segments[1], isVolunteer: true }
+                  }
+                ))
             })
         }
-    })
-  }
+      })
+    }
 
   const handleClick = (e) => {
     putVolunteer();
@@ -61,17 +68,31 @@ const AcceptBtn = ({ mongoUser, ticket, task_id, setLoaded }) => {
 
   return (
     <div  id="accept-btn">
-    <Link
+    {/* <Link
       to={{ pathname: `/task/${task_id}`, state: { mongoUser, ticket, room_id: ticket.room_id, isVolunteer: true } }}
       style={{textDecoration: 'none',  color: 'black'}}
+      key={Math.random()}
       onClick={handleClick}
-    >
+    > */}
       <button style={{ background: "none", border: "none" }}>
         { ticket.task_status.toLowerCase() === 'accepted'
-          ? <button id="chat-btn" style={{ width: "67px", backgroundColor: "#aaf8a7", border: "2px solid #aaf8a7", borderRadius: ".25rem" }}>Chat</button>
-          : <button id="acceptBTN" style={{ width: "67px", backgroundColor: "#FFAF7A", border: "2px solid #FFAF7A", borderRadius: ".25rem" }}>Accept</button> }
+          ? <button  onClick={handleClick} id="chat-btn" style={{ width: "67px", backgroundColor: "#aaf8a7", border: "2px solid #aaf8a7", borderRadius: ".25rem" }}>Chat</button>
+          : <button  onClick={handleClick} id="acceptBTN" style={{ width: "67px", backgroundColor: "#FFAF7A", border: "2px solid #FFAF7A", borderRadius: ".25rem" }}>Accept</button> }
       </button>
-    </Link>
+    {/* <button
+      onClick={handleClick}
+      style={{
+        background: "none",
+        border: "none",
+        width: "67px",
+        border: "2px",
+        borderRadius: ".25rem",
+        backgroundColor: ticket.task_status.toLowerCase === 'accepted' ? '#aaf8a7' : '#FFAF7A'
+      }}
+    >
+      { ticket.task_status.toLowerCase === 'accepted' ? 'Chat' : 'Accept' }
+    </button> */}
+    {/* </Link> */}
     </div>
 
   );
