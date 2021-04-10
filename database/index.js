@@ -1,4 +1,3 @@
-const ioServer = require('../server/index.js');
 const { user, pass } = require('../mongoConfig.js');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
@@ -6,28 +5,7 @@ mongoose.connect(`mongodb+srv://${user}:${pass}@cluster0.6bvqx.mongodb.net/test`
 
 const db = mongoose.connection;
 db.on('error', () => console.log('Failed to connect to MongoDB cluster'));
-db.once('open', () => {
-  console.log('Connected to MongoDB cluster');
-
-//   // Set up watch stream on tasks collections
-//   const taskStream = db
-//     .collection('tasks')
-//     .watch([], { fullDocument: 'updateLookup' });
-
-//   taskStream.on('change', change => {
-//     let cobj;
-//     if (change.operationType === 'update') {
-//       console.log('i emitted partial');
-//       cobj = change.updateDescription.updatedFields;
-//     } else {
-//       console.log('i emmited full');
-//       cobj = change.fullDocument;
-//     }
-//     ioServer.emit('newTask');
-//   });
-// });
-});
-
+db.once('open', () => console.log('Connected to MongoDB cluster'));
 
 const usersSchema = new Schema({
   firebase_id: {type: String, required: true, index: true},

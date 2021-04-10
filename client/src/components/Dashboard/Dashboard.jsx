@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap'
 import { useAuth } from '../../contexts/AuthContext';
 import _, { sortBy } from 'underscore';
-import io from 'socket.io-client';
 
 // Components
 import RequestTile from './RequestTile';
@@ -31,12 +30,6 @@ const Dashboard = ({ user }) => {
 
   // Grabs mongo user on load and re-render & sets state for user & feed
   useEffect(() => getMongoUser(), [loaded]);
-
-  // Sets up socket connection to database upon user connection to dashboard
-  useEffect(() => {
-    const socket = io('/api/socket');
-    socket.on('newTask', () => console.log('i detected a change'));
-  }, []);
 
   useEffect(() => {
     if (mongoUser && mongoUser.isVolunteer) {
@@ -137,7 +130,7 @@ const Dashboard = ({ user }) => {
 
   const handleExpireTask = (task) => {
     let params = { task_id: task._id }
-    axios.put('/api/tasks/expired', params)
+    axios.put('/api/tasksexpired', params)
       .then(() => console.log('Task marked expired'))
       .catch(err => console.log(err))
   }
@@ -147,7 +140,7 @@ const Dashboard = ({ user }) => {
     axios.delete('/api/tasks', { data: { _id: ticket_id }})
     .then(() => {
       console.log('Task deleted');
-      getRequesterTasks();
+      setLoaded(prev => !prev)
     })
     .catch((err) => console.error(err))
   }
