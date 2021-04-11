@@ -21,6 +21,14 @@ const EditTaskModal = ({ ticket, setRenderOld }) => {
   const [startTime, setStartTime] = useState(new Date(ticket.start_time));
   const [endTime, setEndTime] = useState(new Date(ticket.end_time));
   const [fields, setFields] = useState(ticket);
+  const [mongoUser, setMongoUser] = useState();
+
+  useEffect(() => {
+    console.log(ticket.requestor_id);
+    axios.get('/api/users', { params: {firebase_id: ticket.requestor_id }})
+      .then(resp => setMongoUser(resp.data[0]))
+      .catch(err => console.log(err))
+  }, [])
 
   // Tracks user input on form fields
   const handleChange = (e) => {
@@ -39,15 +47,13 @@ const EditTaskModal = ({ ticket, setRenderOld }) => {
   // Store ticket in firebase
   const handleClick = (e) => {
     e.preventDefault();
-    console.log('thumbsUp', ticket);
-    console.log('thumbsDown', ticket);
     const body = {
       _id: fields._id,
       requestor_id: currentUser.uid,
       requestor_name: currentUser.displayName,
       requestor_photo: currentUser.photoURL,
-      requestor_thumbsUp: fields.thumbsUp,
-      requestor_thumbsDown: fields.thumbsDown,
+      requestor_thumbsUp: mongoUser.thumbsUp,
+      requestor_thumbsDown: mongoUser.thumbsDown,
       task_date: startDate,
       task_status: 'Pending',
       task_body: fields.task_body,
