@@ -21,6 +21,14 @@ const EditTaskModal = ({ ticket, setRenderOld }) => {
   const [startTime, setStartTime] = useState(new Date(ticket.start_time));
   const [endTime, setEndTime] = useState(new Date(ticket.end_time));
   const [fields, setFields] = useState(ticket);
+  const [mongoUser, setMongoUser] = useState();
+
+  useEffect(() => {
+    console.log(ticket.requestor_id);
+    axios.get('/api/users', { params: {firebase_id: ticket.requestor_id }})
+      .then(resp => setMongoUser(resp.data[0]))
+      .catch(err => console.log(err))
+  }, [])
 
   // Tracks user input on form fields
   const handleChange = (e) => {
@@ -44,14 +52,14 @@ const EditTaskModal = ({ ticket, setRenderOld }) => {
       requestor_id: currentUser.uid,
       requestor_name: currentUser.displayName,
       requestor_photo: currentUser.photoURL,
-      requestor_thumbsUp: fields.thumbsUp,
-      requestor_thumbsDown: fields.thumbsDown,
+      requestor_thumbsUp: mongoUser.thumbsUp,
+      requestor_thumbsDown: mongoUser.thumbsDown,
       task_date: startDate,
       task_status: 'Pending',
       task_body: fields.task_body,
       task_neighborhood: fields.task_neighborhood,
-      start_time: new Date(startDate.toISOString().substring(0, 11) + startTime.toISOString().substring(11, 24)),
-      end_time: new Date(startDate.toISOString().substring(0, 11) + endTime.toISOString().substring(11, 24)),
+      start_time: new Date(startDate.toLocaleString().substring(0, 10) + ' ' + startTime.toLocaleString().substring(11, 24)),
+      end_time: new Date(startDate.toLocaleString().substring(0, 10) + ' ' + endTime.toLocaleString().substring(11, 24)),
       duration: Math.round((endTime - startTime) / 60000),
     }
     axios.post('/api/tasks', body)
