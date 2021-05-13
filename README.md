@@ -3,7 +3,7 @@
 1. [Technologies](#Technologies)
 1. [Installation](#Installation)
 1. [Setup](#Setup)
-1. [Run SpotiBot](#RunSpotiBot)
+1. [Run CitizensUnited](#RunCitizensUnited)
 
 # Overview
 Citizens United is a web app that bridges tech into the community by connecting volunteers with individuals that require assistance with day-to-day activities (senior citizens, single-mothers, etc.) around the Los Angeles area. Users can sign up as "requesters" or "volunteers" and request or accept tasks posted to neighborhood boards. Once a requester and volunteer are matched, they can talk to each other in realtime to arrange a rendevous with each other. After the task is complete, each user can leave a rating for the other, that affects their community credit score seen by other users on CitizensUnited.
@@ -16,6 +16,7 @@ Citizens United is a web app that bridges tech into the community by connecting 
 - MongoDB
 - [Firestore](https://firebase.google.com/docs/firestore) (Cloud NoSQL Database)
 - [Firebase Authentication](https://firebase.google.com/docs/auth) (User Authentication)
+- [Firebase Storage (Photos)](https://firebase.google.com/docs/storage)
 
 # Installation
 1. Clone down the latest version of CitizensUnited from GitHub and navigate to the project directory.
@@ -33,7 +34,7 @@ $ npm install
 ## Firebase/Firestore
 1. Sign up for a [Firebase](https://firebase.google.com/) account and create a new project.
 
-2. Add Firebase to your web app and copy and paste the Firebase SDK configuration settings to `/client/src/firebase/fbConfig-ex.js`
+2. Add Firebase to your web app and copy and paste the Firebase SDK configuration settings to `/client/src/firebaseConfig-ex.js`
 ```
 // Firebase + Firestore SDK config
 const firebaseConfig = {
@@ -46,4 +47,30 @@ const firebaseConfig = {
 };
 ```
 
-3.  Rename `/client/src/firebase/fbConfig-ex.js` to `/client/src/firebase/fbConfig.js`. Renaming the file will cause it to become gitignored and is the correct filepath for the front-end to import your Firebase configuration.
+3.  Rename `/client/src/firebaseConfig-ex.js` to `/client/src/firebaseConfig.js`. Renaming the file will cause it to become git ignored and is the correct filepath for the front-end to import your Firebase configuration.
+
+## MongoDB
+1. Add your MongoDB credentials and URL to the `/database/mongoConfig-ex.js`. Note the URL can be for your local machine or a [Compass](https://www.mongodb.com/products/compass) cluster (CitizensUnited used a Compass Cluster).
+
+```
+// MongoDB/Compass config
+module.exports = {
+  user: 'FILL ME IN',
+  pass: 'FILL ME IN',
+  url: 'FILL ME IN'
+};
+```
+
+2. Rename `/database/mongoConfig-ex.js` to `/database/mongoConfig-ex.js`. Renaming the file will cause it to become git ignored and is the correct filepath for the back-end to import the database credentials.
+
+
+# Run CitizensUnited
+1. Compile the project build.
+```
+$ npm run build
+```
+2. Start the express server.
+```
+$ npm start
+```
+3. Navigate to the localhost port in your browser. The project default is `localhost:3000`.
