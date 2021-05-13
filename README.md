@@ -3,7 +3,7 @@
 1. [Technologies](#Technologies)
 1. [Installation](#Installation)
 1. [Setup](#Setup)
-1. [Run CitizensUnited](#RunCitizensUnited)
+1. [Start](#Start)
 
 # Overview
 Citizens United is a web app that bridges tech into the community by connecting volunteers with individuals that require assistance with day-to-day activities (senior citizens, single-mothers, etc.) around the Los Angeles area. Users can sign up as "requesters" or "volunteers" and request or accept tasks posted to neighborhood boards. Once a requester and volunteer are matched, they can talk to each other in realtime to arrange a rendevous with each other. After the task is complete, each user can leave a rating for the other, that affects their community credit score seen by other users on CitizensUnited.
@@ -37,7 +37,7 @@ $ npm install
 2. Add Firebase to your web app and copy and paste the Firebase SDK configuration settings to `/client/src/firebaseConfig-ex.js`
 ```
 // Firebase + Firestore SDK config
-const firebaseConfig = {
+const config = {
   apiKey: "FILL_ME_IN",
   authDomain: "FILL_ME_IN",
   projectId: "FILL_ME_IN",
@@ -64,7 +64,7 @@ module.exports = {
 2. Rename `/database/mongoConfig-ex.js` to `/database/mongoConfig-ex.js`. Renaming the file will cause it to become git ignored and is the correct filepath for the back-end to import the database credentials.
 
 
-# Run CitizensUnited
+# Start
 1. Compile the project build.
 ```
 $ npm run build
