@@ -14,9 +14,8 @@ Citizens United is a web app that bridges tech into the community by connecting 
 - JavaScript
 - Express
 - MongoDB
-- [Firestore](https://firebase.google.com/docs/firestore) (Cloud NoSQL Database)
+- [Firebase Storage](https://firebase.google.com/docs/storage) (Photos)
 - [Firebase Authentication](https://firebase.google.com/docs/auth) (User Authentication)
-- [Firebase Storage (Photos)](https://firebase.google.com/docs/storage)
 
 # Installation
 1. Clone down the latest version of CitizensUnited from GitHub and navigate to the project directory.
