@@ -1,4 +1,4 @@
-const { user, pass } = require('../mongoConfig.js');
+const { user, pass, url } = require('./mongoConfig.js');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 mongoose.connect(`mongodb+srv://${user}:${pass}@${url}`, {useNewUrlParser: true, useUnifiedTopology: true});
