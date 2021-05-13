@@ -8,7 +8,9 @@
 # Overview
 Citizens United is a web app that bridges tech into the community by connecting volunteers with individuals that require assistance with day-to-day activities (senior citizens, single-mothers, etc.) around the Los Angeles area. Users can sign up as "requesters" or "volunteers" and request or accept tasks posted to neighborhood boards.
 
-![](Home.gif)
+![](./client/dist/Home.gif)
+![](./client/dist/Signup.gif)
+![](./client/dist/Login.gif)
 
 Once a requester and volunteer are matched, they can talk to each other in realtime to arrange a rendevous with each other. After the task is complete, each user can leave a rating for the other, that affects their community credit score seen by other users on CitizensUnited.
 
