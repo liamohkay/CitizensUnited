@@ -6,7 +6,11 @@
 1. [Start](#Start)
 
 # Overview
-Citizens United is a web app that bridges tech into the community by connecting volunteers with individuals that require assistance with day-to-day activities (senior citizens, single-mothers, etc.) around the Los Angeles area. Users can sign up as "requesters" or "volunteers" and request or accept tasks posted to neighborhood boards. Once a requester and volunteer are matched, they can talk to each other in realtime to arrange a rendevous with each other. After the task is complete, each user can leave a rating for the other, that affects their community credit score seen by other users on CitizensUnited.
+Citizens United is a web app that bridges tech into the community by connecting volunteers with individuals that require assistance with day-to-day activities (senior citizens, single-mothers, etc.) around the Los Angeles area. Users can sign up as "requesters" or "volunteers" and request or accept tasks posted to neighborhood boards.
+
+![](Home.gif)
+
+Once a requester and volunteer are matched, they can talk to each other in realtime to arrange a rendevous with each other. After the task is complete, each user can leave a rating for the other, that affects their community credit score seen by other users on CitizensUnited.
 
 # Technologies
 - HTML + CSS
@@ -23,7 +27,7 @@ Citizens United is a web app that bridges tech into the community by connecting 
 $ git clone https://github.com/liamohkay/CitizensUnited
 $ cd CitizensUnited
 ```
-2. Using install project dependencies inside the SpotiBot directory.
+2. Using install project dependencies inside the CitizensUnited directory.
 ```
 $ npm install
 ```
