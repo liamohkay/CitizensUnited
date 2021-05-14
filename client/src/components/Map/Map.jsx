@@ -1,4 +1,5 @@
 import React from "react";
+import { key } from './mapConfig.js';
 import { GoogleMap, withScriptjs, withGoogleMap, Marker } from "react-google-maps";
 
 const mapData = {
@@ -50,7 +51,7 @@ export default function Map({neighborhood}) {
   return (
     <div style={{width: '50vw', height: '60vh'}} className="map">
       <Wrapped
-        googleMapURL={"https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyBYhkZV9wJYaqnfcvAq5Doga7IKh_Fjh1E"}
+        googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${key}`}
         loadingElement={<div style={{height: "100%"}} />}
         containerElement={<div style={{ height: "100%" }} />}
         mapElement={<div style={{ height: "100%" }} />}

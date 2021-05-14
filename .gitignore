@@ -1,5 +1,6 @@
 /database/mongoConfig.js
 /client/dist/bundle.js
+/client/src/components/Map/mapConfig.js
 /node_modules
 /package-lock.json
 /coverage
