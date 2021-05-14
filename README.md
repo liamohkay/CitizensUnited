@@ -14,10 +14,17 @@ Citizens United is a web app that bridges tech into the community by connecting 
 ![](./client/dist/Signup.gif)
 ### User Login
 ![](./client/dist/Login.gif)
-### Requesting Help
+### Requester Asking For Help
 ![](./client/dist/Request.gif)
 
 Once a requester and volunteer are matched, they can talk to each other in realtime to arrange a rendevous with each other. After the task is complete, each user can leave a rating for the other, that affects their community credit score seen by other users on CitizensUnited.
+
+### Volunteer Accepting Request
+![](./client/dist/Accept.gif)
+### Live Chat
+![](./client/dist/Chat.gif)
+### Rating + Logout
+![](./client/dist/Vote.gif)
 
 # Technologies
 - HTML + CSS
